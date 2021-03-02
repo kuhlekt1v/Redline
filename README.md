@@ -1,2 +1,15 @@
 # Redline
-SWEG5302-Redline Medical System aims to create an efficient and low-cost emergency medical contact sytsem
+SWEG5302-The Redline Medical System aims to create an efficient, low-cost emergency medical contact sytsem for Android and iOS devices using the Xamarin framework.
+
+## Local Setup
+1. Clone repository to local enviroment.
+2. If necessary install an Android Device (Pixel 2 Pie 9.0 - API 28, or similar, at a minimum.)
+   * Tools -> Android -> Android Device Manager.. -> + New
+4. If necessary install Andround 10.0 - Q (Android SDK Platform 29)
+   * Tools -> Android -> Android SDK Manager
+<br>
+
+## Version History
+Date | Description of Work performed | Author
+-----|-------------------------------|-------
+3.1.21| Created project template including intial NuGet packages, code style conventions, and configured framework versions.| Cody Sheridan
