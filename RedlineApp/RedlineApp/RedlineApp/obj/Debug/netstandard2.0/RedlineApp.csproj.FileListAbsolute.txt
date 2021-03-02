@@ -1,0 +1,14 @@
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\bin\Debug\netstandard2.0\RedlineApp.deps.json
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\bin\Debug\netstandard2.0\RedlineApp.dll
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\bin\Debug\netstandard2.0\ref\RedlineApp.dll
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\bin\Debug\netstandard2.0\RedlineApp.pdb
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\obj\Debug\netstandard2.0\RedlineApp.csprojAssemblyReference.cache
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\obj\Debug\netstandard2.0\MainPage.xaml.g.cs
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\obj\Debug\netstandard2.0\RedlineApp.AssemblyInfoInputs.cache
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\obj\Debug\netstandard2.0\RedlineApp.AssemblyInfo.cs
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\obj\Debug\netstandard2.0\RedlineApp.csproj.CoreCompileInputs.cache
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\obj\Debug\netstandard2.0\RedlineApp.dll
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\obj\Debug\netstandard2.0\ref\RedlineApp.dll
+C:\Ghost\Coding\Redline\RedlineApp\RedlineApp\RedlineApp\obj\Debug\netstandard2.0\RedlineApp.pdb
