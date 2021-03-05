@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RedlineApp.RegisterPage">
+    <!-- Device specific content area padding. -->
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                        Android="0"
+                        iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+    
+    <!-- Main content area.-->
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{StaticResource AccentColor}">
+            <Label Text="Register New User"
+                   Padding="10,20, 10, 20"
+                   Style="{StaticResource HeaderTitleStyle}"/>
+            <Frame CornerRadius="13"
+                   Margin="0, 0, 0, -10"
+                   VerticalOptions="FillAndExpand"
+                   BackgroundColor="{StaticResource BackgroundColor}">
+                <StackLayout >
+                    <Grid Margin="0, 20, 0, 0"
+                          RowSpacing="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Registration fields. -->
+                        <Entry Grid.Row="0"
+                               x:Name="FirstNameEntry"
+                               Placeholder="First Name"
+                               Style="{StaticResource TextStyle}"/>
+                        <Entry Grid.Row="1"
+                               x:Name="MiddleInitialEntry"
+                               Placeholder="M.I. (Optional)"
+                               Style="{StaticResource TextStyle}"/>
+                        <Entry Grid.Row="3"
+                               x:Name="LastNameEntry"
+                               Placeholder="Last Name"
+                               Style="{StaticResource TextStyle}"/>
+                        <Entry Grid.Row="4"
+                               x:Name="UsernameEntry"
+                               Placeholder="Username"
+                               Style="{StaticResource TextStyle}"/>
+                        <Entry Grid.Row="5"
+                               IsPassword="True"
+                               x:Name="PasswordEntry"
+                               Placeholder="Password"
+                               Style="{StaticResource TextStyle}"/>
+                        <Entry Grid.Row="6"
+                               IsPassword="True"
+                               x:Name="RetypePassword"
+                               Placeholder="Re-Type Password"
+                               Style="{StaticResource TextStyle}"/>
+                        <Entry Grid.Row="7"
+                               Keyboard="Email"
+                               x:Name="EmailEntry"
+                               Placeholder="Email"
+                               Style="{StaticResource TextStyle}"/>
+                        <!-- Action buttons. -->
+                        <Grid Grid.Row="8"
+                              Margin="0, 20, 0, 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" 
+                                    Text="&lt;"
+                                    FontSize="20"
+                                    FontAttributes="Bold"                                             Clicked="BackButtonClicked"
+                                    Style="{StaticResource PrimaryButton}"/>
+                            <Button Grid.Column="1" 
+                                    Text="Submit"
+                                    FontSize="18"
+                                    Clicked="RegisterNewUser"
+                                    Style="{StaticResource PrimaryButton}"/>
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
