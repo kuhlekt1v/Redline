@@ -11,18 +11,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\SourceSansPro-Bold.ttf" />
+    <None Remove="Resources\Fonts\SourceSansPro-Light.ttf" />
+    <None Remove="Resources\Fonts\SourceSansPro-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\SourceSansPro-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\SourceSansPro-Light.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\SourceSansPro-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Compile Update="View\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
+    <EmbeddedResource Update="View\RegisterPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

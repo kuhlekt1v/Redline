@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RedlineApp.LoginPage">
+
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{StaticResource SecondaryColor}">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Frame CornerRadius="13"
+                   Margin="20"
+                   Padding="20, 80, 20, 20"
+                   VerticalOptions="CenterAndExpand"
+                   HasShadow="True"
+                   BackgroundColor="{StaticResource BackgroundColor}">
+                    <Grid RowSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Login fields. -->
+                        <Entry Grid.Row="1"
+                               Grid.ColumnSpan="3"
+                               x:Name="UsernameEntry"
+                               Placeholder="Username"
+                               Style="{StaticResource TextStyle}"/>
+                        <Entry Grid.Row="2"
+                               Grid.ColumnSpan="3"
+                               x:Name="PasswordEntry"
+                               Placeholder="Password"
+                               Style="{StaticResource TextStyle}"/>
+                        
+                        <!-- Login action buttons. -->
+                        <Grid Grid.Row="3"
+                             Grid.ColumnSpan="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="40" />
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
+                                    Text="Login"
+                                    Clicked="LoginButtonClicked"
+                                    Style="{StaticResource PrimaryButton}"/>
+                            <Button Grid.Column="1"
+                                    Text="?"
+                                    Clicked="HelpButtonClicked"
+                                    Style="{StaticResource PrimaryButton}"/>
+                        </Grid>
+                    </Grid>
+                </Frame>
+                
+                <!-- Sign up label. -->
+                <Label x:Name="newUserLabel"
+               		   Text="New user? Sign up now!"
+                       FontSize="16"
+                       HorizontalTextAlignment="Center"
+                       Style="{StaticResource WhiteLinkLabel}">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="SignUpLinkTapped"/>
+                        </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
