@@ -8,7 +8,7 @@
 
 using SQLite;
 
-namespace RedlineApp.Data
+namespace RedlineApp.Persistence
 {
     public interface ISQLite
     {
