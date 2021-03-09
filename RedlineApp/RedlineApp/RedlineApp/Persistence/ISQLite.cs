@@ -3,15 +3,15 @@
     Purpose:   Initializes connection to SQLite using
                paths provided in platform Data folders.
     Author:    Cody Sheridan
-    Version:   1.0.0
+    Version:   1.0.
 */
 
 using SQLite;
 
 namespace RedlineApp.Persistence
 {
-    public interface ISQLite
+    public interface ISQLiteInterface
     {
-        SQLiteAsyncConnection GetConnection();
+        SQLiteConnection GetConnection();
     }
 }
