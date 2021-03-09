@@ -3,7 +3,7 @@
     Purpose:   Establish connection to local storage
                for SQLite on Android devices.
     Author:    Cody Sheridan
-    Version:   1.0.1
+    Version:   1.0.2
 */
 
 using RedlineApp.Persistence;
@@ -14,9 +14,9 @@ using System.IO;
 [assembly: Xamarin.Forms.Dependency(typeof(SQLiteAndroid))]
 namespace RedlineApp.Droid.Persistence
 {
-    class SQLiteAndroid : ISQLite
+    class SQLiteAndroid : ISQLiteInterface
     {
-        public SQLiteAsyncConnection GetConnection()
+        public SQLiteConnection GetConnection()
         {
             // Set path on device where database file will
             // be stored.
@@ -25,7 +25,7 @@ namespace RedlineApp.Droid.Persistence
             var path = Path.Combine(documentsPath, "RedlineAppDB.db3");
 
             // Return SQLite connection.
-            return new SQLiteAsyncConnection(path);
+            return new SQLiteConnection(path);
         }
     }
 }
