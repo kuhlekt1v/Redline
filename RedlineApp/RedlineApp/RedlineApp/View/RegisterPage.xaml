@@ -75,12 +75,13 @@
                             <Button Grid.Column="0" 
                                     Text="&lt;"
                                     FontSize="20"
-                                    FontAttributes="Bold"                                             Clicked="BackButtonClicked"
+                                    FontAttributes="Bold"                                             
+                                    Clicked="BackButtonClicked"
                                     Style="{StaticResource PrimaryButton}"/>
                             <Button Grid.Column="1" 
                                     Text="Submit"
                                     FontSize="18"
-                                    Clicked="RegisterNewUser"
+                                    Clicked="RegisterButtonClicked"
                                     Style="{StaticResource PrimaryButton}"/>
                         </Grid>
                     </Grid>

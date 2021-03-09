@@ -8,7 +8,7 @@
             <StackLayout VerticalOptions="CenterAndExpand">
                 <Frame CornerRadius="13"
                    Margin="20"
-                   Padding="20, 80, 20, 20"
+                   Padding="20"
                    VerticalOptions="CenterAndExpand"
                    HasShadow="True"
                    BackgroundColor="{StaticResource BackgroundColor}">
@@ -28,12 +28,12 @@
                         <!-- Login fields. -->
                         <Entry Grid.Row="1"
                                Grid.ColumnSpan="3"
-                               x:Name="UsernameEntry"
+                               x:Name="userNameEntry"
                                Placeholder="Username"
                                Style="{StaticResource TextStyle}"/>
                         <Entry Grid.Row="2"
                                Grid.ColumnSpan="3"
-                               x:Name="PasswordEntry"
+                               x:Name="passwordEntry"
                                Placeholder="Password"
                                Style="{StaticResource TextStyle}"/>
                         

@@ -1,9 +1,9 @@
 ﻿using RedlineApp.Model;
 using RedlineApp.Persistence;
+using RedlineApp.View;
+using RedlineApp.ViewModel;
 using SQLite;
 using System;
-using System.Collections.ObjectModel;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,35 +12,28 @@ namespace RedlineApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
-        private SQLiteAsyncConnection _connection;
-        private ObservableCollection<UserAccount> _userAccounts; // Testing
+        private SQLiteConnection _connection;
+        RegisterViewModel registerViewModel = new RegisterViewModel();
 
         public RegisterPage()
         {
             InitializeComponent();
-            _connection = DependencyService.Get<ISQLite>().GetConnection();
+            _connection = DependencyService.Get<ISQLiteInterface>().GetConnection();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         // Load existing UserAccount from databse on page appear.
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
 
             base.OnAppearing();
 
-            await _connection.CreateTableAsync<UserAccount>();
-
-            //var userAccounts = await _connection.Table<UserAccount>().ToListAsync();
-            //_userAccounts = new ObservableCollection<UserAccount>(userAccounts); // Testing
-
-            // Assign useraccounts to list view's ItemSource property.
-            //usersListView.ItemsSource = _userAccounts;                           
-
-
+            _connection.CreateTable<UserAccount>();
         }
 
-        async void RegisterNewUser(object sender, EventArgs e)
+        async void RegisterButtonClicked(object sender, EventArgs e)
         {
-            var userAccount = new UserAccount()
+            var user = new UserAccount()
             {
                 FirstName = FirstNameEntry.Text,
                 MiddleInitial = MiddleInitialEntry.Text,
@@ -50,17 +43,25 @@ namespace RedlineApp
                 RegistrationDate = DateTime.UtcNow,
                 Email = EmailEntry.Text
             };
-        
-           await _connection.InsertAsync(userAccount);
 
-            //_userAccounts.Add(userAccount);
+            var returnValue = registerViewModel.AddNewUser(user);
+
+            if (returnValue == "New user added!")
+            {
+                await DisplayAlert("Success", returnValue, "Ok");
+                await Navigation.PushAsync(new MainPage());
+            }
+            else
+            {
+                await DisplayAlert("Error", returnValue, "Ok");
+            }
 
         }
 
         private void BackButtonClicked(object sender, EventArgs e)
         {
             // Navigate to LoginPage.
-            Application.Current.MainPage = new LoginPage();
+            Navigation.PushAsync(new LoginPage());
         }
     }
 }
