@@ -3,7 +3,7 @@
     Purpose:   Initializes connection to SQLite using
                paths provided in platform Data folders.
     Author:    Cody Sheridan
-    Version:   1.0.
+    Version:   1.0.0
 */
 
 using SQLite;

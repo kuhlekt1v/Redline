@@ -1,4 +1,11 @@
-﻿using RedlineApp.Model;
+﻿/*
+    File name: RegisterPage.xaml.cs
+    Purpose:   Facilitate interaction with page.
+    Author:    Cody Sheridan
+    Version:   1.0.0
+*/
+
+using RedlineApp.Model;
 using RedlineApp.Persistence;
 using RedlineApp.View;
 using RedlineApp.ViewModel;
