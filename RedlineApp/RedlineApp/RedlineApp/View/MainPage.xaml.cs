@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/*
+    File name: MainPage.xaml.cs
+    Purpose:   Facilitate interaction with page.
+    Author:    Cody Sheridan
+    Version:   1.0.0
+*/
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

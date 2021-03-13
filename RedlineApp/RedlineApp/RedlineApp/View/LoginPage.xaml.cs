@@ -1,4 +1,11 @@
-﻿using RedlineApp.View;
+﻿/*
+    File name: LoginPage.xaml.cs
+    Purpose:   Facilitate user interaction with page.
+    Author:    Cody Sheridan
+    Version:   1.0.0
+*/
+
+using RedlineApp.View;
 using RedlineApp.ViewModel;
 using Xamarin.Forms;
 
