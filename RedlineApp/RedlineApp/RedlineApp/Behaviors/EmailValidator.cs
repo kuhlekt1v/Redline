@@ -1,9 +1,9 @@
 ﻿/*
-    File name: TextValidator.cs
+    File name: EmailValidator.cs
     Purpose:   Behavior to ensure entry contains a
                valid email pattern.
     Author:    Cody Sheridan
-    Version:   1.0.0
+    Version:   1.0.1
 */
 
 using System.Text.RegularExpressions;
