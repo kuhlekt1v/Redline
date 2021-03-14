@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:RedlineApp.ViewModel;assembly=RedlineApp"
-             xmlns:local="clr-namespace:RedlineApp.Behaviors"
              x:Class="RedlineApp.LoginPage">
 
     <ContentPage.BindingContext>
@@ -35,11 +34,7 @@
                                Grid.Row="1"
                                Grid.ColumnSpan="3"
                                x:Name="userNameEntry"
-                               Style="{StaticResource TextStyle}">
-                            <Entry.Behaviors>
-                                <local:TextValidator/>
-                            </Entry.Behaviors>
-                        </Entry>
+                               Style="{StaticResource TextStyle}"/>
                         <Entry Grid.Row="2"
                                Grid.ColumnSpan="3"
                                x:Name="passwordEntry"
@@ -47,8 +42,6 @@
                                IsPassword="True"
                                Placeholder="Password"
                                Style="{StaticResource TextStyle}"/>
-
-
 
                         <!-- Login action buttons. -->
                         <Grid Grid.Row="3"

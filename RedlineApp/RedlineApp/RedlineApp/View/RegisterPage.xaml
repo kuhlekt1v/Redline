@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RedlineApp.Behaviors"
              x:Class="RedlineApp.RegisterPage">
     <!-- Device specific content area padding. -->
     <ContentPage.Padding>
@@ -64,7 +65,11 @@
                                Keyboard="Email"
                                x:Name="EmailEntry"
                                Placeholder="Email"
-                               Style="{StaticResource TextStyle}"/>
+                               Style="{StaticResource TextStyle}">
+                            <Entry.Behaviors>
+                                <local:EmailValidator/>
+                            </Entry.Behaviors>
+                        </Entry>
                         <!-- Action buttons. -->
                         <Grid Grid.Row="8"
                               Margin="0, 20, 0, 0">
