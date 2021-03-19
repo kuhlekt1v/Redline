@@ -13,6 +13,17 @@ namespace RedlineApp.Behaviors
 {
     class EmailValidator : Behavior<Entry>
     {
+        // Create EntryField property on entry behavior.
+        public static readonly BindableProperty EntryFieldProperty =
+            BindableProperty.Create("entryField", typeof(string),
+                typeof(EmailValidator), default(string));
+
+        public string EntryField
+        {
+            get { return (string)GetValue(EntryFieldProperty); }
+            set { SetValue(EntryFieldProperty, value); }
+        }
+
         protected override void OnAttachedTo(Entry entry)
         {
             entry.TextChanged += OnEntryTextChanged;
@@ -25,13 +36,26 @@ namespace RedlineApp.Behaviors
             base.OnDetachingFrom(entry);
         }
 
-        private void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+        private void OnEntryTextChanged(object sender, TextChangedEventArgs args)
         {
-            var emailPattern = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))"
-            + @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
-            bool isValid = Regex.IsMatch(e.NewTextValue, emailPattern);
+            // Get error label.
+            Label errorLabel = ((Entry)sender).FindByName<Label>(EntryField);
 
-            ((Entry)sender).TextColor = isValid ? Color.FromHex("#000") : Color.FromHex("#ff9c96");
+            string emailRegex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))"
+              + @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
+
+            bool isEmail = Regex.IsMatch(args.NewTextValue, emailRegex, RegexOptions.IgnoreCase);
+
+            if (isEmail)
+            {
+                ((Entry)sender).TextColor = Color.Default;
+                errorLabel.Text = "";
+            }
+            else
+            {
+                ((Entry)sender).TextColor = Color.Red;
+                errorLabel.Text = "Invalid email address.";
+            }
         }
     }
 }
