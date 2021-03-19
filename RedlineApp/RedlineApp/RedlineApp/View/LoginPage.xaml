@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModel="clr-namespace:RedlineApp.ViewModel;assembly=RedlineApp"
-             x:Class="RedlineApp.LoginPage">
+             x:Class="RedlineApp.View.LoginPage">
 
     <ContentPage.BindingContext>
         <viewModel:LoginViewModel/>
@@ -38,7 +38,6 @@
                         <Entry Grid.Row="2"
                                Grid.ColumnSpan="3"
                                x:Name="passwordEntry"
-                               Text="{Binding Password}"
                                IsPassword="True"
                                Placeholder="Password"
                                Style="{StaticResource TextStyle}"/>
@@ -61,19 +60,18 @@
                         </Grid>
                     </Grid>
                 </Frame>
-                
+
                 <!-- Sign up label. -->
                 <Label x:Name="newUserLabel"
                		   Text="New user? Sign up now!"
                        FontSize="16"
                        HorizontalTextAlignment="Center"
                        Style="{StaticResource WhiteLinkLabel}">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="SignUpLinkTapped"/>
-                        </Label.GestureRecognizers>
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SignUpLinkTapped"/>
+                    </Label.GestureRecognizers>
                 </Label>
             </StackLayout>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

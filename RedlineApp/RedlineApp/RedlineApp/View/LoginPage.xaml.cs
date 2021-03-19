@@ -2,39 +2,31 @@
     File name: LoginPage.xaml.cs
     Purpose:   Facilitate user interaction with page.
     Author:    Cody Sheridan
-    Version:   1.0.1
+    Version:   1.0.2
 */
 
-using RedlineApp.View;
 using RedlineApp.ViewModel;
 using System;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
-namespace RedlineApp
+namespace RedlineApp.View
 {
     public partial class LoginPage : ContentPage
     {
-        private LoginViewModel userAuthentication;
-
+        private LoginViewModel loginViewModel;
         public LoginPage()
         {
             InitializeComponent();
-            userAuthentication = new LoginViewModel();
+            loginViewModel = new LoginViewModel();
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        private void SignUpLinkTapped(object sender, System.EventArgs e)
-        {
-            // Set register page as current page.
-           Navigation.PushAsync(new RegisterPage());
-
-        }
-
-        private void LoginButtonClicked(object sender, System.EventArgs e)
+        private void LoginButtonClicked(object sender, EventArgs e)
         {
             if (userNameEntry.Text != null && passwordEntry.Text != null)
             {
-                var validData = userAuthentication.ValidateUserLogin(userNameEntry.Text, passwordEntry.Text);
+                var validData = loginViewModel.ValidateUserLogin(userNameEntry.Text, passwordEntry.Text);
                 if (validData)
                 {
                     // Clear fields and navigate to main page.
@@ -60,9 +52,15 @@ namespace RedlineApp
 
             if (!string.IsNullOrWhiteSpace(answer))
             {
-                var password = userAuthentication.PasswordReminder(answer);
+                var password = loginViewModel.PasswordReminder(answer);
                 await DisplayAlert("REMINDER IN DEVELOPMENT", password, "Ok");
             }
+        }
+
+        private void SignUpLinkTapped(object sender, EventArgs e)
+        {
+            // Set register page as current page.
+            Navigation.PushAsync(new RegisterPage());
         }
     }
 }

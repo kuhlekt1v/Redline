@@ -5,6 +5,7 @@
     Version:   1.0.0
 */
 
+using RedlineApp.View;
 using Xamarin.Forms;
 
 namespace RedlineApp
