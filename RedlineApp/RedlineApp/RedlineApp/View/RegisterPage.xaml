@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:RedlineApp.Behaviors"
+             xmlns:local="clr-namespace:RedlineApp.Behaviors" 
              x:Class="RedlineApp.RegisterPage">
+
     <!-- Device specific content area padding. -->
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                         Android="0"
                         iOS="0, 20, 0, 0" />
     </ContentPage.Padding>
-    
-    <!-- Main content area.-->
+
+    <!-- Main content area. -->
     <ContentPage.Content>
         <StackLayout BackgroundColor="{StaticResource AccentColor}">
             <Label Text="Register New User"
@@ -20,11 +21,11 @@
                    Margin="0, 0, 0, -10"
                    VerticalOptions="FillAndExpand"
                    BackgroundColor="{StaticResource BackgroundColor}">
-                <StackLayout >
-                    <Grid Margin="0, 20, 0, 0"
-                          RowSpacing="10">
+                <!-- Entry fields. -->
+                <StackLayout>
+                    <Grid Margin="0, 20, 0, 0">
+                        <!-- Form grid layout. -->
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -34,45 +35,155 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <!-- Registration fields. -->
-                        <Entry Grid.Row="0"
-                               x:Name="FirstNameEntry"
-                               Placeholder="First Name"
-                               Style="{StaticResource TextStyle}"/>
-                        <Entry Grid.Row="1"
-                               x:Name="MiddleInitialEntry"
-                               Placeholder="M.I. (Optional)"
-                               Style="{StaticResource TextStyle}"/>
-                        <Entry Grid.Row="3"
-                               x:Name="LastNameEntry"
-                               Placeholder="Last Name"
-                               Style="{StaticResource TextStyle}"/>
-                        <Entry Grid.Row="4"
-                               x:Name="UsernameEntry"
-                               Placeholder="Username"
-                               Style="{StaticResource TextStyle}"/>
-                        <Entry Grid.Row="5"
-                               IsPassword="True"
-                               x:Name="PasswordEntry"
-                               Placeholder="Password"
-                               Style="{StaticResource TextStyle}"/>
-                        <Entry Grid.Row="6"
-                               IsPassword="True"
-                               x:Name="RetypePassword"
-                               Placeholder="Re-Type Password"
-                               Style="{StaticResource TextStyle}"/>
-                        <Entry Grid.Row="7"
-                               Keyboard="Email"
-                               x:Name="EmailEntry"
-                               Placeholder="Email"
-                               Style="{StaticResource TextStyle}">
-                            <Entry.Behaviors>
-                                <local:EmailValidator/>
-                            </Entry.Behaviors>
-                        </Entry>
+                         <!-- Row 0 -->
+                        <Grid Grid.Row="0"
+                              ColumnSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70*"/>
+                                <ColumnDefinition Width="30*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- First name. -->
+                            <Entry Grid.Row="0"
+                                   Grid.Column="0"
+                                   x:Name="FirstNameEntry"
+                                   Placeholder="First Name"
+                                   Style="{StaticResource EntryStyle}">
+                                <Entry.Behaviors>
+                                    <local:MaxLengthValidator MaxLength="50" EntryField="First_Name"/>
+                                    <local:RequiredValidator Required="True" EntryField="First_Name"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                            <Label Grid.Row="1"
+                                   Grid.Column="0"
+                                   x:Name="First_Name"
+                                   Style="{StaticResource ErrorStyle}"/>
+
+                            <!-- Middle initial -->
+                            <Entry Grid.Row="0" 
+                                   Grid.Column="1"
+                                   x:Name="MiddleInitialEntry"
+                                   Placeholder="M.I. (Opt.)"
+                                   Style="{StaticResource EntryStyle}">
+                                <Entry.Behaviors>
+                                    <local:MaxLengthValidator MaxLength="2" EntryField="Initial"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                            <Label Grid.Row="1"
+                                   Grid.Column="1"
+                                   x:Name="Initial"
+                                   Style="{StaticResource ErrorStyle}"/>
+                        </Grid>
+
+
+
+                        <!-- Last name. -->
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Entry Grid.Row="0"
+                                   x:Name="LastNameEntry"
+                                   Placeholder="Last Name"
+                                   Style="{StaticResource EntryStyle}">
+                                <Entry.Behaviors>
+                                    <local:MaxLengthValidator MaxLength="50" EntryField="Last_Name"/>
+                                    <local:RequiredValidator Required="True" EntryField="Last_Name"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                            <Label Grid.Row="1"
+                                   x:Name="Last_Name"
+                                   Style="{StaticResource ErrorStyle}"/>
+                        </Grid>
+
+                        <!-- Username. -->
+                        <Grid Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Entry Grid.Row="0"
+                                   x:Name="UsernameEntry"
+                                   Placeholder="Username"
+                                   Style="{StaticResource EntryStyle}">
+                                <Entry.Behaviors>
+                                    <local:MaxLengthValidator MaxLength="25" EntryField="Username"/>
+                                    <local:RequiredValidator Required="True" EntryField="Username"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                            <Label Grid.Row="1"
+                                   x:Name="Username"
+                                   Style="{StaticResource ErrorStyle}"/>
+                        </Grid>
+
+                        <!-- Password. -->
+                        <Grid Grid.Row="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Entry Grid.Row="0"
+                                   x:Name="PasswordEntry"
+                                   Placeholder="Password"
+                                   Style="{StaticResource EntryStyle}">
+                                <Entry.Behaviors>
+                                    <local:MaxLengthValidator MaxLength="25" EntryField="Password"/>
+                                    <local:RequiredValidator Required="True" EntryField="Password"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                            <Label Grid.Row="1"
+                                   x:Name="Password"
+                                   Style="{StaticResource ErrorStyle}"/>
+                        </Grid>
+                        
+                        <!-- CONFIRM MUST MATCH PASS -->
+                        <!-- Confirm password. -->
+                        <Grid Grid.Row="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Entry Grid.Row="0"
+                                   x:Name="ConfirmPasswordEntry"
+                                   Placeholder="Confirm Password"
+                                   Style="{StaticResource EntryStyle}">
+                                <Entry.Behaviors>
+                                    <local:MaxLengthValidator MaxLength="25" EntryField="Password_Confirmation"/>
+                                    <local:RequiredValidator Required="True" EntryField="Password_Confirmation"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                            <Label Grid.Row="1"
+                                   x:Name="Password_Confirmation"
+                                   Style="{StaticResource ErrorStyle}"/>
+                        </Grid>
+                        
+                        <!-- Email address. -->
+                        <Grid Grid.Row="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Entry Grid.Row="0"
+                                   x:Name="EmailEntry"
+                                   Placeholder="Email address"
+                                   Style="{StaticResource EntryStyle}">
+                                <Entry.Behaviors>
+                                    <local:EmailValidator IsValid="False" MaxLength="50" EntryField="Email" />
+                                    <local:RequiredValidator Required="True" EntryField="Email"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                            <Label Grid.Row="1"
+                                   x:Name="Email"
+                                   Style="{StaticResource ErrorStyle}"/>
+                        </Grid>
+
                         <!-- Action buttons. -->
-                        <Grid Grid.Row="8"
-                              Margin="0, 20, 0, 0">
+                        <Grid Grid.Row="6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"/>
                                 <ColumnDefinition Width="*"/>
@@ -80,7 +191,7 @@
                             <Button Grid.Column="0" 
                                     Text="&lt;"
                                     FontSize="20"
-                                    FontAttributes="Bold"                                             
+                                    FontAttributes="Bold" 
                                     Clicked="BackButtonClicked"
                                     Style="{StaticResource PrimaryButton}"/>
                             <Button Grid.Column="1" 

@@ -2,9 +2,10 @@
     File name: RegisterViewModel.cs
     Purpose:   Provides data required by RegisterPage View.
     Author:    Cody Sheridan
-    Version:   1.0.0
+    Version:   1.0.1
 */
 
+using RedlineApp.Behaviors;
 using RedlineApp.Model;
 using RedlineApp.Persistence;
 using SQLite;
@@ -41,8 +42,8 @@ namespace RedlineApp.ViewModel
             {
                 return "User already exists.";
             }
-
         }
+
 
 
         // Check to ensure user doesn't exist already.

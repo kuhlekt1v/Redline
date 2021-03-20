@@ -5,6 +5,7 @@
     Version:   1.0.0
 */
 
+using RedlineApp.Behaviors;
 using RedlineApp.Model;
 using RedlineApp.Persistence;
 using RedlineApp.View;
@@ -16,15 +17,15 @@ using Xamarin.Forms.Xaml;
 
 namespace RedlineApp
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
         private SQLiteConnection _connection;
-        RegisterViewModel registerViewModel = new RegisterViewModel();
+        private RegisterViewModel registerViewModel;
 
         public RegisterPage()
         {
             InitializeComponent();
+            registerViewModel = new RegisterViewModel();
             _connection = DependencyService.Get<ISQLiteInterface>().GetConnection();
             NavigationPage.SetHasNavigationBar(this, false);
         }
@@ -32,9 +33,7 @@ namespace RedlineApp
         // Load existing UserAccount from databse on page appear.
         protected override void OnAppearing()
         {
-
             base.OnAppearing();
-
             _connection.CreateTable<UserAccount>();
         }
 
@@ -62,7 +61,6 @@ namespace RedlineApp
             {
                 await DisplayAlert("Error", returnValue, "Ok");
             }
-
         }
 
         private void BackButtonClicked(object sender, EventArgs e)

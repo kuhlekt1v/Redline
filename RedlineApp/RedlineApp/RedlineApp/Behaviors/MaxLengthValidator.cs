@@ -57,16 +57,17 @@ namespace RedlineApp.Behaviors
             Label errorLabel = ((Entry)sender).FindByName<Label>(EntryField);
             // Format EntryField for display in error message.
             string fieldName = string.Join(" ", EntryField.Split('_'));
+            bool isValid = args.NewTextValue.Length <= MaxLength;
 
-            if (args.NewTextValue.Length > MaxLength)
-            {
-                ((Entry)sender).TextColor = Color.Red;
-                errorLabel.Text = $"{fieldName} cannot exceed {MaxLength} characters.";
-            }
-            else
+            if (isValid)
             {
                 ((Entry)sender).TextColor = Color.Default;
                 errorLabel.Text = "";
+            }
+            else
+            {
+                ((Entry)sender).TextColor = Color.Red;
+                errorLabel.Text = $"{fieldName} cannot exceed {MaxLength} characters.";
             }
         }
     }
