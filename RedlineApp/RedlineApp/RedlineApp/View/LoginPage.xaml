@@ -34,13 +34,13 @@
                                Grid.Row="1"
                                Grid.ColumnSpan="3"
                                x:Name="userNameEntry"
-                               Style="{StaticResource TextStyle}"/>
+                               Style="{StaticResource EntryStyle}"/>
                         <Entry Grid.Row="2"
                                Grid.ColumnSpan="3"
                                x:Name="passwordEntry"
                                IsPassword="True"
                                Placeholder="Password"
-                               Style="{StaticResource TextStyle}"/>
+                               Style="{StaticResource EntryStyle}"/>
 
                         <!-- Login action buttons. -->
                         <Grid Grid.Row="3"

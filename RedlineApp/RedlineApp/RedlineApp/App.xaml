@@ -11,7 +11,7 @@
             <Color x:Key="BackgroundColor">#DFDFDF</Color>
             <Color x:Key="AccentColor">#E54E47</Color>
             <Color x:Key="SecondaryColor">#eb7a75</Color>
-
+            <Color x:Key="ErrorColor">#eb1f10</Color>
             <Color x:Key="BlueColor">#1769aa</Color>
 
             <!-- STYLES -->
@@ -22,12 +22,18 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
             </Style>
 
-            <Style x:Key="TextStyle" TargetType="Label">
+            <Style x:Key="EntryStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="DarkGray" />
                 <Setter Property="FontFamily" Value="SourceSansProRegular" />
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}"/>
+            </Style>
+
+            <Style x:Key="ErrorStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource ErrorColor}" />
+                <Setter Property="FontAttributes" Value="Italic" />
+                <Setter Property="FontSize" Value="12"/>
             </Style>
 
             
