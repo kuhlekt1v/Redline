@@ -173,6 +173,7 @@
                             <Entry Grid.Row="0"
                                    x:Name="EmailEntry"
                                    Placeholder="Email address"
+                                   Keyboard="Email"
                                    Style="{StaticResource EntryStyle}">
                                 <Entry.Behaviors>
                                     <local:EmailValidator IsValid="False" MaxLength="50" EntryField="Email" />

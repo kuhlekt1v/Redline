@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RedlineApp.View.PrescriptionPage">
+    <!-- Device specific content area padding. -->
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                        Android="0"
+                        iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+    <!-- Main content area. -->
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{StaticResource AccentColor}">
+            <Label Text="Prescriptions"
+                   Padding="10,20, 10, 20"
+                   Style="{StaticResource HeaderTitleStyle}"/>
+
+            <Frame CornerRadius="13"
+                   Margin="0, 0, 0, -10"
+                   VerticalOptions="FillAndExpand"
+                   BackgroundColor="{StaticResource BackgroundColor}">
+
+                <StackLayout>
+                    <!-- Form grid layout. -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="5*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                    
+                         <!-- Row 0, Presciption Entry and Add Button. -->
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- User Entry for Prescription -->
+                            <Entry Grid.Column="0"
+                                   Placeholder="Prescription"
+                                   Style="{StaticResource EntryStyle}"/>
+                            <!-- Add buttom will add prescription to database. -->
+                            <Button Grid.Column="1"
+                                    Text="Add"
+                                    Style="{StaticResource PrimaryButton}"/>
+
+                        </Grid>
+                        <!-- Row 1, Prescription List. -->
+                        <Grid Grid.Row="1">
+                            <!-- As allergies are added they will be listed here. -->
+                            <Label Text="LIST HERE"/>
+                        </Grid>
+                        <!-- Action Buttons. -->
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0"
+                                    FontSize="20"
+                                    Text="&lt;"
+                                    Clicked="BackButton_Clicked"
+                                    Style="{StaticResource PrimaryButton}"/>
+
+                            <Button Grid.Column="1"
+                                    FontSize="18"
+                                    Text="Next"
+                                    Clicked="NextButton_Clicked"
+                                    Style="{StaticResource PrimaryButton}"/>
+
+                        </Grid>
+                    </Grid>
+                </StackLayout>
+
+            </Frame>
+ 
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
