@@ -140,5 +140,13 @@
       <Name>RedlineApp</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="Resources\marker_96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\settings_100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\medical_90.png" />
+  </ItemGroup>
 </Project>

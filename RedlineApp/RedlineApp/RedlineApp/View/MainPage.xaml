@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RedlineApp.View.MainPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="MAIN PAGE"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+             x:Class="RedlineApp.View.MainPage"
+            xmlns:local="clr-namespace:RedlineApp.View"
+            BarBackgroundColor="{StaticResource AccentColor}"
+            BarTextColor="{StaticResource WhiteColor}"
+            SelectedTabColor="{StaticResource LightBlueColor}">
+    <local:ManageAccountPage Title="Account" IconImageSource="settings_100.png"/>
+    <local:MedicalInformationPage Title="Medical" IconImageSource="medical_90.png"/>
+    <local:MapPage Title="Map" IconImageSource="marker_96.png"/>
+</TabbedPage>

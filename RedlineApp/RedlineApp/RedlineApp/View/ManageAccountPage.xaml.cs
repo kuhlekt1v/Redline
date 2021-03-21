@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace RedlineApp.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPage : TabbedPage
+    public partial class ManageAccountPage : ContentPage
     {
-        public MainPage()
+        public ManageAccountPage()
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);

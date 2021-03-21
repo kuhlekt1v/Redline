@@ -4,15 +4,22 @@
              x:Class="RedlineApp.App">
     <Application.Resources>
         <ResourceDictionary>
-           
+            <OnPlatform x:Key="FontAwesome" x:TypeArguments="x:String">
+                <On Platform="iOS" Value="Font Awessome" />
+                <On Platform="Android" Value="fa-solid-900.ttf#Font Awesome" />
+            </OnPlatform>
+
             <!-- THEME COLORS -->
             <Color x:Key="WhiteColor">#FFFFFF</Color>
             <Color x:Key="BlackColor">#000000</Color>
             <Color x:Key="BackgroundColor">#DFDFDF</Color>
             <Color x:Key="AccentColor">#E54E47</Color>
+            <Color x:Key="BrightAccentColor">#ffcdd2</Color>
             <Color x:Key="SecondaryColor">#eb7a75</Color>
             <Color x:Key="ErrorColor">#eb1f10</Color>
-            <Color x:Key="BlueColor">#1769aa</Color>
+            <Color x:Key="BlueColor">#1769aa</Color> #
+            <Color x:Key="LightBlueColor">#b3e5fc</Color> 
+            
 
             <!-- STYLES -->
             <Style x:Key="HeaderTitleStyle" TargetType="Label">
@@ -61,7 +68,6 @@
             <Style x:Key="WhiteLinkLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
             </Style>
-
             
         </ResourceDictionary>
     </Application.Resources>
