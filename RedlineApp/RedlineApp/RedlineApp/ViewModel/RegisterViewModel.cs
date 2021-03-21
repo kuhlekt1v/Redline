@@ -32,7 +32,7 @@ namespace RedlineApp.ViewModel
         {
             var data = _connection.Table<UserAccount>();
             var existingUser = data.Where(x => x.Username == userAccount.Username).FirstOrDefault();
-            var existingEmail = data.Where(x => x.Email == userAccount.Email).FirstOrDefault().ToString();
+            var existingEmail = data.Where(x => x.Email == userAccount.Email).FirstOrDefault();
 
             if (existingUser == null && existingEmail == null)
             {
