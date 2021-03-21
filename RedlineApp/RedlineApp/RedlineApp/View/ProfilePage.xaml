@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RedlineApp.View.ProfilePage">
+    <!-- Device specific content area padding. -->
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                        Android="0"
+                        iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+    <!-- Main content area. -->
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="{StaticResource AccentColor}">
+            <Label Text="Profile"
+                   Padding="10,20, 10, 20"
+                   Style="{StaticResource HeaderTitleStyle}"/>
+
+            <Frame CornerRadius="13"
+                   Margin="0, 0, 0, -10"
+                   VerticalOptions="FillAndExpand"
+                   BackgroundColor="{StaticResource BackgroundColor}">
+
+                <StackLayout>
+                    <!-- Form grid layout. -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                    
+                        <!-- Row 0, Date of Birth entry. -->
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <DatePicker Grid.Row="0"
+                                        Style="{StaticResource EntryStyle}"
+                                        MinimumDate="01/01/1900"
+                                        MaximumDate="01/01/2030"
+                                        Date="01/01/2000" />
+
+                       
+                            <Label Grid.Row="1"
+                                   Style="{StaticResource ErrorStyle}"/>
+
+                        </Grid>
+
+                        <!-- Row 1, Height entry. -->
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Picker Grid.Row="0"
+                                    Grid.Column="0"
+                                    x:Name="HeightFeet"
+                                    Title="Height"
+                                    Style="{StaticResource EntryStyle}">
+                              <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                  <x:String>0</x:String>
+                                  <x:String>1</x:String>
+                                  <x:String>2</x:String>
+                                  <x:String>3</x:String>
+                                  <x:String>4</x:String>
+                                  <x:String>5</x:String>
+                                  <x:String>6</x:String>
+                                  <x:String>7</x:String>
+                                  <x:String>8</x:String>
+                                </x:Array>
+                              </Picker.ItemsSource>
+                            </Picker>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontSize="18"
+                                   Text="Feet"/>
+
+                            <Picker Grid.Row="0"
+                                    Grid.Column="2"
+                                    x:Name="HeightInches"
+                                    Title="Height"
+                                    Style="{StaticResource EntryStyle}">
+                              <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                  <x:String>0</x:String>
+                                  <x:String>1</x:String>
+                                  <x:String>2</x:String>
+                                  <x:String>3</x:String>
+                                  <x:String>4</x:String>
+                                  <x:String>5</x:String>
+                                  <x:String>6</x:String>
+                                  <x:String>7</x:String>
+                                  <x:String>8</x:String>
+                                  <x:String>9</x:String>
+                                  <x:String>10</x:String>
+                                  <x:String>11</x:String>
+                                  <x:String>12</x:String>
+                                </x:Array>
+                              </Picker.ItemsSource>
+                            </Picker>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="3"
+                                   FontSize="18"
+                                   Text="Inches"/>
+
+               
+                       
+                            <Label Grid.Row="1"
+                                   Style="{StaticResource ErrorStyle}"/>
+
+                        </Grid>
+
+                        <!-- Row 2, Weight entry. -->
+                        <Grid Grid.Row="2">
+                            <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Entry Grid.Row="0"
+                                   Grid.Column="0"
+                                   Placeholder="Weight"
+                                   Keyboard="Numeric"
+                                   Style="{StaticResource EntryStyle}"/>
+
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontSize="18"
+                                   Text="Pounds"/>
+
+                       
+                            <Label Grid.Row="1"
+                                   Style="{StaticResource ErrorStyle}"/>
+
+                        </Grid>
+
+                        <!-- Row 3, Sex entry. -->
+                        <Grid Grid.Row="3">
+                            <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Picker Grid.Row="0"
+                                    x:Name="SexPicker"
+                                    Title="Click to Select a Sex"
+                                    Style="{StaticResource EntryStyle}">
+                              <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                  <x:String>Male</x:String>
+                                  <x:String>Female</x:String>
+                                  <x:String>Other</x:String>
+                                </x:Array>
+                              </Picker.ItemsSource>
+                            </Picker>
+
+                       
+                            <Label Grid.Row="1"
+                                   Style="{StaticResource ErrorStyle}"/>
+
+                        </Grid>
+
+                        <!-- Row 4, Blood type entry. -->
+                        <Grid Grid.Row="4">
+                            <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Picker Grid.Row="0"
+                                    x:Name="BloodTypePicker"
+                                    Title="Click to Select a Blood Type"
+                                    Style="{StaticResource EntryStyle}">
+                              <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                  <x:String>A+</x:String>
+                                  <x:String>A-</x:String>
+                                  <x:String>B+</x:String>
+                                  <x:String>B-</x:String>
+                                  <x:String>AB+</x:String>
+                                  <x:String>AB-</x:String>
+                                  <x:String>O+</x:String>
+                                  <x:String>O-</x:String>
+                                </x:Array>
+                              </Picker.ItemsSource>
+                            </Picker>
+
+                       
+                            <Label Grid.Row="1"
+                                   Style="{StaticResource ErrorStyle}"/>
+                                        
+                        </Grid>
+                        <!-- Action Buttons. -->
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0"
+                                    FontSize="20"
+                                    Text="&lt;"
+                                    Clicked="BackButton_Clicked"
+                                    Style="{StaticResource PrimaryButton}"/>
+
+                            <Button Grid.Column="1"
+                                    FontSize="18"
+                                    Text="Next"
+                                    Clicked="NextButton_Clicked"
+                                    Style="{StaticResource PrimaryButton}"/>
+
+                        </Grid>
+                    </Grid>
+
+                    
+
+
+                </StackLayout>
+
+            </Frame>
+ 
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

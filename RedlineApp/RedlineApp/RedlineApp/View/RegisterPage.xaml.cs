@@ -55,7 +55,8 @@ namespace RedlineApp
             if (returnValue == "New user added!")
             {
                 await DisplayAlert("Success", returnValue, "Ok");
-                await Navigation.PushAsync(new MainPage());
+                //await Navigation.PushAsync(new MainPage());
+                await Navigation.PushAsync(new ContactPage());
             }
             else
             {
