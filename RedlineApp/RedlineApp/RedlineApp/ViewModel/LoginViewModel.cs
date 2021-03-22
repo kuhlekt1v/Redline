@@ -1,4 +1,4 @@
-﻿/*
+﻿ /*
     File name: LoginViewModel.cs
     Purpose:   Provides data required by LoginPage View.
     Author:    Cody Sheridan
