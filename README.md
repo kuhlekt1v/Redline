@@ -10,6 +10,7 @@ SWEG5302-The Redline Medical System aims to create an efficient, low-cost emerge
 <br>
 
 ## Version History
-Date | Description of Work performed | Author
+Date | Description of Work performed | Author(s)
 -----|-------------------------------|-------
-3.1.21| Created project template including intial NuGet packages, code style conventions, and configured framework versions.| Cody Sheridan
+03/01/21| Created project template including intial NuGet packages, code style conventions, and configured framework versions.| Cody Sheridan
+04/22/21| Completed reusable behvaviors for form entry validation. Completed UI pages include Login, Register, Medical Info, Preconditions, Prescription, Profile, and Contact. Completed functionality includes login/logout, registering a new user, and navigation via a navbar | Cody Sheridan  Daniel Mansilla
