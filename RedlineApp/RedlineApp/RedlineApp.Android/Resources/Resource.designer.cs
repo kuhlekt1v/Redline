@@ -11692,7 +11692,7 @@ namespace RedlineApp.Droid
 			public const int ic_mtrl_chip_close_circle = 2131165295;
 			
 			// aapt resource value: 0x7F070070
-			public const int marker_96 = 2131165296;
+			public const int marker = 2131165296;
 			
 			// aapt resource value: 0x7F070071
 			public const int material_ic_calendar_black_24dp = 2131165297;
@@ -11716,7 +11716,7 @@ namespace RedlineApp.Droid
 			public const int material_ic_menu_arrow_up_black_24dp = 2131165303;
 			
 			// aapt resource value: 0x7F070078
-			public const int medical_90 = 2131165304;
+			public const int medical = 2131165304;
 			
 			// aapt resource value: 0x7F070079
 			public const int mtrl_dialog_background = 2131165305;
@@ -11785,7 +11785,7 @@ namespace RedlineApp.Droid
 			public const int notify_panel_notification_icon_bg = 2131165326;
 			
 			// aapt resource value: 0x7F07008F
-			public const int settings_100 = 2131165327;
+			public const int settings = 2131165327;
 			
 			// aapt resource value: 0x7F070090
 			public const int test_custom_background = 2131165328;

@@ -6,7 +6,7 @@
             BarBackgroundColor="{StaticResource AccentColor}"
             BarTextColor="{StaticResource WhiteColor}"
             SelectedTabColor="{StaticResource LightBlueColor}">
-    <local:ManageAccountPage Title="Account" IconImageSource="settings_100.png"/>
-    <local:MedicalInformationPage Title="Medical" IconImageSource="medical_90.png"/>
-    <local:MapPage Title="Map" IconImageSource="marker_96.png"/>
+    <local:ManageAccountPage Title="Account" IconImageSource="settings.png"/>
+    <local:MedicalInformationPage Title="Medical" IconImageSource="medical.png"/>
+    <local:MapPage Title="Map" IconImageSource="marker.png"/>
 </TabbedPage>

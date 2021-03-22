@@ -141,12 +141,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\marker_96.png" />
+    <BundleResource Include="Resources\marker.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\settings_100.png" />
+    <BundleResource Include="Resources\marker%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\medical_90.png" />
+    <BundleResource Include="Resources\medical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\medical%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\settings%402x.png" />
   </ItemGroup>
 </Project>
