@@ -158,4 +158,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\settings%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\exit%402x.png" />
+  </ItemGroup>
 </Project>

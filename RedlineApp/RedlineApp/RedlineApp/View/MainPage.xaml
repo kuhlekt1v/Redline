@@ -9,4 +9,5 @@
     <local:ManageAccountPage Title="Account" IconImageSource="settings.png"/>
     <local:MedicalInformationPage Title="Medical" IconImageSource="medical.png"/>
     <local:MapPage Title="Map" IconImageSource="marker.png"/>
+    <local:LogoutPage Title="Logout" IconImageSource="exit.png"/>
 </TabbedPage>
