@@ -25,6 +25,12 @@ namespace RedlineApp
 
         protected override void OnSleep()
         {
+            /* PLACEHOLDER // NOTE:
+             
+               Trigger LoggedInUser = false here to ensure
+               currently logged in user is logged out if they close
+               app without formally logging out
+            */
         }
 
         protected override void OnResume()
