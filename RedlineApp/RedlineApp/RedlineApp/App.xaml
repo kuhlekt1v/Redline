@@ -12,12 +12,13 @@
             <!-- THEME COLORS -->
             <Color x:Key="WhiteColor">#FFFFFF</Color>
             <Color x:Key="BlackColor">#000000</Color>
+            <Color x:Key="GreyColor">#545454</Color>
             <Color x:Key="BackgroundColor">#DFDFDF</Color>
             <Color x:Key="AccentColor">#E54E47</Color>
             <Color x:Key="BrightAccentColor">#ffcdd2</Color>
             <Color x:Key="SecondaryColor">#eb7a75</Color>
             <Color x:Key="ErrorColor">#eb1f10</Color>
-            <Color x:Key="BlueColor">#1769aa</Color> #
+            <Color x:Key="BlueColor">#1769aa</Color>
             <Color x:Key="LightBlueColor">#b3e5fc</Color> 
             
 
@@ -35,6 +36,14 @@
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource WhiteColor}"/>
+            </Style>
+
+            <Style x:Key="CategoryTitleStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
+                <Setter Property="FontFamily" Value="SourceSansProRegular" />
+                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource GreyColor}"/>
             </Style>
 
             <Style x:Key="ErrorStyle" TargetType="Label">
@@ -68,7 +77,7 @@
             <Style x:Key="WhiteLinkLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource WhiteColor}"/>
             </Style>
-            
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
