@@ -47,7 +47,9 @@ namespace RedlineApp
                 Username = UsernameEntry.Text,
                 Password = PasswordEntry.Text,
                 RegistrationDate = DateTime.UtcNow,
-                Email = EmailEntry.Text
+                Email = EmailEntry.Text,
+                ActiveUser = true
+                
             };
 
             var returnValue = registerViewModel.AddNewUser(user);

@@ -7,11 +7,13 @@
 */
 
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
+using System.Collections.Generic;
 
 namespace RedlineApp.Model
 {
-    class UserAccount
+    public class UserAccount
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -34,6 +36,25 @@ namespace RedlineApp.Model
         [MaxLength(255), Unique]
         public string Email { get; set; }
 
+        public bool ActiveUser { get; set; }
+
         public DateTime RegistrationDate { get; set; }
+
+        [OneToOne]
+        public List<ContactDetails> ContactDetails { get; set; }
+
+        [OneToOne]
+        public List<ProfileDetails> ProfileDetails { get; set; }
+
+        [OneToMany]
+        public List<Allergy> Allergy { get; set; }
+
+        [OneToMany]
+        public List<Prescription> Prescription { get; set; }
+
+        [OneToMany]
+        public List<Precondition> Precondition { get; set; }
+
+
     }
 }
