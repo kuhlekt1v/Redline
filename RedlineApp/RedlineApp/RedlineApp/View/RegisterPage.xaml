@@ -35,53 +35,29 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                         <!-- Row 0 -->
-                        <Grid Grid.Row="0"
-                              ColumnSpacing="10">
+                        <!-- Row 0, First name. -->
+                        <Grid Grid.Row="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="70*"/>
-                                <ColumnDefinition Width="30*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!-- First name. -->
                             <Entry Grid.Row="0"
                                    Grid.Column="0"
                                    x:Name="FirstNameEntry"
                                    Placeholder="First Name"
                                    Style="{StaticResource EntryStyle}">
-                                <Entry.Behaviors>
-                                    <local:MaxLengthValidator MaxLength="50" EntryField="First_Name"/>
-                                    <local:RequiredValidator Required="True" EntryField="First_Name"/>
-                                </Entry.Behaviors>
+                            <Entry.Behaviors>
+                                <local:MaxLengthValidator MaxLength="50" EntryField="First_Name"/>
+                                <local:RequiredValidator Required="True" EntryField="First_Name"/>
+                            </Entry.Behaviors>
                             </Entry>
                             <Label Grid.Row="1"
                                    Grid.Column="0"
                                    x:Name="First_Name"
                                    Style="{StaticResource ErrorStyle}"/>
-
-                            <!-- Middle initial -->
-                            <Entry Grid.Row="0" 
-                                   Grid.Column="1"
-                                   x:Name="MiddleInitialEntry"
-                                   Placeholder="M.I. (Opt.)"
-                                   Style="{StaticResource EntryStyle}">
-                                <Entry.Behaviors>
-                                    <local:MaxLengthValidator MaxLength="2" EntryField="Initial"/>
-                                </Entry.Behaviors>
-                            </Entry>
-                            <Label Grid.Row="1"
-                                   Grid.Column="1"
-                                   x:Name="Initial"
-                                   Style="{StaticResource ErrorStyle}"/>
                         </Grid>
 
-
-
-                        <!-- Last name. -->
+                        <!-- Row 1, Last name. -->
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -101,7 +77,7 @@
                                    Style="{StaticResource ErrorStyle}"/>
                         </Grid>
 
-                        <!-- Username. -->
+                        <!-- Row 2, Username. -->
                         <Grid Grid.Row="2">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -121,7 +97,7 @@
                                    Style="{StaticResource ErrorStyle}"/>
                         </Grid>
 
-                        <!-- Password. -->
+                        <!-- Row 3, Password. -->
                         <Grid Grid.Row="3">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -142,8 +118,7 @@
                                    Style="{StaticResource ErrorStyle}"/>
                         </Grid>
                         
-                        <!-- CONFIRM MUST MATCH PASS -->
-                        <!-- Confirm password. -->
+                        <!-- Row 4, Confirm password. -->
                         <Grid Grid.Row="4">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -164,7 +139,7 @@
                                    Style="{StaticResource ErrorStyle}"/>
                         </Grid>
                         
-                        <!-- Email address. -->
+                        <!-- Row 5, Email address. -->
                         <Grid Grid.Row="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -185,7 +160,7 @@
                                    Style="{StaticResource ErrorStyle}"/>
                         </Grid>
 
-                        <!-- Action buttons. -->
+                        <!-- Row 6, Action buttons. -->
                         <Grid Grid.Row="6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"/>

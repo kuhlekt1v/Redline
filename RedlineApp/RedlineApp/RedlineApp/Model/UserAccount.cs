@@ -19,9 +19,6 @@ namespace RedlineApp.Model
         [MaxLength(50)]
         public string FirstName { get; set; }
 
-        [MaxLength(2)]
-        public string MiddleInitial { get; set; }
-
         [MaxLength(255)]
         public string LastName { get; set; }
 

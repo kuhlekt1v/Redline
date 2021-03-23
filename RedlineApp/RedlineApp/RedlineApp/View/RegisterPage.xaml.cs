@@ -2,10 +2,9 @@
     File name: RegisterPage.xaml.cs
     Purpose:   Facilitate interaction with page.
     Author:    Cody Sheridan
-    Version:   1.0.0
+    Version:   1.0.2
 */
 
-using RedlineApp.Behaviors;
 using RedlineApp.Model;
 using RedlineApp.Persistence;
 using RedlineApp.View;
@@ -13,7 +12,6 @@ using RedlineApp.ViewModel;
 using SQLite;
 using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace RedlineApp
 {
@@ -39,10 +37,10 @@ namespace RedlineApp
 
         async void RegisterButtonClicked(object sender, EventArgs e)
         {
+            // User info to be added to db.
             var user = new UserAccount()
             {
                 FirstName = FirstNameEntry.Text,
-                MiddleInitial = MiddleInitialEntry.Text,
                 LastName = LastNameEntry.Text,
                 Username = UsernameEntry.Text,
                 Password = PasswordEntry.Text,
@@ -50,17 +48,38 @@ namespace RedlineApp
                 Email = EmailEntry.Text
             };
 
-            var returnValue = registerViewModel.AddNewUser(user);
+            string returnValue = registerViewModel.AddNewUser(user);
+            bool formIsValid = registerViewModel.AllFieldsFilled(user);
+            bool passwordIsValid = registerViewModel.ConfirmMatchingPassword(user.Password, ConfirmPasswordEntry.Text);
 
-            if (returnValue == "New user added!")
+            // If all required fields are valid.
+            if (formIsValid)
             {
-                await DisplayAlert("Success", returnValue, "Ok");
-                //await Navigation.PushAsync(new MainPage());
-                await Navigation.PushAsync(new ContactPage());
+                // Ensure both password fields match.
+                if (!passwordIsValid)
+                {
+                    await DisplayAlert("Error", "Passwords must match.", "Ok");
+                    registerViewModel.DisplayPasswordError(ConfirmPasswordEntry, Password_Confirmation);
+                }
+                else
+                {
+                    if (returnValue == "New user added!")
+                    {
+                        // Form submitted successfully.
+                        await DisplayAlert("Success", returnValue, "Ok");
+                        //await Navigation.PushAsync(new MainPage());
+                        await Navigation.PushAsync(new ContactPage());
+                    }
+                    else
+                    {
+                        // Something went wrong.
+                        await DisplayAlert("Error", returnValue, "Ok");
+                    }
+                }
             }
             else
             {
-                await DisplayAlert("Error", returnValue, "Ok");
+                await DisplayAlert("Error", "Please complete all required fields.", "Ok");
             }
         }
 

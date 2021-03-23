@@ -11,11 +11,13 @@ using RedlineApp.Persistence;
 using SQLite;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Xamarin.Forms;
 
 namespace RedlineApp.ViewModel
 {
-    class RegisterViewModel
+
+class RegisterViewModel
     {
         private SQLiteConnection _connection;
 
@@ -25,7 +27,6 @@ namespace RedlineApp.ViewModel
             _connection = DependencyService.Get<ISQLiteInterface>().GetConnection();
             _connection.CreateTable<UserAccount>();
         }
-
 
         // Add new user to database.
         public string AddNewUser(UserAccount userAccount)
@@ -49,25 +50,44 @@ namespace RedlineApp.ViewModel
             }
         }
 
-
-
-        // Check to ensure user doesn't exist already.
-
-
-        // Movie these to an account management type page.
-
-
-        // Return list of all users registered in database.
-        private IEnumerable<UserAccount> GetUserAccounts()
+        // Confirm all required fields are filled.
+        public bool AllFieldsFilled(object userAccount)
         {
-            return (from u in _connection.Table<UserAccount>()
-                    select u).ToList();
+            foreach (PropertyInfo pi in userAccount.GetType().GetProperties())
+            {
+                if (pi.PropertyType == typeof(string))
+                {
+                    string value = (string)pi.GetValue(userAccount);
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
-        private UserAccount GetSpecificUser(int id)
+        // Confirm password and password confirmation fields match.
+        public bool ConfirmMatchingPassword(string password, string confirmPass)
         {
-            return _connection.Table<UserAccount>().FirstOrDefault(u => u.Id == id);
+            // Prevent null values breaking.
+            if(password == null || confirmPass == null)
+            {
+                return false;
+            }
+            else
+            {
+                bool passwordMatch = confirmPass.Equals(password);
+                return passwordMatch;
+            }
         }
 
+        // Display error message and focus on entry.
+        public void DisplayPasswordError(Entry confirmPasswordEntry, Label passwordLabel)
+        {
+            confirmPasswordEntry.Focus();
+            confirmPasswordEntry.Text = "";
+            passwordLabel.Text = "Passwords don't match.";
+        }
     }
 }
