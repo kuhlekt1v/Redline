@@ -8,6 +8,7 @@ namespace RedlineApp.View
     public partial class ManageAccountPage : ContentPage
     {
         StackLayout outerStack;
+        Frame mainContentArea;
 
         public ManageAccountPage()
         {
@@ -19,7 +20,8 @@ namespace RedlineApp.View
         {
             base.OnAppearing();
 
-            outerStack = new StackLayout
+            // View area other than status bar.
+            StackLayout outerStack = new StackLayout
             {
                 BackgroundColor = (Color)Application.Current.Resources["AccentColor"],
                 Children =
@@ -44,6 +46,42 @@ namespace RedlineApp.View
                 BackgroundColor = (Color)Application.Current.Resources["BackgroundColor"],
             };
 
+
+            // General account settings buttons.
+            Label updateAccountLbl = new Label
+            {
+                Text = "Update Account",
+                Padding = new Thickness(20, 5, 0, 5),
+                Style = (Style)Application.Current.Resources["CategoryStyle"]
+            };
+
+            var updateAccountTap = new TapGestureRecognizer();
+            updateAccountTap.Tapped += (object sender, EventArgs e) =>
+            {
+                 DisplayAlert("Success", "Link tapped", "ok");
+            };
+            updateAccountLbl.GestureRecognizers.Add(updateAccountTap);
+
+
+
+
+            // Default categories
+            StackLayout defaultCategories = new StackLayout
+            {
+
+                Children =
+                {
+                    // General account settings.
+                    new Label {Text = "General Settings", Padding = new Thickness(10, 20, 0, 10), Style = (Style)Application.Current.Resources["CategoryTitleStyle"]},
+                    updateAccountLbl,
+                    new Label {Text = "Account Security", Padding = new Thickness(20, 5, 0, 5), Style = (Style)Application.Current.Resources["CategoryStyle"]},
+                    new Label {Text = "Delete Account", Padding = new Thickness(20, 5, 0, 5), Style = (Style)Application.Current.Resources["CategoryStyle"]},
+                }
+            };
+
+            // Compose main content view.
+            mainContentArea.Content = defaultCategories;
+
             Button hideDefaultBtn = new Button
             {
                 Text = "Hide TEST"
@@ -53,7 +91,7 @@ namespace RedlineApp.View
             // Need to add ManageAccountViewModel
             hideDefaultBtn.Clicked += HideDefaultCategories;
 
-            StackLayout defaultCategories = new StackLayout
+            StackLayout testButton = new StackLayout
             {
                 Children =
                 {
@@ -63,18 +101,23 @@ namespace RedlineApp.View
 
 
 
-            outerStack.Children.Add(mainContentArea);
-
             // Compose the view.
             outerStack.Children.Add(mainContentArea);
-            outerStack.Children.Add(defaultCategories);
+            outerStack.Children.Add(testButton);
 
             Content = outerStack;
         }
 
         void HideDefaultCategories(object sender, EventArgs e)
         {
-            outerStack.Children.Clear();
+            // Need to clear children of mainContentArea
+            // which is a child of outerStack.
+            
+        }
+
+        async void Test(object sender, EventArgs e)
+        {
+            await DisplayAlert("X", "X", "X");
         }
     }
 

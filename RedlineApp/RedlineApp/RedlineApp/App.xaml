@@ -13,6 +13,7 @@
             <Color x:Key="WhiteColor">#FFFFFF</Color>
             <Color x:Key="BlackColor">#000000</Color>
             <Color x:Key="GreyColor">#545454</Color>
+            <Color x:Key="CharcoalColor">#242424</Color>
             <Color x:Key="BackgroundColor">#DFDFDF</Color>
             <Color x:Key="AccentColor">#E54E47</Color>
             <Color x:Key="BrightAccentColor">#ffcdd2</Color>
@@ -44,6 +45,13 @@
                 <Setter Property="FontSize" Value="22"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
                 <Setter Property="BackgroundColor" Value="{StaticResource GreyColor}"/>
+            </Style>
+            
+            <Style x:Key="CategoryStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource CharcoalColor}" />
+                <Setter Property="FontFamily" Value="SourceSansProRegular" />
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
             </Style>
 
             <Style x:Key="ErrorStyle" TargetType="Label">
