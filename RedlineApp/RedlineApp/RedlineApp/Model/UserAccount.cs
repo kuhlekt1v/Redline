@@ -33,7 +33,7 @@ namespace RedlineApp.Model
         [MaxLength(255), Unique]
         public string Email { get; set; }
 
-        public bool ActiveUser { get; set; }
+        public bool ActiveUser { get; set; } = false;
 
         public DateTime RegistrationDate { get; set; }
 
