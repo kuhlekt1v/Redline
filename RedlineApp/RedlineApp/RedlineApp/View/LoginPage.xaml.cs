@@ -2,7 +2,7 @@
     File name: LoginPage.xaml.cs
     Purpose:   Facilitate user interaction with page.
     Author:    Cody Sheridan
-    Version:   1.0.2
+    Version:   1.0.3
 */
 
 using RedlineApp.Model;
