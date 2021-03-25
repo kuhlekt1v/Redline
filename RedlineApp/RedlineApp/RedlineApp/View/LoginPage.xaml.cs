@@ -5,6 +5,7 @@
     Version:   1.0.2
 */
 
+using RedlineApp.Model;
 using RedlineApp.ViewModel;
 using System;
 using Xamarin.Forms;
@@ -15,6 +16,7 @@ namespace RedlineApp.View
     public partial class LoginPage : ContentPage
     {
         private LoginViewModel loginViewModel;
+
         public LoginPage()
         {
             InitializeComponent();

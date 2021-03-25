@@ -45,8 +45,8 @@ namespace RedlineApp
                 Username = UsernameEntry.Text,
                 Password = PasswordEntry.Text,
                 RegistrationDate = DateTime.UtcNow,
-                Email = EmailEntry.Text,
-                ActiveUser = true
+                Email = EmailEntry.Text
+               // ActiveUser = true
                 
             };
 
