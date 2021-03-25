@@ -34,7 +34,8 @@ namespace RedlineApp.View
         { 
             var data = _connection.Table<UserAccount>();
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
-            if (activeUser != null)
+            // Catch null if no active users on page load.
+            if(activeUser != null)
             {
                 activeUser.ActiveUser = false;
                 _connection.Update(activeUser);
