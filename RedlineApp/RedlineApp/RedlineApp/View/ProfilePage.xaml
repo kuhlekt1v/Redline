@@ -12,7 +12,7 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="{StaticResource AccentColor}">
             <Label Text="Profile"
-                   Padding="10,20, 10, 20"
+                   Padding="10, 20, 10, 20"
                    Style="{StaticResource HeaderTitleStyle}"/>
 
             <Frame CornerRadius="13"

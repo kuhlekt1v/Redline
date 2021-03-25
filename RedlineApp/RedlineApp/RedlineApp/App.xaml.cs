@@ -2,10 +2,13 @@
     File name: App.xaml.cs
     Purpose:   Provides initial entry into application.
     Author:    Cody Sheridan
-    Version:   1.0.0
+    Version:   1.0.1
 */
 
+using RedlineApp.Model;
+using RedlineApp.Persistence;
 using RedlineApp.View;
+using SQLite;
 using Xamarin.Forms;
 
 namespace RedlineApp
@@ -25,16 +28,11 @@ namespace RedlineApp
 
         protected override void OnSleep()
         {
-            /* PLACEHOLDER // NOTE:
-             
-               Trigger LoggedInUser = false here to ensure
-               currently logged in user is logged out if they close
-               app without formally logging out
-            */
         }
 
         protected override void OnResume()
         {
         }
+
     }
 }
