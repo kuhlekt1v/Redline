@@ -2,7 +2,7 @@
     File name: LoginPage.xaml.cs
     Purpose:   Facilitate user interaction with page.
     Author:    Cody Sheridan
-    Version:   1.0.2
+    Version:   1.0.3
 */
 
 using RedlineApp.Model;
@@ -34,8 +34,11 @@ namespace RedlineApp.View
         { 
             var data = _connection.Table<UserAccount>();
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
-            activeUser.ActiveUser = false;
-            _connection.Update(activeUser);
+            if (activeUser != null)
+            {
+                activeUser.ActiveUser = false;
+                _connection.Update(activeUser);
+            }
 
             base.OnAppearing();
         }
