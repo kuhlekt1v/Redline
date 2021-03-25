@@ -2,7 +2,7 @@
     File name: LoginViewModel.cs
     Purpose:   Provides data required by LoginPage View.
     Author:    Cody Sheridan
-    Version:   1.0.2
+    Version:   1.0.3
 */
 
 using RedlineApp.Model;
@@ -21,17 +21,21 @@ namespace RedlineApp.ViewModel
         {
             _connection = DependencyService.Get<ISQLiteInterface>().GetConnection();
             _connection.CreateTable<UserAccount>();
+
         }
 
         // Confirm Username and Password entry match a registered user account.
         public bool ValidateUserLogin(string userName, string password)
         {
             var data = _connection.Table<UserAccount>();
-            var credentials = data.Where(x => x.Username == userName
+            var userAccount = data.Where(x => x.Username == userName
                 && x.Password == password).FirstOrDefault();
 
-            if (credentials != null)
+            if (userAccount != null)
             {
+                // Update as active user.
+                userAccount.ActiveUser = true;
+                _connection.Update(userAccount);
                 return true;
             }
             else

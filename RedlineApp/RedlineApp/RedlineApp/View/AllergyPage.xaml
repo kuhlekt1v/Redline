@@ -6,7 +6,7 @@
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
                         Android="0"
-                        iOS="0, 20, 0, 0" />
+                        iOS="0, 20, 0, 20" />
     </ContentPage.Padding>
 
     <!-- Main content area. -->
@@ -25,9 +25,9 @@
                     <!-- Form grid layout. -->
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="5*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                     
                         <!-- Row 0, Allergy Entry and Add Button. -->
@@ -39,17 +39,30 @@
                             <!-- User Entry for Allergy -->
                             <Entry Grid.Column="0"
                                    Placeholder="Allergy"
+                                   x:Name="AllergyEntry"
                                    Style="{StaticResource EntryStyle}"/>
                             <!-- Add buttom will add allergy to database. -->
                             <Button Grid.Column="1"
                                     Text="Add"
+                                    Clicked="AddButton_Clicked"
                                     Style="{StaticResource PrimaryButton}"/>
                         </Grid>
+
                         <!-- Row 1, Allergy List. -->
                         <Grid Grid.Row="1">
-                            <!-- As allergies are added they will be listed here. -->
-                            <Label Text="LIST HERE"/>
+
+                             <!--As allergies are added they will be listed here.--> 
+                            <ListView x:Name="allergyListView"
+                                      ItemSelected="AllergyListView_ItemSelected">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextCell Text="{Binding AllergyType}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
                         </Grid>
+
                         <!-- Action Buttons. -->
                         <Grid Grid.Row="2">
                             <Grid.ColumnDefinitions>
