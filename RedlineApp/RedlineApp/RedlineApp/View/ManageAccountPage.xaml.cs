@@ -1,5 +1,11 @@
-﻿using System;
+﻿/*
+    File name: ManageAcount.xaml.cs
+    Purpose:   Facilitate interaction with page and create dyanmic view.
+    Author:    Cody Sheridan
+    Version:   1.0.0
+*/
 
+using System;
 using Xamarin.Forms;
 
 namespace RedlineApp.View
@@ -7,9 +13,6 @@ namespace RedlineApp.View
     // REFERENCE: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/button
     public partial class ManageAccountPage : ContentPage
     {
-        StackLayout outerStack;
-        Frame mainContentArea;
-
         public ManageAccountPage()
         {
             InitializeComponent();
@@ -24,16 +27,6 @@ namespace RedlineApp.View
             StackLayout outerStack = new StackLayout
             {
                 BackgroundColor = (Color)Application.Current.Resources["AccentColor"],
-                Children =
-                {
-                    // Page title label.
-                    new Label
-                    {
-                        Text = "Account Settings",
-                        Padding = new Thickness(10,20, 10, 20),
-                        Style = (Style)Application.Current.Resources["HeaderTitleStyle"]
-                    }
-                }
             };
 
             // Main content area.
@@ -41,70 +34,75 @@ namespace RedlineApp.View
             {
                 CornerRadius = 13,
                 Padding = 0,
-                Margin = new Thickness(0, 0, 0, -10),
+                Margin = new Thickness(0, 20, 0, -10),
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 BackgroundColor = (Color)Application.Current.Resources["BackgroundColor"],
             };
 
-
-            // General account settings buttons.
-            Label updateAccountLbl = new Label
+            // Content heading area.
+            Frame headingFrame = new Frame
             {
-                Text = "Update Account",
-                Padding = new Thickness(20, 5, 0, 5),
-                Style = (Style)Application.Current.Resources["CategoryStyle"]
+                CornerRadius = 4,
+                HasShadow = true,
+                BackgroundColor = (Color)Application.Current.Resources["SecondaryColor"]
             };
 
-            var updateAccountTap = new TapGestureRecognizer();
-            updateAccountTap.Tapped += (object sender, EventArgs e) =>
+            // General settings label.
+            Label headingLabel = new Label
             {
-                 DisplayAlert("Success", "Link tapped", "ok");
+                Text = "General Settings",
+                Style = (Style)Application.Current.Resources["CategoryTitleStyle"]
             };
-            updateAccountLbl.GestureRecognizers.Add(updateAccountTap);
+
+            // Compose heading.
+            headingFrame.Content = headingLabel;
+
+            Grid buttonGrid = new Grid
+            {
+                RowSpacing = 20,
+                ColumnDefinitions =
+                {
+                    new ColumnDefinition(),
+                    new ColumnDefinition { Width = new GridLength(100) },
+                    new ColumnDefinition()
+                },
+                RowDefinitions =
+                {
+                    new RowDefinition(),
+                    new RowDefinition(),
+                    new RowDefinition()
+                }
+            };
+
+            Button accountSettingsBtn = new Button
+            {
+                Text = "Account Settings",
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                Style = (Style)Application.Current.Resources["PrimaryButton"]
+            };
+
+            buttonGrid.Children.Add(accountSettingsBtn);
 
 
-
-
-            // Default categories
+            
+            // Default categories.
             StackLayout defaultCategories = new StackLayout
             {
-
                 Children =
                 {
-                    // General account settings.
-                    new Label {Text = "General Settings", Padding = new Thickness(10, 20, 0, 10), Style = (Style)Application.Current.Resources["CategoryTitleStyle"]},
-                    updateAccountLbl,
-                    new Label {Text = "Account Security", Padding = new Thickness(20, 5, 0, 5), Style = (Style)Application.Current.Resources["CategoryStyle"]},
-                    new Label {Text = "Delete Account", Padding = new Thickness(20, 5, 0, 5), Style = (Style)Application.Current.Resources["CategoryStyle"]},
+                    headingFrame,
+                    buttonGrid,
+                    //new Label {Text = "Account Security", Padding = new Thickness(20, 5, 0, 5), Style = (Style)Application.Current.Resources["CategoryStyle"]},
+                    //new Label {Text = "Delete Account", Padding = new Thickness(20, 5, 0, 5), Style = (Style)Application.Current.Resources["CategoryStyle"]},
                 }
             };
 
             // Compose main content view.
             mainContentArea.Content = defaultCategories;
 
-            Button hideDefaultBtn = new Button
-            {
-                Text = "Hide TEST"
-                // Define properties here
-            };
-
-            // Need to add ManageAccountViewModel
-            hideDefaultBtn.Clicked += HideDefaultCategories;
-
-            StackLayout testButton = new StackLayout
-            {
-                Children =
-                {
-                    hideDefaultBtn
-                }
-            };
-
-
-
-            // Compose the view.
+            // Compose complete view.
             outerStack.Children.Add(mainContentArea);
-            outerStack.Children.Add(testButton);
-
             Content = outerStack;
         }
 
@@ -122,16 +120,18 @@ namespace RedlineApp.View
     }
 
 
+//    // General account settings buttons.
+//    Label updateAccountLbl = new Label
+//    {
+//        Text = "Update Account",
+//        Padding = new Thickness(20, 5, 0, 5),
+//        Style = (Style)Application.Current.Resources["CategoryStyle"]
+//    };
 
-    //private void Button_Clicked(object sender, EventArgs e)
-    //    {
-    //        //var defaultCategories = DefaultCategoryStack.Children;
-    //        //DefaultCategoryStack.Children.Clear();
-    //    }
-
-    //    private void Button_Clicked_1(object sender, EventArgs e)
-    //    {
-
-    //    }
-    //}
+//    var updateAccountTap = new TapGestureRecognizer();
+//    updateAccountTap.Tapped += (object sender, EventArgs e) =>
+//            {
+//                outerStack.Children.Clear();
+//            };
+//updateAccountLbl.GestureRecognizers.Add(updateAccountTap);
 }
