@@ -2,10 +2,11 @@
     File name: ManageAcount.xaml.cs
     Purpose:   Facilitate interaction with page and create dyanmic view.
     Author:    Cody Sheridan
-    Version:   1.0.0
+    Version:   1.0.1
 */
 
 using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace RedlineApp.View
@@ -19,10 +20,9 @@ namespace RedlineApp.View
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        // Ensure no active users on page load.
         protected override void OnAppearing()
         {
-            base.OnAppearing();
-
             // View area other than status bar.
             StackLayout outerStack = new StackLayout
             {
@@ -60,12 +60,9 @@ namespace RedlineApp.View
             Grid buttonGrid = new Grid
             {
                 RowSpacing = 20,
-                ColumnDefinitions =
-                {
-                    new ColumnDefinition(),
-                    new ColumnDefinition { Width = new GridLength(100) },
-                    new ColumnDefinition()
-                },
+                Margin = new Thickness(20, 0, 20, 0),
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
                 RowDefinitions =
                 {
                     new RowDefinition(),
@@ -74,18 +71,28 @@ namespace RedlineApp.View
                 }
             };
 
-            Button accountSettingsBtn = new Button
+            Button profileBtn = new Button
             {
-                Text = "Account Settings",
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center,
+                Text = "Profile",
                 Style = (Style)Application.Current.Resources["PrimaryButton"]
             };
 
-            buttonGrid.Children.Add(accountSettingsBtn);
+            Button securityBtn = new Button
+            {
+                Text = "Security",
+                Style = (Style)Application.Current.Resources["PrimaryButton"]
+            };
 
+            Button accountBtn = new Button
+            {
+                Text = "Account",
+                Style = (Style)Application.Current.Resources["PrimaryButton"]
+            };
 
-            
+            buttonGrid.Children.Add(profileBtn, 0, 0);
+            buttonGrid.Children.Add(securityBtn, 0, 1);
+            buttonGrid.Children.Add(accountBtn, 0, 2);
+
             // Default categories.
             StackLayout defaultCategories = new StackLayout
             {
@@ -93,8 +100,6 @@ namespace RedlineApp.View
                 {
                     headingFrame,
                     buttonGrid,
-                    //new Label {Text = "Account Security", Padding = new Thickness(20, 5, 0, 5), Style = (Style)Application.Current.Resources["CategoryStyle"]},
-                    //new Label {Text = "Delete Account", Padding = new Thickness(20, 5, 0, 5), Style = (Style)Application.Current.Resources["CategoryStyle"]},
                 }
             };
 
@@ -104,34 +109,32 @@ namespace RedlineApp.View
             // Compose complete view.
             outerStack.Children.Add(mainContentArea);
             Content = outerStack;
+
+            // Button click events.
+            profileBtn.Clicked += (sender, EventArgs) =>
+            {
+                DisplayInputForm(sender, EventArgs, profileBtn.Text);
+            };
+
+            securityBtn.Clicked += (sender, EventArgs) =>
+            {
+                DisplayInputForm(sender, EventArgs, securityBtn.Text);
+            };
+
+            accountBtn.Clicked += (sender, EventArgs) =>
+            {
+                DisplayInputForm(sender, EventArgs, accountBtn.Text);
+            };
+
+            // Swap default category view for appropriate form.
+            void DisplayInputForm(object sender, EventArgs e, string btnText)
+            {
+                headingLabel.Text = btnText;
+                defaultCategories.Children.RemoveAt(1);
+            }
+
+            base.OnAppearing();
         }
 
-        void HideDefaultCategories(object sender, EventArgs e)
-        {
-            // Need to clear children of mainContentArea
-            // which is a child of outerStack.
-            
-        }
-
-        async void Test(object sender, EventArgs e)
-        {
-            await DisplayAlert("X", "X", "X");
-        }
     }
-
-
-//    // General account settings buttons.
-//    Label updateAccountLbl = new Label
-//    {
-//        Text = "Update Account",
-//        Padding = new Thickness(20, 5, 0, 5),
-//        Style = (Style)Application.Current.Resources["CategoryStyle"]
-//    };
-
-//    var updateAccountTap = new TapGestureRecognizer();
-//    updateAccountTap.Tapped += (object sender, EventArgs e) =>
-//            {
-//                outerStack.Children.Clear();
-//            };
-//updateAccountLbl.GestureRecognizers.Add(updateAccountTap);
 }
