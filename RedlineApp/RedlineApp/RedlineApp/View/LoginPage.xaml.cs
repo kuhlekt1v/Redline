@@ -6,7 +6,9 @@
 */
 
 using RedlineApp.Model;
+using RedlineApp.Persistence;
 using RedlineApp.ViewModel;
+using SQLite;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,6 +17,7 @@ namespace RedlineApp.View
 {
     public partial class LoginPage : ContentPage
     {
+        private SQLiteConnection _connection;
         private LoginViewModel loginViewModel;
 
         public LoginPage()
@@ -22,6 +25,19 @@ namespace RedlineApp.View
             InitializeComponent();
             loginViewModel = new LoginViewModel();
             NavigationPage.SetHasNavigationBar(this, false);
+            _connection = DependencyService.Get<ISQLiteInterface>().GetConnection();
+            _connection.CreateTable<UserAccount>();
+        }
+
+        // Ensure no active users on page load.
+        protected override void OnAppearing()
+        { 
+            var data = _connection.Table<UserAccount>();
+            var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
+            activeUser.ActiveUser = false;
+            _connection.Update(activeUser);
+
+            base.OnAppearing();
         }
 
         private void LoginButtonClicked(object sender, EventArgs e)
