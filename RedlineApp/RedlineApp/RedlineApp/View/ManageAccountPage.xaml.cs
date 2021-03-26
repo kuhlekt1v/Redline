@@ -1,12 +1,12 @@
 ﻿/*
     File name: ManageAcount.xaml.cs
-    Purpose:   Facilitate interaction with page and create dyanmic view.
+    Purpose:   Facilitate interaction with page and create dyanmic 
+               view contained on single page.
     Author:    Cody Sheridan
-    Version:   1.0.1
+    Version:   1.0.2
 */
 
 using System;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace RedlineApp.View
@@ -57,7 +57,8 @@ namespace RedlineApp.View
             // Compose heading.
             headingFrame.Content = headingLabel;
 
-            Grid innerGrid = new Grid
+            // Form grid components.
+            Grid frameGrid = new Grid
             {
                 RowSpacing = 20,
                 Margin = new Thickness(20, 0, 20, 0),
@@ -79,6 +80,28 @@ namespace RedlineApp.View
                 {
                     new ColumnDefinition{ Width = new GridLength(30, GridUnitType.Star) },
                     new ColumnDefinition{ Width = new GridLength(70, GridUnitType.Star) }
+                }
+            };
+            Grid fieldOneGrid = new Grid
+            {
+                RowSpacing = 5,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                RowDefinitions =
+                {
+                    new RowDefinition(),
+                    new RowDefinition(),
+                }
+            };
+            Grid fieldTwoGrid = new Grid
+            {
+                RowSpacing = 5,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                RowDefinitions =
+                {
+                    new RowDefinition(),
+                    new RowDefinition(),
                 }
             };
 
@@ -109,37 +132,39 @@ namespace RedlineApp.View
                 Style = (Style)Application.Current.Resources["PrimaryButton"]
             };
 
-            Entry firstNameEntry = new Entry()
+            Label fieldOneLabel = new Label()
             {
-                Placeholder = "First Name",
-                Style = (Style)Application.Current.Resources["EntryStyle"]
+                Text = "Label 1",
+                Style = (Style)Application.Current.Resources["CategoryStyle"]
             };
-            Entry lastNameEntry = new Entry()
+            Label fieldTwoLabel = new Label()
             {
-                Placeholder = "Last Name",
-                Style = (Style)Application.Current.Resources["EntryStyle"]
-            };
-
-            Label firstNameLbl = new Label()
-            {
-                Text = "First Name",
-                Margin = new Thickness(0, 0, 0, -50),
+                Text = "Label 2",
                 Style = (Style)Application.Current.Resources["CategoryStyle"]
             };
 
-            Label lastNameLbl = new Label()
+            Entry fieldOneEntry = new Entry()
             {
-                Text = "Last Name",
-                Margin = new Thickness(0, 0, 0, -50),
-                Style = (Style)Application.Current.Resources["CategoryStyle"]
+                Placeholder = "Field One",
+                Style = (Style)Application.Current.Resources["EntryStyle"]
             };
+            Entry fieldTwoEntry = new Entry()
+            {
+                Placeholder = "Field Two",
+                Style = (Style)Application.Current.Resources["EntryStyle"]
+            };
+
+            fieldOneGrid.Children.Add(fieldOneLabel, 0, 0);
+            fieldOneGrid.Children.Add(fieldOneEntry, 0, 1);
+            fieldTwoGrid.Children.Add(fieldTwoLabel, 0, 0);
+            fieldTwoGrid.Children.Add(fieldTwoEntry, 0, 1);
 
             submitGrid.Children.Add(backBtn, 0, 0);
             submitGrid.Children.Add(updateBtn, 1, 0);
 
-            innerGrid.Children.Add(profileBtn, 0, 0);
-            innerGrid.Children.Add(securityBtn, 0, 1);
-            innerGrid.Children.Add(accountBtn, 0, 2);
+            frameGrid.Children.Add(profileBtn, 0, 0);
+            frameGrid.Children.Add(securityBtn, 0, 1);
+            frameGrid.Children.Add(accountBtn, 0, 2);
 
             // Default categories.
             StackLayout mainContentInner = new StackLayout
@@ -147,7 +172,7 @@ namespace RedlineApp.View
                 Children =
                 {
                     headingFrame,
-                    innerGrid,
+                    frameGrid,
                 }
             };
 
@@ -162,47 +187,63 @@ namespace RedlineApp.View
             profileBtn.Clicked += (sender, EventArgs) =>
             {
                 HideDefaultView(sender, EventArgs, profileBtn.Text);
-                DisplayProfileForm();
+                DisplayUpdateForm("First Name", "Last Name");       
             };
 
             securityBtn.Clicked += (sender, EventArgs) =>
             {
                 HideDefaultView(sender, EventArgs, securityBtn.Text);
+                DisplayUpdateForm("Password", "Confirm Password");
+
             };
 
             accountBtn.Clicked += (sender, EventArgs) =>
             {
                 HideDefaultView(sender, EventArgs, accountBtn.Text);
+                DisplayUpdateForm("Username", "Email");
             };
 
-            // Swap default category view for appropriate form.
+            backBtn.Clicked += (sender, EventArgs) =>
+            {
+                HideUpdateForm();
+                DisplayDefaultView();
+
+            };
+
+            
+            void DisplayDefaultView()
+            {
+                headingLabel.Text = "General Settings";
+                frameGrid.Children.Add(profileBtn);
+                frameGrid.Children.Add(securityBtn);
+                frameGrid.Children.Add(accountBtn);
+            }
+
             void HideDefaultView(object sender, EventArgs e, string btnText)
             {
                 headingLabel.Text = btnText;
-                innerGrid.Children.Remove(profileBtn);  
-                innerGrid.Children.Remove(securityBtn);  
-                innerGrid.Children.Remove(accountBtn);
+                frameGrid.Children.Remove(profileBtn);  
+                frameGrid.Children.Remove(securityBtn);  
+                frameGrid.Children.Remove(accountBtn);
             }
 
-            void DisplayProfileForm()
+            void DisplayUpdateForm(string fieldOne, string fieldTwo)
             {
-                innerGrid.Children.Add(firstNameLbl, 0, 0);
-                innerGrid.Children.Add(firstNameEntry, 0, 1);
-                innerGrid.Children.Add(lastNameLbl, 0, 2);
-                innerGrid.Children.Add(lastNameEntry, 0, 3);
-                innerGrid.Children.Add(submitGrid, 0, 4);
+                fieldOneLabel.Text = fieldOne;
+                fieldOneEntry.Placeholder = fieldOne;               // Need to connect viewmodel to grab DB info
+                fieldTwoLabel.Text = fieldTwo;
+                fieldTwoEntry.Placeholder = fieldTwo;               // Need to connect viewmodel to grab DB info
+                frameGrid.Children.Add(fieldOneGrid, 0, 0);
+                frameGrid.Children.Add(fieldTwoGrid, 0, 1);
+                frameGrid.Children.Add(submitGrid, 0, 2);
             }
 
-
-            //void DisplayForm()
-            //{
-            //    mainContentInner.Conte
-
-            //    // Compose main content view.
-            //    mainContentFrame.Content = mainContentInner;
-            //    outerStack.Children.Add(mainContentFrame);
-            //    Content = outerStack;
-            //}
+            void HideUpdateForm()
+            {
+                frameGrid.Children.Remove(fieldOneGrid);
+                frameGrid.Children.Remove(fieldTwoGrid);
+                frameGrid.Children.Remove(submitGrid);
+            }
 
             base.OnAppearing();
         }
