@@ -42,7 +42,7 @@
             <Style x:Key="CategoryTitleStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource WhiteColor}" />
                 <Setter Property="FontFamily" Value="SourceSansProRegular" />
-                <Setter Property="FontSize" Value="22"/>
+                <Setter Property="FontSize" Value="28"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
             </Style>

@@ -30,7 +30,7 @@ namespace RedlineApp.View
             };
 
             // Main content area.
-            Frame mainContentArea = new Frame
+            Frame mainContentFrame = new Frame
             {
                 CornerRadius = 13,
                 Padding = 0,
@@ -57,7 +57,7 @@ namespace RedlineApp.View
             // Compose heading.
             headingFrame.Content = headingLabel;
 
-            Grid buttonGrid = new Grid
+            Grid innerGrid = new Grid
             {
                 RowSpacing = 20,
                 Margin = new Thickness(20, 0, 20, 0),
@@ -67,71 +67,142 @@ namespace RedlineApp.View
                 {
                     new RowDefinition(),
                     new RowDefinition(),
-                    new RowDefinition()
+                    new RowDefinition(),
+                }
+            };
+            Grid submitGrid = new Grid
+            {
+                ColumnSpacing = 20,
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                ColumnDefinitions =
+                {
+                    new ColumnDefinition{ Width = new GridLength(30, GridUnitType.Star) },
+                    new ColumnDefinition{ Width = new GridLength(70, GridUnitType.Star) }
                 }
             };
 
-            Button profileBtn = new Button
+            // Individual form components.
+            Button profileBtn = new Button()
             {
                 Text = "Profile",
                 Style = (Style)Application.Current.Resources["PrimaryButton"]
             };
-
             Button securityBtn = new Button
             {
                 Text = "Security",
                 Style = (Style)Application.Current.Resources["PrimaryButton"]
             };
-
             Button accountBtn = new Button
             {
                 Text = "Account",
                 Style = (Style)Application.Current.Resources["PrimaryButton"]
             };
+            Button backBtn = new Button
+            {
+                Text = "<",
+                Style = (Style)Application.Current.Resources["PrimaryButton"]
+            };
+            Button updateBtn = new Button
+            {
+                Text = "Update",
+                Style = (Style)Application.Current.Resources["PrimaryButton"]
+            };
 
-            buttonGrid.Children.Add(profileBtn, 0, 0);
-            buttonGrid.Children.Add(securityBtn, 0, 1);
-            buttonGrid.Children.Add(accountBtn, 0, 2);
+            Entry firstNameEntry = new Entry()
+            {
+                Placeholder = "First Name",
+                Style = (Style)Application.Current.Resources["EntryStyle"]
+            };
+            Entry lastNameEntry = new Entry()
+            {
+                Placeholder = "Last Name",
+                Style = (Style)Application.Current.Resources["EntryStyle"]
+            };
+
+            Label firstNameLbl = new Label()
+            {
+                Text = "First Name",
+                Margin = new Thickness(0, 0, 0, -50),
+                Style = (Style)Application.Current.Resources["CategoryStyle"]
+            };
+
+            Label lastNameLbl = new Label()
+            {
+                Text = "Last Name",
+                Margin = new Thickness(0, 0, 0, -50),
+                Style = (Style)Application.Current.Resources["CategoryStyle"]
+            };
+
+            submitGrid.Children.Add(backBtn, 0, 0);
+            submitGrid.Children.Add(updateBtn, 1, 0);
+
+            innerGrid.Children.Add(profileBtn, 0, 0);
+            innerGrid.Children.Add(securityBtn, 0, 1);
+            innerGrid.Children.Add(accountBtn, 0, 2);
 
             // Default categories.
-            StackLayout defaultCategories = new StackLayout
+            StackLayout mainContentInner = new StackLayout
             {
                 Children =
                 {
                     headingFrame,
-                    buttonGrid,
+                    innerGrid,
                 }
             };
 
             // Compose main content view.
-            mainContentArea.Content = defaultCategories;
+            mainContentFrame.Content = mainContentInner;
 
             // Compose complete view.
-            outerStack.Children.Add(mainContentArea);
+            outerStack.Children.Add(mainContentFrame);
             Content = outerStack;
 
             // Button click events.
             profileBtn.Clicked += (sender, EventArgs) =>
             {
-                DisplayInputForm(sender, EventArgs, profileBtn.Text);
+                HideDefaultView(sender, EventArgs, profileBtn.Text);
+                DisplayProfileForm();
             };
 
             securityBtn.Clicked += (sender, EventArgs) =>
             {
-                DisplayInputForm(sender, EventArgs, securityBtn.Text);
+                HideDefaultView(sender, EventArgs, securityBtn.Text);
             };
 
             accountBtn.Clicked += (sender, EventArgs) =>
             {
-                DisplayInputForm(sender, EventArgs, accountBtn.Text);
+                HideDefaultView(sender, EventArgs, accountBtn.Text);
             };
 
             // Swap default category view for appropriate form.
-            void DisplayInputForm(object sender, EventArgs e, string btnText)
+            void HideDefaultView(object sender, EventArgs e, string btnText)
             {
                 headingLabel.Text = btnText;
-                defaultCategories.Children.RemoveAt(1);
+                innerGrid.Children.Remove(profileBtn);  
+                innerGrid.Children.Remove(securityBtn);  
+                innerGrid.Children.Remove(accountBtn);
             }
+
+            void DisplayProfileForm()
+            {
+                innerGrid.Children.Add(firstNameLbl, 0, 0);
+                innerGrid.Children.Add(firstNameEntry, 0, 1);
+                innerGrid.Children.Add(lastNameLbl, 0, 2);
+                innerGrid.Children.Add(lastNameEntry, 0, 3);
+                innerGrid.Children.Add(submitGrid, 0, 4);
+            }
+
+
+            //void DisplayForm()
+            //{
+            //    mainContentInner.Conte
+
+            //    // Compose main content view.
+            //    mainContentFrame.Content = mainContentInner;
+            //    outerStack.Children.Add(mainContentFrame);
+            //    Content = outerStack;
+            //}
 
             base.OnAppearing();
         }
