@@ -3,25 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RedlineApp.View.MapPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="MAP PAGE"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BackgroundColor="{StaticResource SecondaryColor}">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Frame CornerRadius="13"
+                        Margin="20"
+                        Padding="30, 30, 30, 20"
+                        VerticalOptions="CenterAndExpand"
+                        HasShadow="True"
+                        BackgroundColor="{StaticResource BackgroundColor}">
+                    <Grid RowSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
-            <!--Adding and modifying the title name of the project on the page. -->
-            <Label Text="Welcome to Red Line Application Map!"
-                TextColor="Red" 
-                FontSize="Large"
-                HorizontalOptions="Center"
-                VerticalOptions="CenterAndExpand"/>
-
-            <!-- One button, for a coordinate in the map page. -->
-            <Button Text="Open Map with Coordinate" x:Name="ButtonOpenWithCoordinate" Clicked="ButtonOpenWithCoordinate_Clicked"/>
-
-            <!-- Second button, for a placemark in the map page. -->
-            <Button Text="Open with A Placemark" x:Name="ButtonOpenWithPlacemark" Clicked="ButtonOpenWithPlacemark_Clicked"/>
-
-            <Entry x:Name="EntryName"/>
+                        <!-- Login fields. -->
+                        <Button Text="Open Map with Coordinate"
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="3"
+                                    x:Name="ButtonOpenWithCoordinate"
+                                    Style="{StaticResource PrimaryButton}"
+                                    Clicked="ButtonOpenWithCoordinate_Clicked"/>
+                        <Button Text="Open Map with Placemark"
+                                    Grid.Row="1"
+                                    Grid.ColumnSpan="3"
+                                    x:Name="ButtonOpenWithPlacemark"
+                                    Style="{StaticResource PrimaryButton}"
+                                    Clicked="ButtonOpenWithPlacemark_Clicked"/>
+                    </Grid>
+                </Frame>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
