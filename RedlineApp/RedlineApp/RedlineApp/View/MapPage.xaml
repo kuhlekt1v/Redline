@@ -7,6 +7,21 @@
             <Label Text="MAP PAGE"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+
+            <!--Adding and modifying the title name of the project on the page. -->
+            <Label Text="Welcome to Red Line Application Map!"
+                TextColor="Red" 
+                FontSize="Large"
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand"/>
+
+            <!-- One button, for a coordinate in the map page. -->
+            <Button Text="Open Map with Coordinate" x:Name="ButtonOpenWithCoordinate" Clicked="ButtonOpenWithCoordinate_Clicked"/>
+
+            <!-- Second button, for a placemark in the map page. -->
+            <Button Text="Open with A Placemark" x:Name="ButtonOpenWithPlacemark" Clicked="ButtonOpenWithPlacemark_Clicked"/>
+
+            <Entry x:Name="EntryName"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
