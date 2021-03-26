@@ -40,6 +40,7 @@
                             </Grid.RowDefinitions>
 
                             <DatePicker Grid.Row="0"
+                                        x:Name="DatePickerSelected"
                                         Style="{StaticResource EntryStyle}"
                                         MinimumDate="01/01/1900"
                                         MaximumDate="01/01/2030"
@@ -139,6 +140,7 @@
                             <Entry Grid.Row="0"
                                    Grid.Column="0"
                                    Placeholder="Weight"
+                                   x:Name="WeightEntry"
                                    Keyboard="Numeric"
                                    Style="{StaticResource EntryStyle}"/>
 

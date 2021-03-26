@@ -41,6 +41,7 @@
                             <Entry Grid.Row="0"
                                    Placeholder="Phone Number"
                                    Keyboard="Telephone"
+                                   x:Name="PhoneNumberEntry"
                                    Style="{StaticResource EntryStyle}"/>
 
                        
@@ -58,6 +59,7 @@
 
                             <Entry Grid.Row="0"
                                    Placeholder="Address"
+                                   x:Name="AddressEntry"
                                    Style="{StaticResource EntryStyle}"/>
 
                        
@@ -75,6 +77,7 @@
 
                             <Entry Grid.Row="0"
                                    Placeholder="Emergency Contact Name"
+                                   x:Name="EmergencyContactNameEntry"
                                    Style="{StaticResource EntryStyle}"/>
 
                        
@@ -93,6 +96,7 @@
                             <Entry Grid.Row="0"
                                    Placeholder="Emergency Contact Number"
                                    Keyboard="Telephone"
+                                   x:Name="EmergencyContactNumberEntry"
                                    Style="{StaticResource EntryStyle}"/>
 
                        

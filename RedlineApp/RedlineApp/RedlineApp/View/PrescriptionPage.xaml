@@ -24,9 +24,9 @@
                     <!-- Form grid layout. -->
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="5*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                     
                          <!-- Row 0, Presciption Entry and Add Button. -->
@@ -38,17 +38,27 @@
                             <!-- User Entry for Prescription -->
                             <Entry Grid.Column="0"
                                    Placeholder="Prescription"
+                                   x:Name="PrescriptionEntry"
                                    Style="{StaticResource EntryStyle}"/>
                             <!-- Add buttom will add prescription to database. -->
                             <Button Grid.Column="1"
                                     Text="Add"
+                                    Clicked="AddButton_Clicked"
                                     Style="{StaticResource PrimaryButton}"/>
 
                         </Grid>
                         <!-- Row 1, Prescription List. -->
                         <Grid Grid.Row="1">
                             <!-- As allergies are added they will be listed here. -->
-                            <Label Text="LIST HERE"/>
+                            <ListView x:Name="prescriptionListView"
+                                      ItemSelected="PrescriptionListView_ItemSelected">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextCell Text="{Binding PrescriptionType}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
                         </Grid>
                         <!-- Action Buttons. -->
                         <Grid Grid.Row="2">

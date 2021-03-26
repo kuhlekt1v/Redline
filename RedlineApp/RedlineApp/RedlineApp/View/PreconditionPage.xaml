@@ -24,9 +24,9 @@
                     <!-- Form grid layout. -->
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="5*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                     
                         <!-- Row 0, Precondition Entry and Add Button. -->
@@ -38,17 +38,27 @@
                             <!-- User Entry for Precondition -->
                             <Entry Grid.Column="0"
                                    Placeholder="Precondition"
+                                   x:Name="PreconditionEntry"
                                    Style="{StaticResource EntryStyle}"/>
                             <!-- Add buttom will add precondition to database. -->
                             <Button Grid.Column="1"
                                     Text="Add"
+                                    Clicked="AddButton_Clicked"
                                     Style="{StaticResource PrimaryButton}"/>
 
                         </Grid>
                         <!-- Row 1, Precondition List. -->
                         <Grid Grid.Row="1">
                             <!-- As preconditions are added they will be listed here. -->
-                            <Label Text="LIST HERE"/>
+                            <ListView x:Name="preconditionListView"
+                                      ItemSelected="PreconditionListView_ItemSelected">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextCell Text="{Binding PreconditionType}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+
+                            </ListView>
                         </Grid>
                         <!-- Action Buttons. -->
                         <Grid Grid.Row="2">
