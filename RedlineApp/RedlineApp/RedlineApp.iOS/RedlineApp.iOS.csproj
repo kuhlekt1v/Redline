@@ -71,7 +71,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
@@ -144,10 +143,31 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\exit%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\exit%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\hospital.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\hospital%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\hospital%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
     <BundleResource Include="Resources\marker.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\marker%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\marker%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\medical.png" />
@@ -156,15 +176,15 @@
     <BundleResource Include="Resources\medical%402x.png" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\medical%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
     <BundleResource Include="Resources\settings.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\settings%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\exit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\exit%402x.png" />
+    <BundleResource Include="Resources\settings%403x.png" />
   </ItemGroup>
 </Project>
