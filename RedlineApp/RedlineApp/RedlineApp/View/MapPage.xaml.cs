@@ -20,8 +20,8 @@ namespace RedlineApp.View
         // Adding a button for Map with Coordinate include the location and option.
         private async void ButtonOpenWithCoordinate_Clicked(object sender, EventArgs e)
         {
-            var location = new Location(41.40090, -73.28535);
-            var options = new MapLaunchOptions { Name = "Newtown Municipal Center" };
+            var location = new Location(41.304477119093725, -72.93558964004859);
+            var options = new MapLaunchOptions { Name = "Yale New Haven Hospital" };
             await Map.OpenAsync(location, options);
 
         }

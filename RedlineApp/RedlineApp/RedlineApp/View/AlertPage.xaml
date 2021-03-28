@@ -3,10 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RedlineApp.View.AlertPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Alert Placeholder"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BackgroundColor="{StaticResource SecondaryColor}">
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Frame CornerRadius="13"
+                        Margin="20"
+                        Padding="30"
+                        VerticalOptions="CenterAndExpand"
+                        HasShadow="True"
+                        BackgroundColor="{StaticResource BackgroundColor}">
+                    <Grid RowSpacing="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Alert buttons -->
+                        <Button Text="SEND REQUEST FOR HELP"
+                                    Grid.Row="0"
+                                    x:Name="SendAlertButton"
+                                    Style="{StaticResource PrimaryButton}"
+                                    Clicked="SendAlertButton_Clicked"/>
+
+                    </Grid>
+                </Frame>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

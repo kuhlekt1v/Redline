@@ -23,7 +23,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <!-- Login fields. -->
+                        <!-- Map buttons. -->
                         <Button Text="Open Map with Coordinate"
                                     Grid.Row="0"
                                     Grid.ColumnSpan="3"

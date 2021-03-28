@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +11,11 @@ namespace RedlineApp.View
         public AlertPage()
         {
             InitializeComponent();
+        }
+
+        public async void SendAlertButton_Clicked(object sender, EventArgs e)
+        {
+            await Sms.ComposeAsync(new SmsMessage("Please help", "911"));
         }
     }
 }
