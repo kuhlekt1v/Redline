@@ -64,7 +64,7 @@ namespace RedlineApp.ViewModel
                 mail.From = new MailAddress("redlinemedicalsystem@gmail.com");
                 mail.To.Add(userEmail);
                 mail.Subject = "Password Reminder";
-                mail.Body = $"{recipient}, Your password is {user.Password}.\n If you didn't request a password reminder, please change your password immediately.";
+                mail.Body = $"{recipient}, Your password is {user.Password}.\nIf you didn't request a password reminder, please change your password immediately.";
 
                 // Pass server details and security information.
                 SmtpServer.Port = 587;
