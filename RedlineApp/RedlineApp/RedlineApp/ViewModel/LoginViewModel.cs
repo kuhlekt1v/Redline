@@ -17,14 +17,12 @@ namespace RedlineApp.ViewModel
     public class LoginViewModel
     {
         private SQLiteConnection _connection;
-        private TableQuery<UserAccount> _data;
 
         // Create connection to UserAccount ISQLite table.
         public LoginViewModel()
         {
             _connection = DependencyService.Get<ISQLiteInterface>().GetConnection();
             _connection.CreateTable<UserAccount>();
-                        _data = _connection.Table<UserAccount>();
         }
 
         // Confirm case insensitive Username and case sensitive Password entry match a registered user account.
