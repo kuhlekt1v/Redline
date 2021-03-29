@@ -8,6 +8,7 @@
 
 using RedlineApp.ViewModel;
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace RedlineApp.View
@@ -190,20 +191,20 @@ namespace RedlineApp.View
             profileBtn.Clicked += (sender, EventArgs) =>
             {
                 HideDefaultView(sender, EventArgs, profileBtn.Text);
-                DisplayUpdateForm("First Name", "Last Name");       
+                DisplayUpdateForm("profileBtn", "First Name", "Last Name");       
             };
 
             securityBtn.Clicked += (sender, EventArgs) =>
             {
                 HideDefaultView(sender, EventArgs, securityBtn.Text);
-                DisplayUpdateForm("Password", "Confirm Password");
+                DisplayUpdateForm("passwordBtn", "Password", "Confirm Password");
 
             };
 
             accountBtn.Clicked += (sender, EventArgs) =>
             {
                 HideDefaultView(sender, EventArgs, accountBtn.Text);
-                DisplayUpdateForm("Username", "Email");
+                DisplayUpdateForm("accountBtn", "Username", "Email");
             };
 
             backBtn.Clicked += (sender, EventArgs) =>
@@ -230,22 +231,43 @@ namespace RedlineApp.View
                 frameGrid.Children.Remove(accountBtn);
             }
 
-            void DisplayUpdateForm(string fieldOne, string fieldTwo)
+            // Dynamically display requested form and print record from db.
+            void DisplayUpdateForm(string itemName, string fieldOne, string fieldTwo)
             {
-                var nameList = ManageAccountViewModel.GetCurrentUserName();
-
-                fieldOneLabel.Text = nameList[0];
-                fieldOneEntry.Placeholder = fieldOne;
+                List<string> list = new List<string>();
+                string senderName = itemName;
+                switch (senderName)
+                {
+                    case "profileBtn":
+                        list = ManageAccountViewModel.GetCurrentUserName();
+                        fieldTwoEntry.Keyboard = Keyboard.Default;
+                        fieldOneEntry.IsPassword = false;
+                        fieldTwoEntry.IsPassword = false;
+                        break;
+                    case "passwordBtn":
+                        list = ManageAccountViewModel.GetCurrentUserPassword();
+                        fieldTwoEntry.Keyboard = Keyboard.Default;
+                        fieldOneEntry.IsPassword = true;
+                        fieldTwoEntry.IsPassword = true;
+                        break;
+                    case "accountBtn":
+                        list = ManageAccountViewModel.GetCurrentUserAccount();
+                        fieldTwoEntry.Keyboard = Keyboard.Email;
+                        fieldOneEntry.IsPassword = false;
+                        fieldTwoEntry.IsPassword = false;
+                        break;
+                }
 
                 // Display field one values.
                 fieldOneLabel.Text = fieldOne;
                 fieldOneEntry.Placeholder = fieldOne;
-                fieldOneEntry.Text = nameList[0];
-                
+                fieldOneEntry.Text = list[0];
+
                 // Display field two values.
                 fieldTwoLabel.Text = fieldTwo;
                 fieldTwoEntry.Placeholder = fieldTwo;     
-                fieldTwoEntry.Text = nameList[1];
+                fieldTwoEntry.Text = list[1];
+
 
                 frameGrid.Children.Add(fieldOneGrid, 0, 0);
                 frameGrid.Children.Add(fieldTwoGrid, 0, 1);

@@ -37,5 +37,32 @@ namespace RedlineApp.ViewModel
 
             return returnNames;
         }
+
+        // Return active user password twice to satisfy password and
+        // password confirmation fields.
+        public static List<string> GetCurrentUserPassword()
+        {
+            var account = new ManageAccountViewModel();
+            var activeUser = account._data.Where(x => x.ActiveUser).FirstOrDefault();
+
+            var existingPassword = new List<string>();
+            existingPassword.Add(activeUser.Password);
+            existingPassword.Add(activeUser.Password);
+
+            return existingPassword;
+        }
+
+        // Return active user username and email address.
+        public static List<string> GetCurrentUserAccount()
+        {
+            var account = new ManageAccountViewModel();
+            var activeUser = account._data.Where(x => x.ActiveUser).FirstOrDefault();
+
+            var returnDetails = new List<string>();
+            returnDetails.Add(activeUser.Username);
+            returnDetails.Add(activeUser.Email);
+
+            return returnDetails;
+        }
     }
 }
