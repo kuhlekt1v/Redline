@@ -6,17 +6,20 @@
     Version:   1.0.2
 */
 
+using RedlineApp.ViewModel;
 using System;
 using Xamarin.Forms;
 
 namespace RedlineApp.View
 {
-    // REFERENCE: https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/button
     public partial class ManageAccountPage : ContentPage
     {
+        private ManageAccountViewModel accountViewModel;
+
         public ManageAccountPage()
         {
             InitializeComponent();
+            accountViewModel = new ManageAccountViewModel();
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
@@ -229,10 +232,21 @@ namespace RedlineApp.View
 
             void DisplayUpdateForm(string fieldOne, string fieldTwo)
             {
+                var nameList = ManageAccountViewModel.GetCurrentUserName();
+
+                fieldOneLabel.Text = nameList[0];
+                fieldOneEntry.Placeholder = fieldOne;
+
+                // Display field one values.
                 fieldOneLabel.Text = fieldOne;
-                fieldOneEntry.Placeholder = fieldOne;               // Need to connect viewmodel to grab DB info
+                fieldOneEntry.Placeholder = fieldOne;
+                fieldOneEntry.Text = nameList[0];
+                
+                // Display field two values.
                 fieldTwoLabel.Text = fieldTwo;
-                fieldTwoEntry.Placeholder = fieldTwo;               // Need to connect viewmodel to grab DB info
+                fieldTwoEntry.Placeholder = fieldTwo;     
+                fieldTwoEntry.Text = nameList[1];
+
                 frameGrid.Children.Add(fieldOneGrid, 0, 0);
                 frameGrid.Children.Add(fieldTwoGrid, 0, 1);
                 frameGrid.Children.Add(submitGrid, 0, 2);
