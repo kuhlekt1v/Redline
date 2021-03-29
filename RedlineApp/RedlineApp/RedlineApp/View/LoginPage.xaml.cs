@@ -10,6 +10,7 @@ using RedlineApp.Persistence;
 using RedlineApp.ViewModel;
 using SQLite;
 using System;
+using System.Net.Mail;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -67,17 +68,17 @@ namespace RedlineApp.View
             }
         }
 
-        async void HelpButtonClicked(object sender, EventArgs e)
-        {
-            var answer = await DisplayPromptAsync("Send Password",
+         async void HelpButtonClicked(object sender, EventArgs e)
+         {
+            var answer = await DisplayPromptAsync("Send Password Reminder",
                 "Enter your account email address.", "OK", "Cancel", "Email", keyboard: Keyboard.Email);
 
             if (!string.IsNullOrWhiteSpace(answer))
             {
-                var password = loginViewModel.PasswordReminder(answer);
-                await DisplayAlert("REMINDER IN DEVELOPMENT", password, "Ok");
+                var reminder = loginViewModel.SendPasswordReminder(answer);
+                await DisplayAlert("Password Reminder Notification", reminder, "Ok");
             }
-        }
+         }
 
         private void SignUpLinkTapped(object sender, EventArgs e)
         {
