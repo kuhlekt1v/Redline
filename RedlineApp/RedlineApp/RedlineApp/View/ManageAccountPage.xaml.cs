@@ -97,6 +97,7 @@ namespace RedlineApp.View
                 {
                     new RowDefinition(),
                     new RowDefinition(),
+                    new RowDefinition()
                 }
             };
             Grid fieldTwoGrid = new Grid
@@ -108,6 +109,7 @@ namespace RedlineApp.View
                 {
                     new RowDefinition(),
                     new RowDefinition(),
+                    new RowDefinition()
                 }
             };
 
@@ -148,6 +150,18 @@ namespace RedlineApp.View
                 Text = "Label 2",
                 Style = (Style)Application.Current.Resources["CategoryStyle"]
             };
+            Label fieldOneErrorLabel = new Label()
+            {
+
+                Text = "Error 1",
+                Style = (Style)Application.Current.Resources["ErrorStyle"]
+            };
+            Label fieldTwoErrorLabel = new Label()
+            {
+                Text = "Error 2",
+                Style = (Style)Application.Current.Resources["ErrorStyle"]
+            };
+
 
             Entry fieldOneEntry = new Entry()
             {
@@ -168,8 +182,10 @@ namespace RedlineApp.View
 
             fieldOneGrid.Children.Add(fieldOneLabel, 0, 0);
             fieldOneGrid.Children.Add(fieldOneEntry, 0, 1);
+            fieldOneGrid.Children.Add(fieldOneErrorLabel, 0, 2);
             fieldTwoGrid.Children.Add(fieldTwoLabel, 0, 0);
             fieldTwoGrid.Children.Add(fieldTwoEntry, 0, 1);
+            fieldTwoGrid.Children.Add(fieldTwoErrorLabel, 0, 2);
 
             submitGrid.Children.Add(backBtn, 0, 0);
             submitGrid.Children.Add(updateBtn, 1, 0);
@@ -267,7 +283,6 @@ namespace RedlineApp.View
                     case "accountBtn":
                         list = ManageAccountViewModel.GetCurrentUserAccount();
                         fieldTwoEntry.Keyboard = Keyboard.Email;
-                        fieldTwoEntry.Behaviors.Add(new EmailValidator());
                         updateBtn.Text = "Update Account";
                         fieldOneEntry.IsPassword = false;
                         fieldTwoEntry.IsPassword = false;
