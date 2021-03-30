@@ -2,7 +2,7 @@
    File name: ManageAccountViewModel.cs
    Purpose:   Provides data required by ManageAccount View.
    Author:    Cody Sheridan
-   Version:   1.0.0
+   Version:   1.0.1
 */
 
 using SQLite;
@@ -63,6 +63,43 @@ namespace RedlineApp.ViewModel
             returnDetails.Add(activeUser.Email);
 
             return returnDetails;
+        }
+
+        // Update user account record in database.
+        public string UpdateDatabaseRecord(string updateBtnText, string fieldOneEntry, string fieldTwoEntry)
+        {
+            var account = new ManageAccountViewModel();
+            var activeUser = account._data.Where(x => x.ActiveUser).FirstOrDefault();
+            string returnMessage = "Something went wrong.";
+            // Ensure only record for active user are updated.
+            if (activeUser.ActiveUser == true)
+            {
+                switch (updateBtnText)
+                {
+                    case "Update Profile":
+                        activeUser.FirstName = fieldOneEntry;
+                        activeUser.LastName = fieldTwoEntry;
+                        returnMessage = "Profile updated successfully!";
+                        break;
+                    case "Update Password":
+                        activeUser.Password = fieldOneEntry;
+                        returnMessage = "Password updated successfully!";
+                        break;
+                    case "Update Account":
+                        activeUser.Username = fieldOneEntry;
+                        activeUser.Email = fieldTwoEntry;
+                        returnMessage = "Account updated successfully!";
+                        break;
+                }
+
+                // Update record in db.
+                _connection.Update(activeUser);
+                return returnMessage;
+            }
+            else
+            {
+                return returnMessage;
+            }
         }
     }
 }

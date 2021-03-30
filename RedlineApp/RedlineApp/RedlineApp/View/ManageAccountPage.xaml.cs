@@ -3,9 +3,10 @@
     Purpose:   Facilitate interaction with page and create dyanmic 
                view contained on single page.
     Author:    Cody Sheridan
-    Version:   1.0.2
+    Version:   1.0.3
 */
 
+using RedlineApp.Model;
 using RedlineApp.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -188,17 +189,17 @@ namespace RedlineApp.View
             Content = outerStack;
 
             // Button click events.
+
             profileBtn.Clicked += (sender, EventArgs) =>
             {
                 HideDefaultView(sender, EventArgs, profileBtn.Text);
-                DisplayUpdateForm("profileBtn", "First Name", "Last Name");       
+                DisplayUpdateForm("profileBtn", "First Name", "Last Name");
             };
 
             securityBtn.Clicked += (sender, EventArgs) =>
             {
                 HideDefaultView(sender, EventArgs, securityBtn.Text);
-                DisplayUpdateForm("passwordBtn", "Password", "Confirm Password");
-
+                DisplayUpdateForm("passwordBtn", "New Password", "Confirm New Password");
             };
 
             accountBtn.Clicked += (sender, EventArgs) =>
@@ -211,10 +212,14 @@ namespace RedlineApp.View
             {
                 HideUpdateForm();
                 DisplayDefaultView();
-
             };
 
-            
+            updateBtn.Clicked += (sender, EventArgs) =>
+            {
+                UpdateRecord(updateBtn.Text, fieldOneEntry.Text, fieldTwoEntry.Text);
+            };
+
+            // Display form based which button was pressed.
             void DisplayDefaultView()
             {
                 headingLabel.Text = "General Settings";
@@ -241,18 +246,21 @@ namespace RedlineApp.View
                     case "profileBtn":
                         list = ManageAccountViewModel.GetCurrentUserName();
                         fieldTwoEntry.Keyboard = Keyboard.Default;
+                        updateBtn.Text = "Update Profile";
                         fieldOneEntry.IsPassword = false;
                         fieldTwoEntry.IsPassword = false;
                         break;
                     case "passwordBtn":
                         list = ManageAccountViewModel.GetCurrentUserPassword();
                         fieldTwoEntry.Keyboard = Keyboard.Default;
+                        updateBtn.Text = "Update Password";
                         fieldOneEntry.IsPassword = true;
                         fieldTwoEntry.IsPassword = true;
                         break;
                     case "accountBtn":
                         list = ManageAccountViewModel.GetCurrentUserAccount();
                         fieldTwoEntry.Keyboard = Keyboard.Email;
+                        updateBtn.Text = "Update Account";
                         fieldOneEntry.IsPassword = false;
                         fieldTwoEntry.IsPassword = false;
                         break;
@@ -268,7 +276,6 @@ namespace RedlineApp.View
                 fieldTwoEntry.Placeholder = fieldTwo;     
                 fieldTwoEntry.Text = list[1];
 
-
                 frameGrid.Children.Add(fieldOneGrid, 0, 0);
                 frameGrid.Children.Add(fieldTwoGrid, 0, 1);
                 frameGrid.Children.Add(submitGrid, 0, 2);
@@ -281,6 +288,18 @@ namespace RedlineApp.View
                 frameGrid.Children.Remove(submitGrid);
             }
 
+            void UpdateRecord(string updateBtnText, string fieldOne, string fieldTwo)
+            {
+                var result = accountViewModel.UpdateDatabaseRecord(updateBtnText, fieldOne, fieldTwo);
+                if (result != "Something went wrong.")
+                {
+                    DisplayAlert("Success", result, "Close");
+                }
+                else
+                {
+                    DisplayAlert("Error", result, "Close");
+                }
+            }
             base.OnAppearing();
         }
 
