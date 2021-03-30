@@ -18,19 +18,19 @@ namespace RedlineApp.Model
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(50), NotNull]
         public string FirstName { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(255), NotNull]
         public string LastName { get; set; }
 
-        [MaxLength(25), Unique]
+        [MaxLength(25), NotNull, Unique]
         public string Username { get; set; }
 
-        [MaxLength(25)]
+        [MaxLength(25), NotNull]
         public string Password { get; set; }
 
-        [MaxLength(255), Unique]
+        [MaxLength(255), NotNull, Unique]
         public string Email { get; set; }
 
         public bool ActiveUser { get; set; } = false;
