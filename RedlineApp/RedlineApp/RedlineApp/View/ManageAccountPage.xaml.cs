@@ -6,6 +6,7 @@
     Version:   1.0.3
 */
 
+using RedlineApp.Behaviors;
 using RedlineApp.Model;
 using RedlineApp.ViewModel;
 using System;
@@ -159,6 +160,12 @@ namespace RedlineApp.View
                 Style = (Style)Application.Current.Resources["EntryStyle"]
             };
 
+            // Attach form validation behaviors.
+            // fieldOneEntry.Behaviors.Add(new MaxLengthValidator());
+            // fieldTwoEntry.Behaviors.Add(new MaxLengthValidator());
+            //fieldOneEntry.Behaviors.Add(new RequiredValidator());
+            //fieldTwoEntry.Behaviors.Add(new RequiredValidator());
+
             fieldOneGrid.Children.Add(fieldOneLabel, 0, 0);
             fieldOneGrid.Children.Add(fieldOneEntry, 0, 1);
             fieldTwoGrid.Children.Add(fieldTwoLabel, 0, 0);
@@ -260,6 +267,7 @@ namespace RedlineApp.View
                     case "accountBtn":
                         list = ManageAccountViewModel.GetCurrentUserAccount();
                         fieldTwoEntry.Keyboard = Keyboard.Email;
+                        fieldTwoEntry.Behaviors.Add(new EmailValidator());
                         updateBtn.Text = "Update Account";
                         fieldOneEntry.IsPassword = false;
                         fieldTwoEntry.IsPassword = false;

@@ -18,7 +18,7 @@ namespace RedlineApp.Behaviors
         // Create MaxLength property on entry behavior
         public static readonly BindableProperty MaxLengthProperty =
             BindableProperty.Create("maxLength", typeof(int),
-            typeof(MaxLengthValidator), 0);
+            typeof(MaxLengthValidator), 50);
 
         // Create EntryField property on entry behevaior
         public static readonly BindableProperty EntryFieldProperty =
