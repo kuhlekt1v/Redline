@@ -37,6 +37,7 @@ class RegisterViewModel
 
             if (existingUser == null && existingEmail == null)
             {
+                userAccount.ActiveUser = true;
                 _connection.Insert(userAccount);
                 return "New user added!";
             }
@@ -53,6 +54,7 @@ class RegisterViewModel
         // Confirm all required fields are filled.
         public bool AllFieldsFilled(object userAccount)
         {
+            bool result = true;
             foreach (PropertyInfo pi in userAccount.GetType().GetProperties())
             {
                 if (pi.PropertyType == typeof(string))
@@ -60,11 +62,12 @@ class RegisterViewModel
                     string value = (string)pi.GetValue(userAccount);
                     if (string.IsNullOrEmpty(value))
                     {
-                        return false;
+                        result = false;
+                        break;
                     }
-                }
+                }    
             }
-            return true;
+            return result;
         }
 
         // Confirm password and password confirmation fields match.

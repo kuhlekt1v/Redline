@@ -46,11 +46,10 @@ namespace RedlineApp
                 Password = PasswordEntry.Text,
                 RegistrationDate = DateTime.UtcNow,
                 Email = EmailEntry.Text,
-                ActiveUser = true
-                
+                ActiveUser = true 
             };
 
-            string returnValue = registerViewModel.AddNewUser(user);
+
             bool formIsValid = registerViewModel.AllFieldsFilled(user);
             bool passwordIsValid = registerViewModel.ConfirmMatchingPassword(user.Password, ConfirmPasswordEntry.Text);
 
@@ -65,6 +64,9 @@ namespace RedlineApp
                 }
                 else
                 {
+                    // Add record to database.
+                    string returnValue = registerViewModel.AddNewUser(user);
+
                     if (returnValue == "New user added!")
                     {
                         // Form submitted successfully.
