@@ -3,7 +3,7 @@
     Purpose:   Facilitate interaction with page and create dyanmic 
                view contained on single page.
     Author:    Cody Sheridan
-    Version:   1.0.3
+    Version:   1.0.4
 */
 
 using RedlineApp.Behaviors;
@@ -152,16 +152,12 @@ namespace RedlineApp.View
             };
             Label fieldOneErrorLabel = new Label()
             {
-
-                Text = "Error 1",
                 Style = (Style)Application.Current.Resources["ErrorStyle"]
             };
             Label fieldTwoErrorLabel = new Label()
             {
-                Text = "Error 2",
                 Style = (Style)Application.Current.Resources["ErrorStyle"]
             };
-
 
             Entry fieldOneEntry = new Entry()
             {
@@ -239,7 +235,24 @@ namespace RedlineApp.View
 
             updateBtn.Clicked += (sender, EventArgs) =>
             {
-                UpdateRecord(updateBtn.Text, fieldOneEntry.Text, fieldTwoEntry.Text);
+                bool passwordIsValid = accountViewModel.ConfirmMatchingPassword(updateBtn.Text, 
+                    fieldOneEntry.Text, fieldTwoEntry.Text);
+
+                bool formIsValid = accountViewModel.AllFieldsFilled(fieldOneEntry.Text, fieldTwoEntry.Text);
+
+                if (formIsValid && passwordIsValid)
+                {
+                    UpdateRecord(updateBtn.Text, fieldOneEntry.Text, fieldTwoEntry.Text);
+                }
+                else if (formIsValid && !passwordIsValid)
+                {
+                    fieldTwoEntry.Text = "";
+                    fieldTwoErrorLabel.Text = "Must match password.";
+                }
+                else
+                {
+                    DisplayRequiredError(fieldOneLabel.Text, fieldTwoLabel.Text);
+                }                
             };
 
             // Display form based which button was pressed.
@@ -259,9 +272,18 @@ namespace RedlineApp.View
                 frameGrid.Children.Remove(accountBtn);
             }
 
+            // Clear text from error labels.
+            void ClearValidationErrors()
+            {
+                fieldOneErrorLabel.Text = "";
+                fieldTwoErrorLabel.Text = "";
+            }
+
             // Dynamically display requested form and print record from db.
             void DisplayUpdateForm(string itemName, string fieldOne, string fieldTwo)
             {
+                ClearValidationErrors();
+
                 List<string> list = new List<string>();
                 string senderName = itemName;
                 switch (senderName)
@@ -269,7 +291,7 @@ namespace RedlineApp.View
                     case "profileBtn":
                         list = ManageAccountViewModel.GetCurrentUserName();
                         fieldTwoEntry.Keyboard = Keyboard.Default;
-                        updateBtn.Text = "Update Profile";
+                        updateBtn.Text = "Update Profile"; 
                         fieldOneEntry.IsPassword = false;
                         fieldTwoEntry.IsPassword = false;
                         break;
@@ -316,6 +338,7 @@ namespace RedlineApp.View
                 var result = accountViewModel.UpdateDatabaseRecord(updateBtnText, fieldOne, fieldTwo);
                 if (result != "Something went wrong.")
                 {
+                    ClearValidationErrors();
                     DisplayAlert("Success", result, "Close");
                 }
                 else
@@ -323,6 +346,31 @@ namespace RedlineApp.View
                     DisplayAlert("Error", result, "Close");
                 }
             }
+
+            // Display required error label on empty fields.
+            void DisplayRequiredError(string fieldOne, string fieldTwo)
+            {
+                // Field one control.
+                if(string.IsNullOrWhiteSpace(fieldOneEntry.Text))
+                {
+                    fieldOneErrorLabel.Text = $"{fieldOne} Required";
+                }
+                else
+                {
+                    fieldOneErrorLabel.Text = "";
+                }
+                
+                // Field two control.
+                if (string.IsNullOrWhiteSpace(fieldTwoEntry.Text))
+                {
+                    fieldTwoErrorLabel.Text = $"{fieldTwo} Required";
+                }
+                else
+                {
+                    fieldTwoErrorLabel.Text = "";
+                }
+            }
+
             base.OnAppearing();
         }
 

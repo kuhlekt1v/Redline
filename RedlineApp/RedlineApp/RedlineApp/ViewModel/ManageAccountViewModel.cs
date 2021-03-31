@@ -2,7 +2,7 @@
    File name: ManageAccountViewModel.cs
    Purpose:   Provides data required by ManageAccount View.
    Author:    Cody Sheridan
-   Version:   1.0.1
+   Version:   1.0.2
 */
 
 using SQLite;
@@ -64,6 +64,43 @@ namespace RedlineApp.ViewModel
 
             return returnDetails;
         }
+
+        // Confirm password and password confirmation fields match.
+        public bool ConfirmMatchingPassword(string form, string password, string confirmPass)
+        {
+            // Always return true if sending form is not the password form.
+            if(form == "Update Password")
+            {
+                // Prevent null values breaking.
+                if (password == null || confirmPass == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    bool passwordMatch = confirmPass.Equals(password);
+                    return passwordMatch;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        // Confirm all required fields are filled.
+        public bool AllFieldsFilled(string fieldOne, string fieldTwo)
+        {
+            if(!string.IsNullOrWhiteSpace(fieldOne) && !string.IsNullOrWhiteSpace(fieldTwo))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
         // Update user account record in database.
         public string UpdateDatabaseRecord(string updateBtnText, string fieldOneEntry, string fieldTwoEntry)
