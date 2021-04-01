@@ -138,5 +138,22 @@ namespace RedlineApp.ViewModel
                 return returnMessage;
             }
         }
+
+        public bool DeleteUserAccount()
+        {
+            var account = new ManageAccountViewModel();
+            var activeUser = account._data.Where(x => x.ActiveUser).FirstOrDefault();
+
+            if (activeUser != null)
+            {
+                _connection.Delete(activeUser);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 }

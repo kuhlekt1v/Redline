@@ -75,6 +75,7 @@ namespace RedlineApp.View
                     new RowDefinition(),
                     new RowDefinition(),
                     new RowDefinition(),
+                    new RowDefinition(),
                 }
             };
             Grid submitGrid = new Grid
@@ -129,6 +130,11 @@ namespace RedlineApp.View
                 Text = "Account",
                 Style = (Style)Application.Current.Resources["PrimaryButton"]
             };
+            Button deleteAcctBtn = new Button
+            {
+                Text = "Delete Account",
+                Style = (Style)Application.Current.Resources["SecondaryButton"]
+            };
             Button backBtn = new Button
             {
                 Text = "<",
@@ -170,11 +176,6 @@ namespace RedlineApp.View
                 Style = (Style)Application.Current.Resources["EntryStyle"]
             };
 
-            // Attach form validation behaviors.
-            // fieldOneEntry.Behaviors.Add(new MaxLengthValidator());
-            // fieldTwoEntry.Behaviors.Add(new MaxLengthValidator());
-            //fieldOneEntry.Behaviors.Add(new RequiredValidator());
-            //fieldTwoEntry.Behaviors.Add(new RequiredValidator());
 
             fieldOneGrid.Children.Add(fieldOneLabel, 0, 0);
             fieldOneGrid.Children.Add(fieldOneEntry, 0, 1);
@@ -189,6 +190,7 @@ namespace RedlineApp.View
             frameGrid.Children.Add(profileBtn, 0, 0);
             frameGrid.Children.Add(securityBtn, 0, 1);
             frameGrid.Children.Add(accountBtn, 0, 2);
+            frameGrid.Children.Add(deleteAcctBtn, 0, 3);
 
             // Default categories.
             StackLayout mainContentInner = new StackLayout
@@ -225,6 +227,27 @@ namespace RedlineApp.View
             {
                 HideDefaultView(sender, EventArgs, accountBtn.Text);
                 DisplayUpdateForm("accountBtn", "Username", "Email");
+            };
+
+            deleteAcctBtn.Clicked += async (sender, EventArgs) =>
+            {
+                bool answer = await DisplayAlert("Delete Account?", 
+                    "This action cannot be reversed. Are you sure you wish to proceed?", 
+                    "Yes", "No");
+
+                if(answer)
+                {
+                    bool result = accountViewModel.DeleteUserAccount();
+
+                    if(result)
+                    {
+                        await Navigation.PushAsync(new LoginPage());
+                    }
+                    else
+                    {
+                        await DisplayAlert("Error", "We are unable to complete your request. Please try again.", "Ok");
+                    }
+                }
             };
 
             backBtn.Clicked += (sender, EventArgs) =>
@@ -270,6 +293,7 @@ namespace RedlineApp.View
                 frameGrid.Children.Remove(profileBtn);  
                 frameGrid.Children.Remove(securityBtn);  
                 frameGrid.Children.Remove(accountBtn);
+                frameGrid.Children.Remove(deleteAcctBtn);
             }
 
             // Clear text from error labels.
