@@ -285,6 +285,7 @@ namespace RedlineApp.View
                 frameGrid.Children.Add(profileBtn);
                 frameGrid.Children.Add(securityBtn);
                 frameGrid.Children.Add(accountBtn);
+                frameGrid.Children.Add(deleteAcctBtn);
             }
 
             void HideDefaultView(object sender, EventArgs e, string btnText)
