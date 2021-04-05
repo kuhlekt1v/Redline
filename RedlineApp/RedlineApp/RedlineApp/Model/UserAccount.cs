@@ -38,18 +38,18 @@ namespace RedlineApp.Model
         public DateTime RegistrationDate { get; set; }
 
         [OneToOne]
-        public List<ContactDetails> ContactDetails { get; set; }
+        public ContactDetails ContactDetails { get; set; }
 
         [OneToOne]
-        public List<ProfileDetails> ProfileDetails { get; set; }
+        public ProfileDetails ProfileDetails { get; set; }
 
-        [OneToMany]
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Allergy> Allergy { get; set; }
 
-        [OneToMany]
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Prescription> Prescription { get; set; }
 
-        [OneToMany]
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Precondition> Precondition { get; set; }
 
 

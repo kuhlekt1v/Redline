@@ -96,9 +96,9 @@ namespace RedlineApp.View
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 RowDefinitions =
                 {
-                    new RowDefinition(),
-                    new RowDefinition(),
-                    new RowDefinition()
+                    new RowDefinition{ Height = GridLength.Auto },
+                    new RowDefinition{ Height = GridLength.Auto },
+                    new RowDefinition{ Height = GridLength.Auto }
                 }
             };
             Grid fieldTwoGrid = new Grid
@@ -108,9 +108,9 @@ namespace RedlineApp.View
                 HorizontalOptions = LayoutOptions.FillAndExpand,
                 RowDefinitions =
                 {
-                    new RowDefinition(),
-                    new RowDefinition(),
-                    new RowDefinition()
+                    new RowDefinition{ Height = GridLength.Auto },
+                    new RowDefinition{ Height = GridLength.Auto },
+                    new RowDefinition{ Height = GridLength.Auto }
                 }
             };
 
@@ -361,14 +361,28 @@ namespace RedlineApp.View
             void UpdateRecord(string updateBtnText, string fieldOne, string fieldTwo)
             {
                 var result = accountViewModel.UpdateDatabaseRecord(updateBtnText, fieldOne, fieldTwo);
-                if (result != "Something went wrong.")
+                if(result != "Account updated successfully!")
                 {
-                    ClearValidationErrors();
-                    DisplayAlert("Success", result, "Close");
+                    switch (result)
+                    {
+                        case "username taken":
+                            fieldOneErrorLabel.Text = "Username taken.";
+                            fieldTwoErrorLabel.Text = "";
+                            break;
+                        case "email taken":
+                            fieldOneErrorLabel.Text = "";
+                            fieldTwoErrorLabel.Text = "Account exists.";
+                            break;
+                        case "both taken":
+                            fieldOneErrorLabel.Text = "Username taken.";
+                            fieldTwoErrorLabel.Text = "Account exists.";
+                            break;
+                    }
                 }
                 else
                 {
-                    DisplayAlert("Error", result, "Close");
+                    ClearValidationErrors();
+                    DisplayAlert("Success", result, "Ok.");
                 }
             }
 

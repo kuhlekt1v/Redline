@@ -10,6 +10,8 @@ using Xamarin.Forms;
 using RedlineApp.Model;
 using RedlineApp.Persistence;
 using System.Collections.Generic;
+using System.Linq;
+using SQLiteNetExtensions.Extensions;
 
 namespace RedlineApp.ViewModel
 {
@@ -101,6 +103,37 @@ namespace RedlineApp.ViewModel
             }
         }
 
+        private string ConfirmUniqueCredentials(string username, string email)
+        {
+            var account = new ManageAccountViewModel();
+            var activeUser = account._data.Where(x => x.ActiveUser).FirstOrDefault();
+            var existingUser = _data.Where(x => x.Username == username && x.ActiveUser != true).FirstOrDefault();
+            var existingEmail = _data.Where(x => x.Email == email && x.ActiveUser != true).FirstOrDefault();
+            string response = "Account updated successfully!";
+
+            if (existingUser != null && existingEmail == null)
+            {
+                activeUser.Email = email;
+                response = "username taken";
+                return response;
+            }
+            else if (existingUser == null && existingEmail != null)
+            {
+                response = "email taken";
+                return response;
+            }
+            else if (existingUser != null && existingEmail != null)
+            {
+                response = "both taken";
+                return response;
+            }
+            else
+            {
+                activeUser.Username = username;
+                activeUser.Email = email;
+                return response;
+            }
+        }
 
         // Update user account record in database.
         public string UpdateDatabaseRecord(string updateBtnText, string fieldOneEntry, string fieldTwoEntry)
@@ -123,9 +156,12 @@ namespace RedlineApp.ViewModel
                         returnMessage = "Password updated successfully!";
                         break;
                     case "Update Account":
-                        activeUser.Username = fieldOneEntry;
-                        activeUser.Email = fieldTwoEntry;
-                        returnMessage = "Account updated successfully!";
+                        returnMessage = ConfirmUniqueCredentials(fieldOneEntry, fieldTwoEntry);
+                        if (returnMessage == "Account updated successfully!")
+                        {
+                            activeUser.Username = fieldOneEntry;
+                            activeUser.Email = fieldTwoEntry;
+                        }
                         break;
                 }
 
@@ -146,13 +182,78 @@ namespace RedlineApp.ViewModel
 
             if (activeUser != null)
             {
-                _connection.Delete(activeUser);
+                //var userRecords = _connection.GetWithChildren<UserAccount>(activeUser.Id, recursive: true);
+                var userRecords = _connection.GetAllWithChildren<UserAccount>().FirstOrDefault();
+                _connection.Delete(activeUser, recursive: true);
                 return true;
             }
             else
             {
                 return false;
             }
+            //// Intialize empty list of objects.
+            //var allRecords = new List<object>();
+            //var allergies = new List<object>();
+
+            //// Add database records to list where id matches id of active user.
+            //allRecords.Add(activeUser);
+
+
+            //allergies.Add(_connection.Table<Allergy>().Where(x => x.UserId == activeUser.Id).ToList());
+            //allRecords.Add(allergies);
+            //allRecords.Add(new List<object> { _connection.Table<ContactDetails>().Where(x => x.UserId == activeUser.Id).ToList() });
+            //allRecords.Add(new List<object> { _connection.Table<Precondition>().Where(x => x.UserId == activeUser.Id).ToList() });
+            //allRecords.Add(new List<object> { _connection.Table<Prescription>().Where(x => x.UserId == activeUser.Id).ToList() });
+            //allRecords.Add(new List<object> { _connection.Table<ProfileDetails>().Where(x => x.UserId == activeUser.Id).ToList() });
+
+
+            //if (allRecords != null)
+            //{
+            //    for (var i = 0; i < 6; i++)
+            //    {
+            //        if (allRecords[i] != null)
+            //        {
+            //            _connection.Delete
+            //        }
+
+            //    }
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+
+            //if (allRecords != null)
+            //{
+            //    foreach(List<object> tblRecord in allRecords)
+            //    {
+            //        for e
+            //        for (var i = 0; i <= tblRecord.Count; i++)
+            //        {
+            //            _connection.Delete(tblRecord[i]);
+            //        }
+            //    }
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+
+            //if (allRecords != null)
+            //{
+            //    for (var i = 0; i < 6; i++)
+            //    {
+            //        for (var j = 0; j < allRecords[i].Count; )
+            //        _connection.Delete(allRecords[i]);
+            //    }
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
 
         }
     }

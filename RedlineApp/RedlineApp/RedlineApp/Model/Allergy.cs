@@ -23,7 +23,7 @@ namespace RedlineApp.Model
         [ForeignKey(typeof(UserAccount))]
         public int UserId { get; set; }
 
-        [ManyToOne]
+        [ManyToOne(CascadeOperations = CascadeOperation.All)]
         public UserAccount UserAccount { get; set; }
 
     }

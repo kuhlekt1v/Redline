@@ -35,6 +35,9 @@ namespace RedlineApp.View
 
         async private void NextButton_Clicked(System.Object sender, System.EventArgs e)
         {
+            var data = _connection.Table<UserAccount>();
+            var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
+
             ContactDetails contactDetails = new ContactDetails()
             {
                 PhoneNumber = PhoneNumberEntry.Text,
@@ -45,7 +48,7 @@ namespace RedlineApp.View
 
                 EmergencyContactName = EmergencyContactNameEntry.Text,
 
-                UserId = 1
+                UserId = activeUser.Id
             };
 
             int rows = _connection.Insert(contactDetails);

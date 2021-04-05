@@ -1,6 +1,7 @@
 ﻿using RedlineApp.Model;
 using RedlineApp.Persistence;
 using SQLite;
+using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
 
@@ -47,6 +48,7 @@ namespace RedlineApp.View
 
             if (rows > 0)
             {
+                _connection.UpdateWithChildren(selectedAllergy);
                 await Navigation.PushAsync(new AllergyPage());
             }
 

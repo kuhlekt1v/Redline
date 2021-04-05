@@ -7,8 +7,8 @@
     <!-- Device specific content area padding. -->
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness"
-                        Android="0"
-                        iOS="0, 20, 0, 0" />
+                    Android="0"
+                    iOS="0, 20, 0, 0" />
     </ContentPage.Padding>
 
     <!-- Main content area. -->
@@ -23,7 +23,7 @@
                    BackgroundColor="{StaticResource BackgroundColor}">
                 <!-- Entry fields. -->
                 <StackLayout>
-                    <Grid Margin="0, 20, 0, 0">
+                    <Grid Margin="0, 20, 0, 20">
                         <!-- Form grid layout. -->
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

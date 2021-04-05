@@ -47,10 +47,13 @@ namespace RedlineApp.View
 
         async void AddButton_Clicked(System.Object sender, System.EventArgs e)
         {
+            var data = _connection.Table<UserAccount>();
+            var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
+
             Allergy allergy = new Allergy()
             {
                 AllergyType = AllergyEntry.Text,
-                UserId = 1
+                UserId = activeUser.Id
             };
 
             int rows = _connection.Insert(allergy);
