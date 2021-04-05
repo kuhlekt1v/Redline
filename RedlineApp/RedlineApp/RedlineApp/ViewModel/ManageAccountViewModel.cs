@@ -2,7 +2,7 @@
    File name: ManageAccountViewModel.cs
    Purpose:   Provides data required by ManageAccount View.
    Author:    Cody Sheridan
-   Version:   1.0.2
+   Version:   1.0.3
 */
 
 using SQLite;
@@ -164,7 +164,6 @@ namespace RedlineApp.ViewModel
                         }
                         break;
                 }
-
                 // Update record in db.
                 _connection.Update(activeUser);
                 return returnMessage;
@@ -182,79 +181,17 @@ namespace RedlineApp.ViewModel
 
             if (activeUser != null)
             {
-                //var userRecords = _connection.GetWithChildren<UserAccount>(activeUser.Id, recursive: true);
-                var userRecords = _connection.GetAllWithChildren<UserAccount>().FirstOrDefault();
-                _connection.Delete(activeUser, recursive: true);
+                // Get all children records of active user.
+                var activeUserRecord = _connection.GetWithChildren<UserAccount>(activeUser.Id);
+
+                // Delete all records related to active user.
+                _connection.Delete(activeUserRecord, recursive: true);
                 return true;
             }
             else
             {
                 return false;
             }
-            //// Intialize empty list of objects.
-            //var allRecords = new List<object>();
-            //var allergies = new List<object>();
-
-            //// Add database records to list where id matches id of active user.
-            //allRecords.Add(activeUser);
-
-
-            //allergies.Add(_connection.Table<Allergy>().Where(x => x.UserId == activeUser.Id).ToList());
-            //allRecords.Add(allergies);
-            //allRecords.Add(new List<object> { _connection.Table<ContactDetails>().Where(x => x.UserId == activeUser.Id).ToList() });
-            //allRecords.Add(new List<object> { _connection.Table<Precondition>().Where(x => x.UserId == activeUser.Id).ToList() });
-            //allRecords.Add(new List<object> { _connection.Table<Prescription>().Where(x => x.UserId == activeUser.Id).ToList() });
-            //allRecords.Add(new List<object> { _connection.Table<ProfileDetails>().Where(x => x.UserId == activeUser.Id).ToList() });
-
-
-            //if (allRecords != null)
-            //{
-            //    for (var i = 0; i < 6; i++)
-            //    {
-            //        if (allRecords[i] != null)
-            //        {
-            //            _connection.Delete
-            //        }
-
-            //    }
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
-
-            //if (allRecords != null)
-            //{
-            //    foreach(List<object> tblRecord in allRecords)
-            //    {
-            //        for e
-            //        for (var i = 0; i <= tblRecord.Count; i++)
-            //        {
-            //            _connection.Delete(tblRecord[i]);
-            //        }
-            //    }
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
-
-            //if (allRecords != null)
-            //{
-            //    for (var i = 0; i < 6; i++)
-            //    {
-            //        for (var j = 0; j < allRecords[i].Count; )
-            //        _connection.Delete(allRecords[i]);
-            //    }
-            //    return true;
-            //}
-            //else
-            //{
-            //    return false;
-            //}
-
         }
     }
 }

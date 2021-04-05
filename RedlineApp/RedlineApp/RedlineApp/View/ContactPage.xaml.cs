@@ -8,8 +8,6 @@
 using RedlineApp.Model;
 using RedlineApp.Persistence;
 using SQLite;
-using System;
-using System.Collections.Generic;
 
 using Xamarin.Forms;
 

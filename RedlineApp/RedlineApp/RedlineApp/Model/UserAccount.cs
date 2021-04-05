@@ -3,7 +3,7 @@
     Purpose:   Class containing all registered 
                users' account information.
     Author:    Cody Sheridan
-    Version:   1.0.0
+    Version:   1.0.2
 */
 
 using SQLite;
@@ -37,21 +37,19 @@ namespace RedlineApp.Model
 
         public DateTime RegistrationDate { get; set; }
 
-        [OneToOne]
+        [OneToOne(CascadeOperations = CascadeOperation.CascadeRead | CascadeOperation.CascadeDelete)]
         public ContactDetails ContactDetails { get; set; }
 
-        [OneToOne]
+        [OneToOne(CascadeOperations = CascadeOperation.CascadeRead | CascadeOperation.CascadeDelete)]
         public ProfileDetails ProfileDetails { get; set; }
 
-        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        [OneToMany(CascadeOperations = CascadeOperation.CascadeRead | CascadeOperation.CascadeDelete)]
         public List<Allergy> Allergy { get; set; }
 
-        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        [OneToMany(CascadeOperations = CascadeOperation.CascadeRead | CascadeOperation.CascadeDelete)]
         public List<Prescription> Prescription { get; set; }
 
-        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        [OneToMany(CascadeOperations = CascadeOperation.CascadeRead | CascadeOperation.CascadeDelete)]
         public List<Precondition> Precondition { get; set; }
-
-
     }
 }
