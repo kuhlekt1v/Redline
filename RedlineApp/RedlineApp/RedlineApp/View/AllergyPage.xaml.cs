@@ -29,8 +29,11 @@ namespace RedlineApp.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _connection.CreateTable<Allergy>();
-            var allergies = _connection.Table<Allergy>().ToList();
+            //_connection.CreateTable<Allergy>();
+            var data = _connection.Table<UserAccount>();
+            var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
+            var allergies = _connection.Table<Allergy>().Where(x => x.UserId == activeUser.Id).ToList();
+            //var allergies = _connection.Table<Allergy>().ToList();
             allergyListView.ItemsSource = allergies;
             
         }
@@ -80,6 +83,11 @@ namespace RedlineApp.View
             {
                 Navigation.PushAsync(new AllergyDetailPage(selectedAllergy));
             }
+        }
+
+        void HomeButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
         }
     }
 }

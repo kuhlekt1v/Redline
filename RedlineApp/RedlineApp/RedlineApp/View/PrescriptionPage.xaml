@@ -63,8 +63,9 @@
                         <!-- Action Buttons. -->
                         <Grid Grid.Row="2">
                             <Grid.ColumnDefinitions>
+                                    <!--<ColumnDefinition Width="*"/>-->
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
                             <Button Grid.Column="0"
@@ -75,7 +76,15 @@
 
                             <Button Grid.Column="1"
                                     FontSize="18"
-                                    Text="Next"
+                                    Text="Home"
+                                    Clicked="HomeButton_Clicked"
+                                    x:Name="HomeButton"
+                                    
+                                    Style="{StaticResource PrimaryButton}"/>
+
+                            <Button Grid.Column="2"
+                                    FontSize="18"
+                                    Text="&gt;"
                                     Clicked="NextButton_Clicked"
                                     Style="{StaticResource PrimaryButton}"/>
 

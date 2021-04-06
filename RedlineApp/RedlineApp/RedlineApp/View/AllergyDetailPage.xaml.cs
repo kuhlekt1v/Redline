@@ -48,7 +48,7 @@ namespace RedlineApp.View
 
             if (rows > 0)
             {
-                _connection.UpdateWithChildren(selectedAllergy);
+                //_connection.UpdateWithChildren(selectedAllergy);
                 await Navigation.PushAsync(new AllergyPage());
             }
 
