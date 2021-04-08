@@ -112,13 +112,13 @@
                             </Grid.ColumnDefinitions>
 
                             <Button Grid.Column="0"
-                                    Text="Skip"
+                                    Text="Home"
                                     FontSize="18"
                                     Clicked="SkipButton_Clicked"
                                     Style="{StaticResource PrimaryButton}"/>
 
                             <Button Grid.Column="1"
-                                    Text="Next"
+                                    Text="submit &#38; next"
                                     FontSize="18"
                                     Clicked="NextButton_Clicked"
                                     Style="{StaticResource PrimaryButton}"/>

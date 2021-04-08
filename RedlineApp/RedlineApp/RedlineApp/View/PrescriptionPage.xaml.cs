@@ -30,8 +30,12 @@ namespace RedlineApp.View
         {
             base.OnAppearing();
             _connection.CreateTable<Prescription>();
-            var preconditions = _connection.Table<Prescription>().ToList();
-            prescriptionListView.ItemsSource = preconditions;
+            var data = _connection.Table<UserAccount>();
+            var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
+            var prescriptions = _connection.Table<Prescription>().Where(x => x.UserId == activeUser.Id).ToList();
+            //var prescriptions = _connection.Table<Prescription>().ToList();
+            prescriptionListView.ItemsSource = prescriptions;
+            ;
         }
 
         private void BackButton_Clicked(System.Object sender, System.EventArgs e)
@@ -77,6 +81,11 @@ namespace RedlineApp.View
             {
                 Navigation.PushAsync(new PrescriptionDetailPage(selectedPrescription));
             }
+        }
+
+        void HomeButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
         }
     }
 }

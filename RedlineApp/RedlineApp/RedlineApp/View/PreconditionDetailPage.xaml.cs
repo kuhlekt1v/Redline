@@ -46,7 +46,7 @@ namespace RedlineApp.View
 
             if (rows > 0)
             {
-                _connection.UpdateWithChildren(selectedPrecondition);
+                //_connection.UpdateWithChildren(selectedPrecondition);
                 await Navigation.PushAsync(new PreconditionPage());
             }
         }

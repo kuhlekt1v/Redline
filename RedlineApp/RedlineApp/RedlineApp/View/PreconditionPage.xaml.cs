@@ -29,8 +29,11 @@ namespace RedlineApp.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _connection.CreateTable<Precondition>();
-            var preconditions = _connection.Table<Precondition>().ToList();
+            //_connection.CreateTable<Precondition>();
+            var data = _connection.Table<UserAccount>();
+            var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
+            var preconditions = _connection.Table<Precondition>().Where(x => x.UserId == activeUser.Id).ToList();
+            //var preconditions = _connection.Table<Precondition>().ToList();
             preconditionListView.ItemsSource = preconditions;
         }
 
@@ -80,6 +83,11 @@ namespace RedlineApp.View
             {
                 Navigation.PushAsync(new PreconditionDetailPage(selectedPrecondition));
             }
+        }
+
+        void HomeButton_Clicked(System.Object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
         }
     }
 }

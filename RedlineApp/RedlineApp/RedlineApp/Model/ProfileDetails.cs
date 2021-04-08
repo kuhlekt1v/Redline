@@ -20,7 +20,10 @@ namespace RedlineApp.Model
         public DateTime DateOfBirth { get; set; }
 
         [MaxLength(3)]
-        public string Height { get; set; }
+        public string HeightFeet { get; set; }
+
+        [MaxLength(3)]
+        public string HeightInches { get; set; }
 
         [MaxLength(3)]
         public string Weight { get; set; }

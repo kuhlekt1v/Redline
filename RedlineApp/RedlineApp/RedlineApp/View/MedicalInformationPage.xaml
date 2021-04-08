@@ -3,11 +3,66 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RedlineApp.View.MedicalInformationPage">
 
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="MEDICAL PAGE"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+
+        <StackLayout BackgroundColor="{StaticResource SecondaryColor}">
+            
+            <StackLayout VerticalOptions="CenterAndExpand">
+                <Frame CornerRadius="13"
+                        Margin="20"
+                        Padding="30, 30, 30, 20"
+                        VerticalOptions="CenterAndExpand"
+                        HasShadow="True"
+                        BackgroundColor="{StaticResource BackgroundColor}">
+                    <Grid RowSpacing="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Map buttons. -->
+                        <Button Text="Edit Contact Info"
+                                Grid.Row="0"
+                                Grid.ColumnSpan="3"
+                                Style="{StaticResource PrimaryButton}"
+                                x:Name="EditContact"
+                                Clicked="EditContact_Clicked"/>
+                        <Button Text="Edit Profile Info"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="3"
+                                Style="{StaticResource PrimaryButton}"
+                                x:Name="EditProfile"
+                                Clicked="EditProfile_Clicked"/>
+                        <Button Text="Edit Allergy Info"
+                                Grid.Row="2"
+                                Grid.ColumnSpan="3"
+                                Style="{StaticResource PrimaryButton}"
+                                x:Name="EditAllergy"
+                                Clicked="EditAllergy_Clicked"/>
+                        <Button Text="Edit Prescription Info"
+                                Grid.Row="3"
+                                Grid.ColumnSpan="3"
+                                Style="{StaticResource PrimaryButton}"
+                                x:Name="EditPrescription"
+                                Clicked="EditPrescription_Clicked"/>
+                        <Button Text="Edit Precondition Info"
+                                Grid.Row="4"
+                                Grid.ColumnSpan="3"
+                                Style="{StaticResource PrimaryButton}"
+                                x:Name="EditPrecondition"
+                                Clicked="EditPrecondition_Clicked"/>
+                    </Grid>
+                </Frame>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 
