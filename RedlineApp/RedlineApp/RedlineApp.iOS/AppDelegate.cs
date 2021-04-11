@@ -23,9 +23,12 @@ namespace RedlineApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+          //  global::Xamarin.Forms.Forms.Init();
+            Xamarin.FormsGoogleMaps.Init("AIzaSyC7W4MIjUl-83OZv1Coz7gfzxNEiipTipM");
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
     }
 }
+

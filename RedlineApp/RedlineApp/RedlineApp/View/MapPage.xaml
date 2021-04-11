@@ -1,27 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RedlineApp.View.MapPage">
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+        mc:Ignorable="d"
+    x:Class="RedlineApp.View.MapPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="MAP PAGE"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-
-            <!--Adding and modifying the title name of the project on the page. -->
-            <Label Text="Welcome to Red Line Application Map!"
-                TextColor="Red" 
-                FontSize="Large"
-                HorizontalOptions="Center"
-                VerticalOptions="CenterAndExpand"/>
-
-            <!-- One button, for a coordinate in the map page. -->
-            <Button Text="Open Map with Coordinate" x:Name="ButtonOpenWithCoordinate" Clicked="ButtonOpenWithCoordinate_Clicked"/>
-
-            <!-- Second button, for a placemark in the map page. -->
-            <Button Text="Open with A Placemark" x:Name="ButtonOpenWithPlacemark" Clicked="ButtonOpenWithPlacemark_Clicked"/>
-
-            <Entry x:Name="EntryName"/>
-        </StackLayout>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+              
+            </Grid.RowDefinitions>
+            <maps:Map Grid.Row="0"  HasZoomEnabled="True" x:Name="map"  HeightRequest="200" WidthRequest="200" />
+           
+           
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
