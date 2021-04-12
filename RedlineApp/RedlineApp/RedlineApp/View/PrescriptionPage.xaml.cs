@@ -85,7 +85,7 @@ namespace RedlineApp.View
 
         void HomeButton_Clicked(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new MedicalInformationPage());
+            Navigation.PushAsync(new MainPage());
         }
     }
 }
