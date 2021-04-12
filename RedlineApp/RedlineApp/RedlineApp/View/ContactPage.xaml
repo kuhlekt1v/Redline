@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:RedlineApp.Behaviors"
              x:Class="RedlineApp.View.ContactPage">
     <!-- Device specific content area padding. -->
     <ContentPage.Padding>
@@ -42,10 +42,15 @@
                                    Placeholder="Phone Number"
                                    Keyboard="Telephone"
                                    x:Name="PhoneNumberEntry"
-                                   Style="{StaticResource EntryStyle}"/>
+                                   Style="{StaticResource EntryStyle}">
 
-                       
+                            <Entry.Behaviors>
+                                    <local:MaxLengthValidator MaxLength="16" EntryField="Phone_Number"/>
+                                    <local:RequiredValidator Required="True" EntryField="Phone_Number"/>
+                            </Entry.Behaviors>
+                            </Entry>
                             <Label Grid.Row="1"
+                                   x:Name="Phone_Number"
                                    Style="{StaticResource ErrorStyle}"/>
 
                         </Grid>
@@ -60,10 +65,15 @@
                             <Entry Grid.Row="0"
                                    Placeholder="Address"
                                    x:Name="AddressEntry"
-                                   Style="{StaticResource EntryStyle}"/>
+                                   Style="{StaticResource EntryStyle}">
 
-                       
+                            <Entry.Behaviors>
+                                    <local:MaxLengthValidator MaxLength="50" EntryField="Address"/>
+                                    <local:RequiredValidator Required="True" EntryField="Address"/>
+                            </Entry.Behaviors>
+                            </Entry>
                             <Label Grid.Row="1"
+                                   x:Name="Address"
                                    Style="{StaticResource ErrorStyle}"/>
 
                         </Grid>
@@ -78,11 +88,17 @@
                             <Entry Grid.Row="0"
                                    Placeholder="Emergency Contact Name"
                                    x:Name="EmergencyContactNameEntry"
-                                   Style="{StaticResource EntryStyle}"/>
+                                   Style="{StaticResource EntryStyle}">
 
-                       
+                            <Entry.Behaviors>
+                                    <local:MaxLengthValidator MaxLength="25" EntryField="Emergency_Contact"/>
+                                    <local:RequiredValidator Required="True" EntryField="Emergency_Contact"/>
+                            </Entry.Behaviors>
+                            </Entry>
                             <Label Grid.Row="1"
+                                   x:Name="Emergency_Contact"
                                    Style="{StaticResource ErrorStyle}"/>
+
 
                         </Grid>
 
@@ -97,10 +113,15 @@
                                    Placeholder="Emergency Contact Number"
                                    Keyboard="Telephone"
                                    x:Name="EmergencyContactNumberEntry"
-                                   Style="{StaticResource EntryStyle}"/>
+                                   Style="{StaticResource EntryStyle}">
 
-                       
+                            <Entry.Behaviors>
+                                    <local:MaxLengthValidator MaxLength="16" EntryField="Emergency_Contact_Number"/>
+                                    <local:RequiredValidator Required="True" EntryField="Emergency_Contact_Number"/>
+                            </Entry.Behaviors>
+                            </Entry>
                             <Label Grid.Row="1"
+                                   x:Name="Emergency_Contact_Number"
                                    Style="{StaticResource ErrorStyle}"/>
 
                         </Grid>
@@ -118,17 +139,13 @@
                                     Style="{StaticResource PrimaryButton}"/>
 
                             <Button Grid.Column="1"
-                                    Text="submit &#38; next"
+                                    Text="update &#38; next"
                                     FontSize="18"
                                     Clicked="NextButton_Clicked"
                                     Style="{StaticResource PrimaryButton}"/>
 
                         </Grid>
                     </Grid>
-                    
-
-                    
-
 
                 </StackLayout>
 

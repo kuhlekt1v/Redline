@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:RedlineApp.Behaviors"
              x:Class="RedlineApp.View.ProfilePage">
     <!-- Device specific content area padding. -->
     <ContentPage.Padding>
@@ -142,15 +142,21 @@
                                    Placeholder="Weight"
                                    x:Name="WeightEntry"
                                    Keyboard="Numeric"
-                                   Style="{StaticResource EntryStyle}"/>
+                                   Style="{StaticResource EntryStyle}">
+
+                                <Entry.Behaviors>
+                                    <local:MaxLengthValidator MaxLength="4" EntryField="Weight"/>
+                                    <local:RequiredValidator Required="True" EntryField="Weight"/>
+                                </Entry.Behaviors>
+                            </Entry>
 
                             <Label Grid.Row="0"
                                    Grid.Column="1"
                                    FontSize="18"
                                    Text="Pounds"/>
-
                        
                             <Label Grid.Row="1"
+                                   x:Name="Weight"
                                    Style="{StaticResource ErrorStyle}"/>
 
                         </Grid>
@@ -228,7 +234,7 @@
 
                             <Button Grid.Column="1"
                                     FontSize="18"
-                                    Text="submit &#38; next"
+                                    Text="update &#38; next"
                                     Clicked="NextButton_Clicked"
                                     Style="{StaticResource PrimaryButton}"/>
 
