@@ -29,7 +29,7 @@ namespace RedlineApp.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //_connection.CreateTable<ProfileDetails>();
+            _connection.CreateTable<ProfileDetails>();
             var data = _connection.Table<UserAccount>();
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
             var profile = _connection.Table<ProfileDetails>().Where(x => x.UserId == activeUser.Id).FirstOrDefault();

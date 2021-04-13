@@ -29,7 +29,7 @@ namespace RedlineApp.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //_connection.CreateTable<Allergy>();
+            _connection.CreateTable<Allergy>();
             var data = _connection.Table<UserAccount>();
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
             var allergies = _connection.Table<Allergy>().Where(x => x.UserId == activeUser.Id).ToList();

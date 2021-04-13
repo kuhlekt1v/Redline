@@ -266,6 +266,7 @@ namespace RedlineApp.View
                 if (formIsValid && passwordIsValid)
                 {
                     UpdateRecord(updateBtn.Text, fieldOneEntry.Text, fieldTwoEntry.Text);
+                    //DisplayAlert("Success. Password updated su")
                 }
                 else if (formIsValid && !passwordIsValid)
                 {

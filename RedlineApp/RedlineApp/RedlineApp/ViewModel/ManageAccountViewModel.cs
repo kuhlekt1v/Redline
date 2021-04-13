@@ -149,11 +149,11 @@ namespace RedlineApp.ViewModel
                     case "Update Profile":
                         activeUser.FirstName = fieldOneEntry;
                         activeUser.LastName = fieldTwoEntry;
-                        returnMessage = "Profile updated successfully!";
+                        returnMessage = "Account updated successfully!";
                         break;
                     case "Update Password":
                         activeUser.Password = fieldOneEntry;
-                        returnMessage = "Password updated successfully!";
+                        returnMessage = "Account updated successfully!";
                         break;
                     case "Update Account":
                         returnMessage = ConfirmUniqueCredentials(fieldOneEntry, fieldTwoEntry);
@@ -181,12 +181,19 @@ namespace RedlineApp.ViewModel
 
             if (activeUser != null)
             {
-                // Get all children records of active user.
-                var activeUserRecord = _connection.GetWithChildren<UserAccount>(activeUser.Id);
+                try
+                {
+                    // Get all children records of active user.
+                    var activeUserRecord = _connection.GetWithChildren<UserAccount>(activeUser.Id);
 
-                // Delete all records related to active user.
-                _connection.Delete(activeUserRecord, recursive: true);
-                return true;
+                    // Delete all records related to active user.
+                    _connection.Delete(activeUserRecord, recursive: true);
+                    return true;
+                } 
+                catch (SQLiteException)
+                {
+                    return false;
+                }
             }
             else
             {
