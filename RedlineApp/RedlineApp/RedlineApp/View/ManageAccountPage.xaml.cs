@@ -175,6 +175,7 @@ namespace RedlineApp.View
                 Placeholder = "Field Two",
                 Style = (Style)Application.Current.Resources["EntryStyle"]
             };
+            
 
 
             fieldOneGrid.Children.Add(fieldOneLabel, 0, 0);
@@ -258,12 +259,10 @@ namespace RedlineApp.View
 
             updateBtn.Clicked += (sender, EventArgs) =>
             {
+                bool formIsValid = accountViewModel.AllFieldsFilled(fieldOneEntry.Text, fieldTwoEntry.Text);
+                bool emailIsValid = accountViewModel.ConfirmValidEmail(updateBtn.Text, fieldTwoEntry.Text);
                 bool passwordIsValid = accountViewModel.ConfirmMatchingPassword(updateBtn.Text, 
                     fieldOneEntry.Text, fieldTwoEntry.Text);
-
-                bool formIsValid = accountViewModel.AllFieldsFilled(fieldOneEntry.Text, fieldTwoEntry.Text);
-
-                bool emailIsValid = accountViewModel.ConfirmValidEmail(updateBtn.Text, fieldTwoEntry.Text);
 
                 if ((formIsValid && passwordIsValid) && (formIsValid && emailIsValid))
                 {
@@ -322,7 +321,7 @@ namespace RedlineApp.View
                     case "profileBtn":
                         list = ManageAccountViewModel.GetCurrentUserName();
                         fieldTwoEntry.Keyboard = Keyboard.Default;
-                        updateBtn.Text = "Update Profile"; 
+                        updateBtn.Text = "Update Profile";
                         fieldOneEntry.IsPassword = false;
                         fieldTwoEntry.IsPassword = false;
                         break;
@@ -337,6 +336,8 @@ namespace RedlineApp.View
                         list = ManageAccountViewModel.GetCurrentUserAccount();
                         fieldTwoEntry.Keyboard = Keyboard.Email;
                         updateBtn.Text = "Update Account";
+                        fieldOneEntry.MaxLength = 25;
+                        fieldTwoEntry.MaxLength = 50;
                         fieldOneEntry.IsPassword = false;
                         fieldTwoEntry.IsPassword = false;
                         break;
