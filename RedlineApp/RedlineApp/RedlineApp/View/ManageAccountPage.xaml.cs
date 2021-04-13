@@ -263,15 +263,20 @@ namespace RedlineApp.View
 
                 bool formIsValid = accountViewModel.AllFieldsFilled(fieldOneEntry.Text, fieldTwoEntry.Text);
 
-                if (formIsValid && passwordIsValid)
+                bool emailIsValid = accountViewModel.ConfirmValidEmail(updateBtn.Text, fieldTwoEntry.Text);
+
+                if ((formIsValid && passwordIsValid) && (formIsValid && emailIsValid))
                 {
                     UpdateRecord(updateBtn.Text, fieldOneEntry.Text, fieldTwoEntry.Text);
-                    //DisplayAlert("Success. Password updated su")
                 }
                 else if (formIsValid && !passwordIsValid)
                 {
                     fieldTwoEntry.Text = "";
                     fieldTwoErrorLabel.Text = "Must match password.";
+                }
+                else if (formIsValid && !emailIsValid)
+                {
+                    fieldTwoErrorLabel.Text = "Invalid email.";
                 }
                 else
                 {

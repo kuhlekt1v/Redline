@@ -12,6 +12,7 @@ using RedlineApp.Persistence;
 using System.Collections.Generic;
 using System.Linq;
 using SQLiteNetExtensions.Extensions;
+using System.Text.RegularExpressions;
 
 namespace RedlineApp.ViewModel
 {
@@ -88,6 +89,33 @@ namespace RedlineApp.ViewModel
             {
                 return true;
             }
+        }
+
+        // Confirm email is valid.
+        public bool ConfirmValidEmail(string form, string email)
+        {
+            // Always return true if sending form is not the account form.
+            if (form == "Update Account")
+            {
+                // Prevent null values breaking.
+                if (email == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    string emailRegex = @"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))"
+                      + @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$";
+                    bool isValidEmail = Regex.IsMatch(email, emailRegex, RegexOptions.IgnoreCase);
+
+                    return isValidEmail;
+                }
+            }
+            else
+            {
+                return true;
+            }
+
         }
 
         // Confirm all required fields are filled.
