@@ -51,7 +51,9 @@ namespace RedlineApp
 
 
             bool formIsValid = registerViewModel.AllFieldsFilled(user);
+            bool isValidEmail = registerViewModel.ConfirmValidEmail(EmailEntry.Text);
             bool passwordIsValid = registerViewModel.ConfirmMatchingPassword(user.Password, ConfirmPasswordEntry.Text);
+            
 
             // If all required fields are valid.
             if (formIsValid)
@@ -60,6 +62,12 @@ namespace RedlineApp
                 if (!passwordIsValid)
                 {
                     await DisplayAlert("Error", "Passwords must match.", "Ok");
+                    registerViewModel.DisplayPasswordError(ConfirmPasswordEntry, Password_Confirmation);
+                }
+                // Ensure valid email entered
+                else if(!isValidEmail)
+                {
+                    await DisplayAlert("Error", "Invalid email address.", "Ok");
                     registerViewModel.DisplayPasswordError(ConfirmPasswordEntry, Password_Confirmation);
                 }
                 else
