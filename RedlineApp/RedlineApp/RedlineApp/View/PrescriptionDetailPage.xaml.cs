@@ -1,4 +1,11 @@
-﻿using RedlineApp.Model;
+﻿/*
+    File name: PreconditionDetailPage.xaml.cs
+    Purpose:   Facilitate interaction with page.
+    Author:    Daniel Mansilla
+    Version:   1.0.0
+*/
+
+using RedlineApp.Model;
 using RedlineApp.Persistence;
 using SQLite;
 using System;
@@ -16,14 +23,12 @@ namespace RedlineApp.View
         public PrescriptionDetailPage(Prescription selectedPrescription)
         {
             InitializeComponent();
-
             _connection = DependencyService.Get<ISQLiteInterface>().GetConnection();
-
             this.selectedPrescription = selectedPrescription;
-
             prescriptionEntry.Text = selectedPrescription.PrescriptionType;
         }
 
+        //Connect to DB and create prescription table
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -31,6 +36,7 @@ namespace RedlineApp.View
 
         }
 
+        //Button click action to assign new value to prescription
         async void UpdateButton_Clicked(System.Object sender, System.EventArgs e)
         {
             selectedPrescription.PrescriptionType = prescriptionEntry.Text;
@@ -49,6 +55,7 @@ namespace RedlineApp.View
             }
         }
 
+        //Button click to delete selected prescription
         async void DeleteButton_Clicked(System.Object sender, System.EventArgs e)
         {
             int rows = _connection.Delete(selectedPrescription);

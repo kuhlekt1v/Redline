@@ -26,6 +26,7 @@ namespace RedlineApp.View
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        //On page open connect to DB and find rows in Prescription table where user is active.
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -33,7 +34,6 @@ namespace RedlineApp.View
             var data = _connection.Table<UserAccount>();
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
             var prescriptions = _connection.Table<Prescription>().Where(x => x.UserId == activeUser.Id).ToList();
-            //var prescriptions = _connection.Table<Prescription>().ToList();
             prescriptionListView.ItemsSource = prescriptions;
             ;
         }
@@ -48,6 +48,7 @@ namespace RedlineApp.View
             Navigation.PushAsync(new PreconditionPage());
         }
 
+        //Add prescription to DB table and assign userID to active user ID.
         async void AddButton_Clicked(System.Object sender, System.EventArgs e)
         {
             var data = _connection.Table<UserAccount>();
@@ -73,6 +74,7 @@ namespace RedlineApp.View
             }
         }
 
+        //On item clicked redirect to details page for update or delete options.
         void PrescriptionListView_ItemSelected(System.Object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
             var selectedPrescription = prescriptionListView.SelectedItem as Prescription;

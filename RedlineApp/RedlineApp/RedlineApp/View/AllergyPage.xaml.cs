@@ -26,14 +26,14 @@ namespace RedlineApp.View
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        //On page open connect to DB and find rows in allergy table where user is active.
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //_connection.CreateTable<Allergy>();
+            _connection.CreateTable<Allergy>();
             var data = _connection.Table<UserAccount>();
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
             var allergies = _connection.Table<Allergy>().Where(x => x.UserId == activeUser.Id).ToList();
-            //var allergies = _connection.Table<Allergy>().ToList();
             allergyListView.ItemsSource = allergies;
             
         }
@@ -48,6 +48,7 @@ namespace RedlineApp.View
             Navigation.PushAsync(new PrescriptionPage());
         }
 
+        //Add allergy to DB table and assign userID to active user ID.
         async void AddButton_Clicked(System.Object sender, System.EventArgs e)
         {
             var data = _connection.Table<UserAccount>();
@@ -71,10 +72,9 @@ namespace RedlineApp.View
             {
                 await Navigation.PushAsync(new AllergyPage());
             }
-                
-
         }
 
+        //On item clicked redirect to details page for update or delete options.
         void AllergyListView_ItemSelected(System.Object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
             var selectedAllergy = allergyListView.SelectedItem as Allergy;

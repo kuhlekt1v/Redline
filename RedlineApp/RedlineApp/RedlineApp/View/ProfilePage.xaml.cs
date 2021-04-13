@@ -26,14 +26,16 @@ namespace RedlineApp.View
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        //On page open create profile table and find active user ID.
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //_connection.CreateTable<ProfileDetails>();
+            _connection.CreateTable<ProfileDetails>();
             var data = _connection.Table<UserAccount>();
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
             var profile = _connection.Table<ProfileDetails>().Where(x => x.UserId == activeUser.Id).FirstOrDefault();
 
+            //if active user already has profile info then display in entry fields.
             if (profile != null)
             {
                 DatePickerSelected.Date = profile.DateOfBirth;
@@ -52,6 +54,7 @@ namespace RedlineApp.View
             Navigation.PushAsync(new ContactPage());
         }
 
+        //On next button click submit profile info or update if user changed existing info.
         async private void NextButton_Clicked(System.Object sender, System.EventArgs e)
         {
             if (DatePickerSelected.Date == null || (string)HeightFeet.SelectedItem == null || (string)HeightFeet.SelectedItem == null ||
@@ -100,15 +103,10 @@ namespace RedlineApp.View
                 else
                 {
                     profile.DateOfBirth = DatePickerSelected.Date;
-
                     profile.HeightFeet = (string)HeightFeet.SelectedItem;
-
                     profile.HeightInches = (string)HeightInches.SelectedItem;
-
                     profile.Weight = WeightEntry.Text;
-
                     profile.Sex = (string)SexPicker.SelectedItem;
-
                     profile.BloodType = (string)BloodTypePicker.SelectedItem;
 
                     int rows = _connection.Update(profile);
@@ -121,7 +119,6 @@ namespace RedlineApp.View
 
                     if (rows > 0)
                     {
-                        //_connection.UpdateWithChildren(contact);
                         await Navigation.PushAsync(new AllergyPage());
                     }
 

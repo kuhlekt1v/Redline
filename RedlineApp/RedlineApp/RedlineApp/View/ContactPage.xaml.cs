@@ -24,14 +24,16 @@ namespace RedlineApp.View
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        //On page open create contact details table and find active user ID.
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //_connection.CreateTable<ContactDetails>();
+            _connection.CreateTable<ContactDetails>();
             var data = _connection.Table<UserAccount>();
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
             var contact = _connection.Table<ContactDetails>().Where(x => x.UserId == activeUser.Id).FirstOrDefault();
 
+            //if active user already has contact info then display in entry fields.
             if (contact != null)
             {
                 PhoneNumberEntry.Text = contact.PhoneNumber;
@@ -42,6 +44,7 @@ namespace RedlineApp.View
 
         }
 
+        //On next button click submit contact info or update if user changed existing info.
         async private void NextButton_Clicked(System.Object sender, System.EventArgs e)
         {
             if (PhoneNumberEntry.Text == null || AddressEntry.Text == null || EmergencyContactNumberEntry.Text == null || EmergencyContactNameEntry.Text == null)
@@ -59,13 +62,9 @@ namespace RedlineApp.View
                     ContactDetails contactDetails = new ContactDetails()
                     {
                         PhoneNumber = PhoneNumberEntry.Text,
-
                         Address = AddressEntry.Text,
-
                         EmergencyContactNumber = EmergencyContactNumberEntry.Text,
-
                         EmergencyContactName = EmergencyContactNameEntry.Text,
-
                         UserId = activeUser.Id
                     };
 
@@ -85,11 +84,8 @@ namespace RedlineApp.View
                 else
                 {
                     contact.PhoneNumber = PhoneNumberEntry.Text;
-
                     contact.Address = AddressEntry.Text;
-
                     contact.EmergencyContactNumber = EmergencyContactNumberEntry.Text;
-
                     contact.EmergencyContactName = EmergencyContactNameEntry.Text;
 
                     int rows = _connection.Update(contact);
@@ -102,7 +98,6 @@ namespace RedlineApp.View
 
                     if (rows > 0)
                     {
-                        //_connection.UpdateWithChildren(contact);
                         await Navigation.PushAsync(new ProfilePage());
                     }
                 }
@@ -113,6 +108,7 @@ namespace RedlineApp.View
             
         }
 
+        //redirects user to home page
         private void SkipButton_Clicked(System.Object sender, System.EventArgs e)
         {
             Navigation.PushAsync(new MainPage());

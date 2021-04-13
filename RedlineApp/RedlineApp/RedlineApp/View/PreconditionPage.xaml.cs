@@ -26,14 +26,14 @@ namespace RedlineApp.View
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
+        //On page open connect to DB and find rows in precondition table where user is active.
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            //_connection.CreateTable<Precondition>();
+            _connection.CreateTable<Precondition>();
             var data = _connection.Table<UserAccount>();
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
             var preconditions = _connection.Table<Precondition>().Where(x => x.UserId == activeUser.Id).ToList();
-            //var preconditions = _connection.Table<Precondition>().ToList();
             preconditionListView.ItemsSource = preconditions;
         }
 
@@ -43,13 +43,7 @@ namespace RedlineApp.View
             Navigation.PushAsync(new PrescriptionPage());
         }
 
-        private void CompleteButton_Clicked(System.Object sender, System.EventArgs e)
-        {
-            Navigation.PushAsync(new MainPage());
-        }
-
-
-
+        //Add preconditions to DB table and assign userID to active user ID.
         async void AddButton_Clicked(System.Object sender, System.EventArgs e)
         {
             var data = _connection.Table<UserAccount>();
@@ -75,6 +69,7 @@ namespace RedlineApp.View
             }
         }
 
+        //On item clicked redirect to details page for update or delete options.
         void PreconditionListView_ItemSelected(System.Object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
             var selectedPrecondition = preconditionListView.SelectedItem as Precondition;
