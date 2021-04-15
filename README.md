@@ -23,11 +23,12 @@ SWEG5302-The Redline Medical System aims to create an efficient, low-cost emerge
 <br>
 
 ## Android Emulator Setup (Visual Studio 2019)
+1. Open the Android SDK Manager. _Circled in red below._
 
 ![alt text](https://github.com/kuhlekt1v/redline/blob/revised-map/OpenAndroidSDKManager.png?raw=true)
 
-1. Open the Android SDK Manager. _Circled in red above._
-   <br>
-
-![alt text](https://github.com/kuhlekt1v/redline/blob/revised-map/SDKManager.png?raw=true) 2. Ensure both Google Play (Intel x86 Atom & Intel x86 Atom_64) and Google API system images are installed for the device emulator you will use. _Highlighted in red above._
 <br>
+
+2. Ensure both Google Play (Intel x86 Atom & Intel x86 Atom_64) and Google API system images are installed for the device emulator you will use. _Highlighted in red below._
+
+![alt text](https://github.com/kuhlekt1v/redline/blob/revised-map/SDKManager.png?raw=true) 
