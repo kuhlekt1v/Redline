@@ -1,44 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              x:Class="RedlineApp.View.MapPage">
+    <!-- Main content area. -->
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{StaticResource SecondaryColor}">
-            <StackLayout VerticalOptions="CenterAndExpand">
-                <Frame CornerRadius="13"
-                        Margin="20"
-                        Padding="30, 30, 30, 20"
-                        VerticalOptions="CenterAndExpand"
-                        HasShadow="True"
-                        BackgroundColor="{StaticResource BackgroundColor}">
-                    <Grid RowSpacing="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+        <StackLayout BackgroundColor="{StaticResource AccentColor}">
+            <Label Text="Nearby Emergency Service"
+                   Padding="10,20, 10, 20"
+                   Style="{StaticResource HeaderTitleStyle}"/>
+            <Frame CornerRadius="13"
+                   Margin="0, 0, 0, -10"
+                   VerticalOptions="FillAndExpand"
+                   BackgroundColor="{StaticResource BackgroundColor}">
 
-                        <!-- Map buttons. -->
-                        <Button Text="Open Map with Coordinate"
-                                    Grid.Row="0"
-                                    Grid.ColumnSpan="3"
-                                    x:Name="ButtonOpenWithCoordinate"
-                                    Style="{StaticResource PrimaryButton}"
-                                    Clicked="ButtonOpenWithCoordinate_Clicked"/>
-                        <Button Text="Open Map with Placemark"
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="3"
-                                    x:Name="ButtonOpenWithPlacemark"
-                                    Style="{StaticResource PrimaryButton}"
-                                    Clicked="ButtonOpenWithPlacemark_Clicked"/>
-                    </Grid>
-                </Frame>
-            </StackLayout>
+                <StackLayout>
+                <!-- Google map display. -->
+                <maps:Map x:Name="MapDisplay"/>
+                <!-- Refresh button. -->
+                <Button x:Name="RefreshLocationBtn" 
+                        Text="Refresh Location"
+                        Style="{StaticResource PrimaryButton}"/>
+
+
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
