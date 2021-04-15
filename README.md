@@ -37,3 +37,6 @@ SWEG5302-The Redline Medical System aims to create an efficient, low-cost emerge
 4. With the emulator running navigate to the device's settings page and set your the device location. _To simulate a user moving with their device change the device's location and press **Refresh Location** on the Map page._
 
 ![alt text](https://github.com/kuhlekt1v/redline/blob/revised-map/MoreSettings.png?raw=true)
+<br>
+
+The **ItemGroup "XamarinBuildDownloadRestoreAssemblyAar" is no longer supported** warning currently has no effect on application operation.
