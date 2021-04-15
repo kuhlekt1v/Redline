@@ -1,14 +1,15 @@
 ﻿/*
     File name: RestClient.cs
-    Purpose:   Return results of Http query as JSON data.
+    Purpose:   Return results of HTTP query to GoogleAPI 
+               as JSON data.
     Author:    Cody Sheridan
     Version:   1.0.0
 */
 
-using Newtonsoft.Json;
 using System;
-using System.Diagnostics;
 using System.Net.Http;
+using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace RedlineApp.Helpers

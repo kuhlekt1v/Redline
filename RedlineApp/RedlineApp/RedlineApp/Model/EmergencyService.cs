@@ -1,10 +1,17 @@
-﻿using System.Collections.Generic;
+﻿/*
+    File name: EmergencyService.cs
+    Purpose:   Class contains GoogleAPI data
+               converted from JSON by RestClient.cs 
+    Author:    Cody Sheridan
+    Version:   1.0.0
+*/
+
+using System.Collections.Generic;
 
 namespace RedlineApp.Model
 {
     public class EmergencyService
     {
-        // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
         public class Location
         {
             public double Lat { get; set; }
@@ -74,11 +81,9 @@ namespace RedlineApp.Model
 
         public class Root
         {
-
             public List<object> HtmlAttributions { get; set; }
             public string NextPageToken { get; set; }
             public List<Result> Results { get; set; }
-
             public string Status { get; set; }
         }
     }

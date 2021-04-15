@@ -34,12 +34,18 @@ namespace RedlineApp.View
             _data = _connection.Table<UserAccount>();
 
             InitializeComponent();
+
+            // Show spinning activity indicator.
+            ActivityIndicatorStatus.IsVisible = true;
+            // Display pins.
             DisplayUserLocation();
             DisplayNearbyHospitals();
+            // Hide spinning activity indicator.
+            ActivityIndicatorStatus.IsVisible = false;
 
         }
 
-
+        // Display user's current location on map.
         public async void DisplayUserLocation()
         {
             var user = _data.Where(x => x.ActiveUser).FirstOrDefault();
@@ -76,61 +82,39 @@ namespace RedlineApp.View
         }
 
 
-        // THIS WORKS! - ONLY COMMENTED OUT FOR IMPLEMENTATION OF VISUAL MAP.
-
+        // Display pins of all hospitals within 30 mile radius of user location.
         async void DisplayNearbyHospitals()
         {
             // REMOVE IN PRODUCTION - SECURITY RISK!
             var apiKey = "AIzaSyC7W4MIjUl-83OZv1Coz7gfzxNEiipTipM";
 
-            // Show spinning activity indicator.
-            //ActivityIndicatorStatus.IsVisible = true;
-
             // Access device location.
             var request = new GeolocationRequest(GeolocationAccuracy.Best);
             var location = await Geolocation.GetLocationAsync(request);
 
-            // Query to display hospitals within 30 mile radius of device location.
+            // Query to GoogleAPI.
             var nearbyHospitals = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={location.Latitude},{location.Longitude}&radius=49000&type=hospital&key={apiKey}";
             var result = await NearbyPlaceSearch(nearbyHospitals);
 
-
-            //var listHospitals = new ObservableCollection<EmergencyService.Result>();
-
-            //Add each item returned from GoogleAPI query to observable collection.
-
+            // Create map pins from GoogleAPI query results.
             foreach (var item in result.Results)
             {
+                // Save item latitude and longitude to new position.
                 Position hospitalLocation = new Position(item.Geometry.Location.Lat, item.Geometry.Location.Lng);
 
                 Pin hospitalPin = new Pin()
                 {
                     Label = item.Name,
                     Address = item.Vicinity,
-                    Position = hospitalLocation
+                    Position = hospitalLocation,
                 };
 
                 MapDisplay.Pins.Add(hospitalPin);
             };
-
-            
-
-
-
-
-
-            //listHospitals.Add(item.);
-
-            //// Attach results to list view.
-            //LocationListView.ItemsSource = listHospitals;
-
-            //// hide spinning activity indicator.
-            //ActivityIndicatorStatus.IsVisible = false;
         }
 
         static async Task<EmergencyService.Root> NearbyPlaceSearch(string googleQuery)
         {
-           // var pageToken = nextPageToken != null ? "&pagetoken=" + nextPageToken : null;
             var requestUri = string.Format(googleQuery);
 
             try
@@ -143,15 +127,20 @@ namespace RedlineApp.View
             {
                 Debug.WriteLine("Nearby place search error: " + e.Message);
             }
-
             return null;
         }
 
-        // Clear all pins and refresh for new user location.
+        // Clear all pins and refresh map results for new user location.
         private void RefreshLocationBtnClicked(object sender, EventArgs e)
         {
             MapDisplay.Pins.Clear();
+            // Show spinning activity indicator.
+            ActivityIndicatorStatus.IsVisible = true;
+            // Display pins.
             DisplayUserLocation();
+            DisplayNearbyHospitals();
+            // Hide spinning activity indicator.
+            ActivityIndicatorStatus.IsVisible = false;
         }
     }
 }
