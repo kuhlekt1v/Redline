@@ -6,7 +6,7 @@
     <!-- Main content area. -->
     <ContentPage.Content>
         <StackLayout BackgroundColor="{StaticResource AccentColor}">
-            <Label Text="Nearby Emergency Service"
+            <Label Text="Nearby Emergency Services"
                    Padding="10,20, 10, 20"
                    Style="{StaticResource HeaderTitleStyle}"/>
             <Frame CornerRadius="13"
@@ -16,13 +16,13 @@
 
                 <StackLayout>
                 <!-- Google map display. -->
-                <maps:Map x:Name="MapDisplay"/>
-                <!-- Refresh button. -->
+                <maps:Map x:Name="MapDisplay" MapType="Street" IsShowingUser="True"/>
+                    
+                    <!-- Refresh button. -->
                 <Button x:Name="RefreshLocationBtn" 
                         Text="Refresh Location"
-                        Style="{StaticResource PrimaryButton}"/>
-
-
+                        Style="{StaticResource PrimaryButton}"
+                        Clicked="RefreshLocationBtnClicked"/>
                 </StackLayout>
             </Frame>
         </StackLayout>
