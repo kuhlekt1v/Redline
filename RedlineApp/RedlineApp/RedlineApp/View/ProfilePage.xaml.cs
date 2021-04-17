@@ -44,19 +44,40 @@ namespace RedlineApp.View
                 WeightEntry.Text = profile.Weight;
                 SexPicker.SelectedItem = profile.Sex;
                 BloodTypePicker.SelectedItem = profile.BloodType;
+            }
 
+            //if the last page was the main page then switch the buttons at bottom of screen.
+            var previousPageIndex = Navigation.NavigationStack.Count - 2;
+            var previousPageType = Navigation.NavigationStack[previousPageIndex];
+
+            if (previousPageType.GetType() == typeof(MainPage))
+            {
+                backHome.Text = "Home";
+                updateNext.Text = "Save";
             }
 
         }
 
         private void BackButton_Clicked(System.Object sender, System.EventArgs e)
         {
-            Navigation.PushAsync(new ContactPage());
+            var previousPageIndex = Navigation.NavigationStack.Count - 2;
+            var previousPageType = Navigation.NavigationStack[previousPageIndex];
+            if (previousPageType.GetType() == typeof(MainPage))
+            {
+                Navigation.PushAsync(new MainPage());
+            }
+            else
+            {
+                Navigation.PushAsync(new ContactPage());
+            }
+            
         }
 
         //On next button click submit profile info or update if user changed existing info.
         async private void NextButton_Clicked(System.Object sender, System.EventArgs e)
         {
+            var previousPageIndex = Navigation.NavigationStack.Count - 2;
+            var previousPageType = Navigation.NavigationStack[previousPageIndex];
             if (DatePickerSelected.Date == null || (string)HeightFeet.SelectedItem == null || (string)HeightFeet.SelectedItem == null ||
                 WeightEntry.Text == null || (string)SexPicker.SelectedItem == null || (string)BloodTypePicker.SelectedItem == null)
             {
@@ -97,7 +118,14 @@ namespace RedlineApp.View
 
                     if (rows > 0)
                     {
-                        await Navigation.PushAsync(new AllergyPage());
+                        if (previousPageType.GetType() == typeof(MainPage))
+                        {
+                            await Navigation.PushAsync(new MainPage());
+                        }
+                        else
+                        {
+                            await Navigation.PushAsync(new AllergyPage());
+                        }
                     }
                 }
                 else
@@ -119,7 +147,14 @@ namespace RedlineApp.View
 
                     if (rows > 0)
                     {
-                        await Navigation.PushAsync(new AllergyPage());
+                        if (previousPageType.GetType() == typeof(MainPage))
+                        {
+                            await Navigation.PushAsync(new MainPage());
+                        }
+                        else
+                        {
+                            await Navigation.PushAsync(new AllergyPage());
+                        }
                     }
 
                 }

@@ -35,7 +35,26 @@ namespace RedlineApp.View
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
             var prescriptions = _connection.Table<Prescription>().Where(x => x.UserId == activeUser.Id).ToList();
             prescriptionListView.ItemsSource = prescriptions;
-            ;
+
+            //if the last page was the main page then switch the buttons at bottom of screen.
+            var previousPageIndex = Navigation.NavigationStack.Count - 2;
+            var previousPageType = Navigation.NavigationStack[previousPageIndex];
+
+            Button backbutton = new Button
+            {
+                Text = "Back",
+                Style = (Style)Application.Current.Resources["PrimaryButton"]
+            };
+
+            if (previousPageType.GetType() == typeof(MainPage) || previousPageType.GetType() == typeof(PrescriptionDetailPage))
+            {
+                ButtonGrid.Children.Clear();
+                ButtonGrid.Children.Add(backbutton);
+                ButtonGrid.ColumnDefinitions.Clear();
+                backbutton.Clicked += (sender, EventArgs) => {
+                    Navigation.PushAsync(new MainPage());
+                };
+            }
         }
 
         private void BackButton_Clicked(System.Object sender, System.EventArgs e)
