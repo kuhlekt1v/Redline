@@ -1,4 +1,11 @@
-﻿using RedlineApp.Model;
+﻿/*
+    File name: PreconditionDetailPage.xaml.cs
+    Purpose:   Facilitate interaction with page.
+    Author:    Daniel Mansilla
+    Version:   1.0.0
+*/
+
+using RedlineApp.Model;
 using RedlineApp.Persistence;
 using SQLite;
 using SQLiteNetExtensions.Extensions;
@@ -17,14 +24,12 @@ namespace RedlineApp.View
         public PreconditionDetailPage(Precondition selectedPrecondition)
         {
             InitializeComponent();
-
             _connection = DependencyService.Get<ISQLiteInterface>().GetConnection();
-
             this.selectedPrecondition = selectedPrecondition;
-
             preconditionEntry.Text = selectedPrecondition.PreconditionType;
         }
 
+        //Connect to DB and create Precondition table
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -32,6 +37,7 @@ namespace RedlineApp.View
 
         }
 
+        //Button click action to assign new value to Precondition
         async void UpdateButton_Clicked(System.Object sender, System.EventArgs e)
         {
             selectedPrecondition.PreconditionType = preconditionEntry.Text;
@@ -46,11 +52,11 @@ namespace RedlineApp.View
 
             if (rows > 0)
             {
-                //_connection.UpdateWithChildren(selectedPrecondition);
                 await Navigation.PushAsync(new PreconditionPage());
             }
         }
 
+        //Button click to delete selected Precondition
         async void DeleteButton_Clicked(System.Object sender, System.EventArgs e)
         {
             int rows = _connection.Delete(selectedPrecondition);

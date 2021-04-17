@@ -1,4 +1,11 @@
-﻿using RedlineApp.Model;
+﻿/*
+    File name: AllergyDetailPage.xaml.cs
+    Purpose:   Facilitate interaction with page.
+    Author:    Daniel Mansilla
+    Version:   1.0.0
+*/
+
+using RedlineApp.Model;
 using RedlineApp.Persistence;
 using SQLite;
 using SQLiteNetExtensions.Extensions;
@@ -18,14 +25,12 @@ namespace RedlineApp.View
         public AllergyDetailPage(Allergy selectedAllergy)
         {
             InitializeComponent();
-
             _connection = DependencyService.Get<ISQLiteInterface>().GetConnection();
-
             this.selectedAllergy = selectedAllergy;
-
             allergyEntry.Text = selectedAllergy.AllergyType;
         }
 
+        //Connect to DB and create Allergy table
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -33,7 +38,7 @@ namespace RedlineApp.View
             
         }
 
-
+        //Button click action to assign new value to Allergy
         async void UpdateButton_Clicked(System.Object sender, System.EventArgs e)
         {
             selectedAllergy.AllergyType = allergyEntry.Text;
@@ -48,12 +53,12 @@ namespace RedlineApp.View
 
             if (rows > 0)
             {
-                //_connection.UpdateWithChildren(selectedAllergy);
                 await Navigation.PushAsync(new AllergyPage());
             }
 
         }
 
+        //Button click to delete selected allergy
         async void DeleteButton_Clicked(System.Object sender, System.EventArgs e)
         {
             int rows = _connection.Delete(selectedAllergy);
