@@ -35,6 +35,26 @@ namespace RedlineApp.View
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
             var preconditions = _connection.Table<Precondition>().Where(x => x.UserId == activeUser.Id).ToList();
             preconditionListView.ItemsSource = preconditions;
+
+            //if the last page was the main page then switch the buttons at bottom of screen.
+            var previousPageIndex = Navigation.NavigationStack.Count - 2;
+            var previousPageType = Navigation.NavigationStack[previousPageIndex];
+
+            Button backbutton = new Button
+            {
+                Text = "Back",
+                Style = (Style)Application.Current.Resources["PrimaryButton"]
+            };
+
+            if (previousPageType.GetType() == typeof(MainPage) || previousPageType.GetType() == typeof(PreconditionDetailPage))
+            {
+                ButtonGrid.Children.Clear();
+                ButtonGrid.Children.Add(backbutton);
+                ButtonGrid.ColumnDefinitions.Clear();
+                backbutton.Clicked += (sender, EventArgs) => {
+                    Navigation.PushAsync(new MainPage());
+                };
+            }
         }
 
 

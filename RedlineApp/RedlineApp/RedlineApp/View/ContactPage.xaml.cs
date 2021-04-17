@@ -42,11 +42,22 @@ namespace RedlineApp.View
                 EmergencyContactNameEntry.Text = contact.EmergencyContactName;
             }
 
+            //if the last page was the main page then switch the buttons at bottom of screen.
+            var previousPageIndex = Navigation.NavigationStack.Count - 2;
+            var previousPageType = Navigation.NavigationStack[previousPageIndex];
+
+            if (previousPageType.GetType() == typeof(MainPage))
+            {
+                updateNext.Text = "Save";
+            }
+
         }
 
         //On next button click submit contact info or update if user changed existing info.
         async private void NextButton_Clicked(System.Object sender, System.EventArgs e)
         {
+            var previousPageIndex = Navigation.NavigationStack.Count - 2;
+            var previousPageType = Navigation.NavigationStack[previousPageIndex];
             if (PhoneNumberEntry.Text == null || AddressEntry.Text == null || EmergencyContactNumberEntry.Text == null || EmergencyContactNameEntry.Text == null)
             {
                 await DisplayAlert("Failure", "Please fill in all fields", "Ok");
@@ -78,7 +89,15 @@ namespace RedlineApp.View
 
                     if (rows > 0)
                     {
-                        await Navigation.PushAsync(new ProfilePage());
+                        if (previousPageType.GetType() == typeof(MainPage))
+                        {
+                            await Navigation.PushAsync(new MainPage());
+                        }
+                        else
+                        {
+                            await Navigation.PushAsync(new ProfilePage());
+                        }
+                        
                     }
                 }
                 else
@@ -98,7 +117,14 @@ namespace RedlineApp.View
 
                     if (rows > 0)
                     {
-                        await Navigation.PushAsync(new ProfilePage());
+                        if (previousPageType.GetType() == typeof(MainPage))
+                        {
+                            await Navigation.PushAsync(new MainPage());
+                        }
+                        else
+                        {
+                            await Navigation.PushAsync(new ProfilePage());
+                        }
                     }
                 }
 

@@ -64,7 +64,8 @@
                         </Grid>
 
                         <!-- Action Buttons. -->
-                        <Grid Grid.Row="2">
+                        <Grid Grid.Row="2"
+                              x:Name="ButtonGrid">
                             <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
@@ -74,6 +75,7 @@
                             <Button Grid.Column="0"
                                     FontSize="20"
                                     Text="&lt;"
+                                    x:Name="BackButton"
                                     Clicked="BackButton_Clicked"
                                     Style="{StaticResource PrimaryButton}"/>
 
@@ -87,6 +89,7 @@
                             <Button Grid.Column="2"
                                     FontSize="18"
                                     Text="&gt;"
+                                    x:Name="NextButton"
                                     Clicked="NextButton_Clicked"
                                     Style="{StaticResource PrimaryButton}"/>
                             
