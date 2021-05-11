@@ -47,42 +47,53 @@ namespace RedlineApp.ViewModel
         // Email password to account's registered email address.
         public string SendPasswordReminder(string userEmail)
         {
-            var user = _connection.Table<UserAccount>()
-                .Where(x => x.Email == userEmail).FirstOrDefault();
-            string recipient = $"{user.FirstName} {user.LastName}";
             string result;
 
-            try
+            var user = _connection.Table<UserAccount>()
+                .Where(x => x.Email == userEmail).FirstOrDefault();
+
+            if (user != null)
             {
-                // Initialize empty email and establish connection
-                // with Google SMTP server. 
-                MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+                try
+                {
+                    string recipient = $"{user.FirstName} {user.LastName}";
+                    // Initialize empty email and establish connection
+                    // with Google SMTP server. 
+                    MailMessage mail = new MailMessage();
+                    SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-                // Compose email recipient from Redline.
-                mail.From = new MailAddress("redlinemedicalsystem@gmail.com");
-                mail.To.Add(userEmail);
-                mail.Subject = "Password Reminder";
-                mail.Body = $"{recipient}, Your password is {user.Password}.\nIf you didn't request a password reminder, please change your password immediately.";
+                    // Compose email recipient from Redline.
+                    mail.From = new MailAddress("redlinemedicalsystem@gmail.com");
+                    mail.To.Add(userEmail);
+                    mail.Subject = "Password Reminder";
+                    mail.Body = $"{recipient}, Your password is {user.Password}.\nIf you didn't request a password reminder, please change your password immediately.";
 
-                // Pass server details and security information.
-                SmtpServer.Port = 587;
-                SmtpServer.Host = "smtp.gmail.com";
-                SmtpServer.EnableSsl = true;
-                SmtpServer.UseDefaultCredentials = false;
-                // DEMONSTRATION ONLY - CLEAR TEXT PASSWORD NOT SAFE FOR PRODUCTION!
-                SmtpServer.Credentials = new System.Net.NetworkCredential("redlinemedicalsystem@gmail.com", "RedL1nx2783");
+                    // Pass server details and security information.
+                    SmtpServer.Port = 587;
+                    SmtpServer.Host = "smtp.gmail.com";
+                    SmtpServer.EnableSsl = true;
+                    SmtpServer.UseDefaultCredentials = false;
+                    // DEMONSTRATION ONLY - CLEAR TEXT PASSWORD NOT SAFE FOR PRODUCTION!
+                    SmtpServer.Credentials = new System.Net.NetworkCredential("redlinemedicalsystem@gmail.com", "RedL1nx2783");
 
-                SmtpServer.Send(mail);
+                    SmtpServer.Send(mail);
 
-                result =  $"Password reminder sent successfully to {user.Email}.";
+                    result = $"Password reminder sent successfully to {user.Email}.";
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    result = ex.Message;
+                    return result;
+                }
+            }
+            else
+            { 
+                // False result if email address does not exists.
+                result = $"If an account exists for {userEmail} you will receive a password reminder via email.";
                 return result;
             }
-            catch (Exception ex)
-            {
-                result = ex.Message;
-                return result;
-            }
+           
         }
     }
 }

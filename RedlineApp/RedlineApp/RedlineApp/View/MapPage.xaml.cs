@@ -86,7 +86,7 @@ namespace RedlineApp.View
         async void DisplayNearbyHospitals()
         {
             // REMOVE IN PRODUCTION - SECURITY RISK!
-            var apiKey = "AIzaSyC7W4MIjUl-83OZv1Coz7gfzxNEiipTipM";
+            var apiKey = "AIzaSyBrsIqIotJL_ALcaSYguwk8PzkCXRvyclI";
 
             // Access device location.
             var request = new GeolocationRequest(GeolocationAccuracy.Best);

@@ -47,7 +47,7 @@
                                    Placeholder="First Name"
                                    Style="{StaticResource EntryStyle}">
                             <Entry.Behaviors>
-                                <local:MaxLengthValidator MaxLength="50" EntryField="First_Name"/>
+                                <local:MaxLengthValidator MaxLength="10" EntryField="First_Name"/>
                                 <local:RequiredValidator Required="True" EntryField="First_Name"/>
                             </Entry.Behaviors>
                             </Entry>

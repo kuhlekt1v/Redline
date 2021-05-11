@@ -32,11 +32,11 @@ namespace RedlineApp.View
 
         // Ensure no active users on page load.
         protected override void OnAppearing()
-        { 
+        {
             var data = _connection.Table<UserAccount>();
             var activeUser = data.Where(x => x.ActiveUser == true).FirstOrDefault();
             // Catch null if no active users on page load.
-            if(activeUser != null)
+            if (activeUser != null)
             {
                 activeUser.ActiveUser = false;
                 _connection.Update(activeUser);
@@ -68,8 +68,8 @@ namespace RedlineApp.View
             }
         }
 
-         async void HelpButtonClicked(object sender, EventArgs e)
-         {
+        async void HelpButtonClicked(object sender, EventArgs e)
+        {
             var answer = await DisplayPromptAsync("Send Password Reminder",
                 "Enter your account email address.", "OK", "Cancel", "Email", keyboard: Keyboard.Email);
 
@@ -78,7 +78,11 @@ namespace RedlineApp.View
                 var reminder = loginViewModel.SendPasswordReminder(answer);
                 await DisplayAlert("Password Reminder Notification", reminder, "Ok");
             }
-         }
+            else
+            {
+                await DisplayAlert("Password Reminder Notification", "Email required. Please try again.", "Ok");
+            }
+        }
 
         private void SignUpLinkTapped(object sender, EventArgs e)
         {
