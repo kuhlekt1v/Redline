@@ -11,6 +11,74 @@ SWEG5302-The Redline Medical System aims to create an efficient, low-cost emerge
    - Tools -> Android -> Android SDK Manager
      <br>
 
+## Secure API Key Management
+
+This application requires Google Maps API keys for both Android and iOS platforms. For security reasons, API keys are no longer hardcoded in the source code and must be provided via environment variables.
+
+### Required Environment Variables
+
+Set the following environment variables before running the application:
+
+- **`GOOGLE_MAPS_API_KEY_ANDROID`** - Your Google Maps API key for Android platform
+- **`GOOGLE_MAPS_API_KEY_IOS`** - Your Google Maps API key for iOS platform
+
+### Setting Environment Variables
+
+#### Windows (Command Prompt)
+```cmd
+set GOOGLE_MAPS_API_KEY_ANDROID=your_android_api_key_here
+set GOOGLE_MAPS_API_KEY_IOS=your_ios_api_key_here
+```
+
+#### Windows (PowerShell)
+```powershell
+$env:GOOGLE_MAPS_API_KEY_ANDROID="your_android_api_key_here"
+$env:GOOGLE_MAPS_API_KEY_IOS="your_ios_api_key_here"
+```
+
+#### macOS/Linux
+```bash
+export GOOGLE_MAPS_API_KEY_ANDROID="your_android_api_key_here"
+export GOOGLE_MAPS_API_KEY_IOS="your_ios_api_key_here"
+```
+
+#### Visual Studio
+1. Right-click on your project in Solution Explorer
+2. Select "Properties"
+3. Go to "Debug" tab
+4. Add environment variables in the "Environment variables" section
+
+### Obtaining Google Maps API Keys
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable the following APIs:
+   - Maps SDK for Android
+   - Maps SDK for iOS
+   - Places API
+4. Go to "Credentials" and create API keys
+5. Configure API key restrictions for security:
+   - For Android: Add your app's package name and SHA-1 certificate fingerprint
+   - For iOS: Add your app's bundle identifier
+
+### Security Best Practices
+
+- **Never commit API keys to source control**
+- **Use different API keys for development and production**
+- **Restrict API keys to specific APIs and applications**
+- **Regularly rotate API keys**
+- **Monitor API key usage in Google Cloud Console**
+- **Set up billing alerts to detect unusual usage**
+
+### Production Deployment
+
+For production deployments, ensure environment variables are set in your deployment environment:
+- **Azure App Service**: Configure in Application Settings
+- **AWS**: Use Environment Variables in your deployment configuration
+- **Docker**: Use `-e` flags or environment files
+- **CI/CD Pipelines**: Use secure variable storage (Azure DevOps Variable Groups, GitHub Secrets, etc.)
+
+
 ## Version History
 
 | Date     | Description of Work performed                                                                                                                                                                                                                                             | Author(s)                     |
