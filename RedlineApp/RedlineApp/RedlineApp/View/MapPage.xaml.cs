@@ -42,7 +42,6 @@ namespace RedlineApp.View
             DisplayNearbyHospitals();
             // Hide spinning activity indicator.
             ActivityIndicatorStatus.IsVisible = false;
-
         }
 
         // Display user's current location on map.
@@ -68,7 +67,6 @@ namespace RedlineApp.View
                         Address = "You are here.",
                         Type = PinType.Place,
                         Position = userLocation,
-
                     };
                     userPin.Icon = BitmapDescriptorFactory.DefaultMarker(Color.FromHex("#0077ff"));
                     MapDisplay.Pins.Add(userPin);
@@ -81,12 +79,17 @@ namespace RedlineApp.View
             }
         }
 
-
         // Display pins of all hospitals within 30 mile radius of user location.
         async void DisplayNearbyHospitals()
         {
-            // REMOVE IN PRODUCTION - SECURITY RISK!
-            var apiKey = "AIzaSyBrsIqIotJL_ALcaSYguwk8PzkCXRvyclI";
+            // Load Google Maps API key from environment variable.
+            var apiKey = Environment.GetEnvironmentVariable("GOOGLE_MAPS_API_KEY_ANDROID");
+
+            if (string.IsNullOrWhiteSpace(apiKey))
+            {
+                await DisplayAlert("Error", "Google Maps API key is missing. Please set the environment variable 'GOOGLE_MAPS_API_KEY_ANDROID'.", "Close");
+                return;
+            }
 
             // Access device location.
             var request = new GeolocationRequest(GeolocationAccuracy.Best);
