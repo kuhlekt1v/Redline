@@ -30,6 +30,14 @@ namespace RedlineApp.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            
+            // Load Google Maps API key from environment variable
+            var apiKey = Environment.GetEnvironmentVariable("GOOGLE_MAPS_API_KEY_ANDROID");
+            if (string.IsNullOrWhiteSpace(apiKey))
+            {
+                throw new InvalidOperationException("Google Maps API key is missing. Please set the environment variable 'GOOGLE_MAPS_API_KEY_ANDROID'.");
+            }
+            
             Xamarin.FormsGoogleMaps.Init(this, savedInstanceState);
             LoadApplication(new App());
         }

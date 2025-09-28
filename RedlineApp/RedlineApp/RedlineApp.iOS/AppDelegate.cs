@@ -23,7 +23,15 @@ namespace RedlineApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            Xamarin.FormsGoogleMaps.Init("AIzaSyC7W4MIjUl-83OZv1Coz7gfzxNEiipTipM");
+            
+            // Load Google Maps API key from environment variable
+            var apiKey = Environment.GetEnvironmentVariable("GOOGLE_MAPS_API_KEY_IOS");
+            if (string.IsNullOrWhiteSpace(apiKey))
+            {
+                throw new InvalidOperationException("Google Maps API key is missing. Please set the environment variable 'GOOGLE_MAPS_API_KEY_IOS'.");
+            }
+            
+            Xamarin.FormsGoogleMaps.Init(apiKey);
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

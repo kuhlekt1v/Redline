@@ -85,32 +85,45 @@ namespace RedlineApp.View
         // Display pins of all hospitals within 30 mile radius of user location.
         async void DisplayNearbyHospitals()
         {
-            // REMOVE IN PRODUCTION - SECURITY RISK!
-            var apiKey = "AIzaSyBrsIqIotJL_ALcaSYguwk8PzkCXRvyclI";
+            // Load Google Maps API key from environment variable.
+            var apiKey = Environment.GetEnvironmentVariable("GOOGLE_MAPS_API_KEY_ANDROID");
 
-            // Access device location.
-            var request = new GeolocationRequest(GeolocationAccuracy.Best);
-            var location = await Geolocation.GetLocationAsync(request);
-
-            // Query to GoogleAPI.
-            var nearbyHospitals = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={location.Latitude},{location.Longitude}&radius=49000&type=hospital&key={apiKey}";
-            var result = await NearbyPlaceSearch(nearbyHospitals);
-
-            // Create map pins from GoogleAPI query results.
-            foreach (var item in result.Results)
+            if (string.IsNullOrWhiteSpace(apiKey))
             {
-                // Save item latitude and longitude to new position.
-                Position hospitalLocation = new Position(item.Geometry.Location.Lat, item.Geometry.Location.Lng);
+                await DisplayAlert("Error", "Google Maps API key is missing. Please set the environment variable 'GOOGLE_MAPS_API_KEY_ANDROID'.", "Close");
+                return;
+            }
 
-                Pin hospitalPin = new Pin()
+            try
+            {
+                // Access device location.
+                var request = new GeolocationRequest(GeolocationAccuracy.Best);
+                var location = await Geolocation.GetLocationAsync(request);
+
+                // Query to GoogleAPI.
+                var nearbyHospitals = $"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={location.Latitude},{location.Longitude}&radius=49000&type=hospital&key={apiKey}";
+                var result = await NearbyPlaceSearch(nearbyHospitals);
+
+                // Create map pins from GoogleAPI query results.
+                foreach (var item in result.Results)
                 {
-                    Label = item.Name,
-                    Address = item.Vicinity,
-                    Position = hospitalLocation,
-                };
+                    // Save item latitude and longitude to new position.
+                    Position hospitalLocation = new Position(item.Geometry.Location.Lat, item.Geometry.Location.Lng);
 
-                MapDisplay.Pins.Add(hospitalPin);
-            };
+                    Pin hospitalPin = new Pin()
+                    {
+                        Label = item.Name,
+                        Address = item.Vicinity,
+                        Position = hospitalLocation,
+                    };
+
+                    MapDisplay.Pins.Add(hospitalPin);
+                };
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", $"Failed to load nearby hospitals: {ex.Message}", "Close");
+            }
         }
 
         static async Task<EmergencyService.Root> NearbyPlaceSearch(string googleQuery)
